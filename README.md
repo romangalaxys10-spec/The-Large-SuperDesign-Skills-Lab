@@ -337,7 +337,7 @@ Contributions welcome. Rules to keep the lab uniform:
 
 ## 🗂️ Full skill index
 
-Machine-readable: [`skills-index.json`](skills-index.json)
+Machine-readable: [`skills-index.json`](skills-index.json) — now covers **all 154 skill folders** with `family`, `hasDemo`, `hasDiagram` and `description` fields for agent discovery.
 Visual: open [`index.html`](index.html) locally.
 
 ### 🟢 Production Vercel systems (20)

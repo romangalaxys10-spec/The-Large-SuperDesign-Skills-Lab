@@ -1,641 +1,1604 @@
 [
   {
-    "slug": "aquafix-hydro-ledger",
-    "name": "AquaFix Hydro Ledger",
-    "origin": "vercel",
-    "source": "https://aquafix-sandy.vercel.app",
-    "category": "Home services / emergency trade",
-    "dark": false,
-    "accent": "#0891b2"
-  },
-  {
-    "slug": "autopro-voltage-dark",
-    "name": "AutoPro Voltage Dark",
-    "origin": "vercel",
-    "source": "https://autopro-pi.vercel.app",
-    "category": "Automotive / performance workshop",
-    "dark": true,
-    "accent": "#ff3b2f"
-  },
-  {
-    "slug": "glowup-fraunces-atelier",
-    "name": "GlowUp Fraunces Atelier",
-    "origin": "vercel",
-    "source": "https://glowup-bice.vercel.app",
-    "category": "Beauty / wellness atelier",
-    "dark": false,
-    "accent": "#b5674f"
-  },
-  {
-    "slug": "sakartvelo-forest-gold-realty",
-    "name": "Sakartvelo Forest & Gold Realty",
-    "origin": "vercel",
-    "source": "https://sakartvelo-homes.vercel.app",
-    "category": "Real estate / investment advisory",
-    "dark": false,
-    "accent": "#c8a45e"
-  },
-  {
-    "slug": "dentacare-clinical-mint",
-    "name": "DentaCare Clinical Mint",
-    "origin": "vercel",
-    "source": "https://dentacare-hazel.vercel.app",
-    "category": "Healthcare / dental clinic",
-    "dark": false,
-    "accent": "#1e8fd6"
-  },
-  {
-    "slug": "legalline-paper-editorial",
-    "name": "LegalLine Paper Editorial",
-    "origin": "vercel",
-    "source": "https://legalline.vercel.app",
-    "category": "Legal / professional services",
-    "dark": false,
-    "accent": "#9a6b15"
-  },
-  {
-    "slug": "cleanpro-gambetta-eco",
-    "name": "CleanPro Gambetta Eco-Minimal",
-    "origin": "vercel",
-    "source": "https://cleanpro-snowy-sigma.vercel.app",
-    "category": "Cleaning / facility services",
-    "dark": false,
-    "accent": "#0f9d6c"
-  },
-  {
-    "slug": "ironforge-volt-industrial",
-    "name": "IronForge Volt Industrial",
-    "origin": "vercel",
-    "source": "https://ironforge-bice.vercel.app",
-    "category": "Fitness / athletic club",
-    "dark": true,
-    "accent": "#e8ff47"
-  },
-  {
-    "slug": "sweetest-warm-bakery",
-    "name": "Sweetest Warm Bakery",
-    "origin": "vercel",
-    "source": "https://sweetest-house.vercel.app",
-    "category": "Food & drink / artisan bakery",
-    "dark": false,
-    "accent": "#eda63c"
-  },
-  {
-    "slug": "techfix-blueprint-terminal",
-    "name": "TechFix Blueprint Terminal",
-    "origin": "vercel",
-    "source": "https://techfix-five.vercel.app",
-    "category": "Electronics repair / technical lab",
-    "dark": true,
-    "accent": "#39e0d0"
-  },
-  {
-    "slug": "linear-near-black-indigo",
-    "name": "Linear Near-Black Indigo",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/linear",
-    "category": "SaaS / product & engineering tools",
-    "dark": true,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "wise-ultra-black-lime",
-    "name": "Wise Ultra-Black Lime",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/wise",
-    "category": "Fintech / money transfer",
-    "dark": false,
-    "accent": "#9fe870"
-  },
-  {
     "slug": "anthropic-cream-grotesque",
-    "name": "Anthropic Cream Grotesque Editorial",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/anthropic",
-    "category": "AI research / long-form product",
-    "dark": false,
-    "accent": "#c96442"
+    "family": "vercel",
+    "skillPath": "skills/anthropic-cream-grotesque/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Anthropic Cream Grotesque Editorial \u2014 AI research / long-form product. Cream-paper editorial pairing bold grotesque with serif voice. Use when building interfaces that need this exact visual identity."
   },
   {
     "slug": "apple-flat-retail-light",
-    "name": "Apple Flat Retail Light",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/apple",
-    "category": "Consumer hardware retail",
-    "dark": false,
-    "accent": "#0071e3"
+    "family": "vercel",
+    "skillPath": "skills/apple-flat-retail-light/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Apple Flat Retail Light \u2014 Consumer hardware retail. Flat off-white panels with edge-to-edge product renders. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "aquafix-hydro-ledger",
+    "family": "vercel",
+    "skillPath": "skills/aquafix-hydro-ledger/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "AquaFix Hydro Ledger \u2014 Home services / emergency trade. Calm hydro-light trust system. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "autopro-voltage-dark",
+    "family": "vercel",
+    "skillPath": "skills/autopro-voltage-dark/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "AutoPro Voltage Dark \u2014 Automotive / performance workshop. Near-black engineering garage with rationed red voltage. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "awesome-agentic",
+    "family": "awesome",
+    "skillPath": "skills/awesome-agentic/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Conversational AI-first interface with minimal controls, clear outcomes, and delegated task flows for agentic workflows."
+  },
+  {
+    "slug": "awesome-ant",
+    "family": "awesome",
+    "skillPath": "skills/awesome-ant/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Structured, enterprise-focused design system emphasizing clarity, consistency, and efficiency for data-dense web applications."
+  },
+  {
+    "slug": "awesome-artistic",
+    "family": "awesome",
+    "skillPath": "skills/awesome-artistic/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "High-contrast, expressive style with creative typography and bold color choices for visually striking interfaces."
+  },
+  {
+    "slug": "awesome-basic",
+    "family": "awesome",
+    "skillPath": "skills/awesome-basic/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Print-inspired visual language for books, magazines, and reports with editorial grids and expressive typography."
+  },
+  {
+    "slug": "awesome-bento",
+    "family": "awesome",
+    "skillPath": "skills/awesome-bento/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Modular grid layout with card-like blocks, clear hierarchy, soft spacing, and subtle visual contrast for organized, scannable interfaces."
+  },
+  {
+    "slug": "awesome-bold",
+    "family": "awesome",
+    "skillPath": "skills/awesome-bold/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Strong visual presence with heavyweight typography, high-contrast colors, and commanding layouts."
+  },
+  {
+    "slug": "awesome-brutalism",
+    "family": "awesome",
+    "skillPath": "skills/awesome-brutalism/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Raw, anti-design aesthetic inspired by concrete architecture with unadorned elements, jarring layouts, and functional minimalism."
+  },
+  {
+    "slug": "awesome-cafe",
+    "family": "awesome",
+    "skillPath": "skills/awesome-cafe/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Cozy cafe-inspired interface with warm tones, soft typography, and clean layouts for a relaxed browsing experience."
+  },
+  {
+    "slug": "awesome-claude",
+    "family": "awesome",
+    "skillPath": "skills/awesome-claude/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "A research-journal aesthetic printed on warm stone \u2014 authoritative, editorial, almost achromatic. Pages live on warm ivory parchment (never pure white), with near-black slate as the dominant ink."
+  },
+  {
+    "slug": "awesome-claymorphism",
+    "family": "awesome",
+    "skillPath": "skills/awesome-claymorphism/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Soft, rounded 3D-like shapes mimicking malleable clay with playful, puffy elements and colorful surfaces."
+  },
+  {
+    "slug": "awesome-clean",
+    "family": "awesome",
+    "skillPath": "skills/awesome-clean/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Simplicity-focused design with ample whitespace, legible typography, and a limited color palette to reduce visual clutter."
+  },
+  {
+    "slug": "awesome-codex",
+    "family": "awesome",
+    "skillPath": "skills/awesome-codex/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "A radically minimal, blank-canvas interface built as a pure edge-to-edge surface, with almost no color and typography carrying the visual weight. Black serves as the only filled color, the only divide"
+  },
+  {
+    "slug": "awesome-colorful",
+    "family": "awesome",
+    "skillPath": "skills/awesome-colorful/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Vibrant, high-contrast palettes and gradients for engaging, memorable, and modern user experiences."
+  },
+  {
+    "slug": "awesome-contemporary",
+    "family": "awesome",
+    "skillPath": "skills/awesome-contemporary/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Current-era minimalist design with bento grids, dark mode support, and high-performance accessible layouts."
+  },
+  {
+    "slug": "awesome-corporate",
+    "family": "awesome",
+    "skillPath": "skills/awesome-corporate/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Professional, brand-aligned design with structured grids, minimalist layouts, and consistent enterprise patterns."
+  },
+  {
+    "slug": "awesome-cosmic",
+    "family": "awesome",
+    "skillPath": "skills/awesome-cosmic/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Futuristic sci-fi aesthetic with dark themes, vibrant neon accents, and immersive spatial elements."
+  },
+  {
+    "slug": "awesome-creative",
+    "family": "awesome",
+    "skillPath": "skills/awesome-creative/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Playful, character-driven design with expressive typography and bold graphics for landing pages and creative projects."
+  },
+  {
+    "slug": "awesome-dithered",
+    "family": "awesome",
+    "skillPath": "skills/awesome-dithered/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Dot-pattern rendering technique that simulates shades with a limited palette for nostalgic, retro, high-contrast visuals."
+  },
+  {
+    "slug": "awesome-doodle",
+    "family": "awesome",
+    "skillPath": "skills/awesome-doodle/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Hand-drawn, sketch-like style with doodles, handwritten fonts, and imperfect lines for a playful, informal feel."
+  },
+  {
+    "slug": "awesome-dramatic",
+    "family": "awesome",
+    "skillPath": "skills/awesome-dramatic/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "High-contrast, theatrical design with bold layouts, immersive visuals, and unconventional compositions that command attention."
+  },
+  {
+    "slug": "awesome-editorial",
+    "family": "awesome",
+    "skillPath": "skills/awesome-editorial/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Magazine-inspired editorial layout with refined serif typography, structured grids, and elegant reading experiences."
+  },
+  {
+    "slug": "awesome-enterprise",
+    "family": "awesome",
+    "skillPath": "skills/awesome-enterprise/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Dark-themed cloud-platform aesthetic with modular grids, glass-like panels, and strong data hierarchy for productivity dashboards."
+  },
+  {
+    "slug": "awesome-expressive",
+    "family": "awesome",
+    "skillPath": "skills/awesome-expressive/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Vibrant, personality-driven design with bold colors, playful graphics, and dynamic layouts that balance creativity with structure."
+  },
+  {
+    "slug": "awesome-fantasy",
+    "family": "awesome",
+    "skillPath": "skills/awesome-fantasy/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Game-inspired fantasy aesthetic with bold, premium visuals, rich color palettes, and immersive thematic elements."
+  },
+  {
+    "slug": "awesome-fiction",
+    "family": "awesome",
+    "skillPath": "skills/awesome-fiction/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "A playful, energetic, cartoonesque interface inspired by friendly children's-book illustrations \u2014 warm cream backgrounds, big bold custom display typography, saturated brand color blocks, thick black "
+  },
+  {
+    "slug": "awesome-flat",
+    "family": "awesome",
+    "skillPath": "skills/awesome-flat/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Two-dimensional minimalist style with vibrant colors, clean typography, and no 3D effects for fast, user-friendly interfaces."
+  },
+  {
+    "slug": "awesome-friendly",
+    "family": "awesome",
+    "skillPath": "skills/awesome-friendly/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Approachable, intuitive design with rounded elements, ample whitespace, and soft pastel color palettes."
+  },
+  {
+    "slug": "awesome-futuristic",
+    "family": "awesome",
+    "skillPath": "skills/awesome-futuristic/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Forward-looking design with tech-inspired typography, modern layouts, and a sleek, innovation-driven aesthetic."
+  },
+  {
+    "slug": "awesome-geometric",
+    "family": "awesome",
+    "skillPath": "skills/awesome-geometric/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Geometric, structured design with clean typography, neutral colors, precise shapes, and intuitive layouts that stay out of the way."
+  },
+  {
+    "slug": "awesome-glassmorphism",
+    "family": "awesome",
+    "skillPath": "skills/awesome-glassmorphism/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Frosted glass effect with translucent layers, subtle blur, and luminous borders for depth and modern elegance."
+  },
+  {
+    "slug": "awesome-gradient",
+    "family": "awesome",
+    "skillPath": "skills/awesome-gradient/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Smooth color transitions and gradient-rich surfaces for modern, playful interfaces with visual depth."
+  },
+  {
+    "slug": "awesome-immersive",
+    "family": "awesome",
+    "skillPath": "skills/awesome-immersive/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "An immersive, interactive, exhibit-style interface that blends storytelling, animation, and gamified elements to create a playful, experience-driven journey. The entire app sits on a single continuous"
+  },
+  {
+    "slug": "awesome-impeccable",
+    "family": "awesome",
+    "skillPath": "skills/awesome-impeccable/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "A modern, graphic, editorial-poster aesthetic \u2014 warm and confident \u2014 built on alternating cream and burnt orange sections, an amber brand color."
+  },
+  {
+    "slug": "awesome-levels",
+    "family": "awesome",
+    "skillPath": "skills/awesome-levels/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Conversion-focused design that removes friction and guides users toward action through clarity, trust, and speed."
+  },
+  {
+    "slug": "awesome-lingo",
+    "family": "awesome",
+    "skillPath": "skills/awesome-lingo/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Playful, minimal design with bright colors, rounded shapes, tactile 3D borders, and friendly illustrations for approachable interfaces."
+  },
+  {
+    "slug": "awesome-material",
+    "family": "awesome",
+    "skillPath": "skills/awesome-material/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Google's Material Design with layered surfaces, dynamic theming, built-in motion, and responsive cross-platform patterns."
+  },
+  {
+    "slug": "awesome-matrix",
+    "family": "awesome",
+    "skillPath": "skills/awesome-matrix/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "A cyber-slick, dark-only Matrix-inspired interface defined by minimalist fashion, high-tech digital elements"
+  },
+  {
+    "slug": "awesome-minimal",
+    "family": "awesome",
+    "skillPath": "skills/awesome-minimal/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Stripped-back design emphasizing whitespace, clean typography, and restrained color for maximum clarity and focus."
+  },
+  {
+    "slug": "awesome-modern",
+    "family": "awesome",
+    "skillPath": "skills/awesome-modern/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Contemporary editorial style with serif typography, minimal palettes, and clean layouts for polished digital products."
+  },
+  {
+    "slug": "awesome-mono",
+    "family": "awesome",
+    "skillPath": "skills/awesome-mono/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Monospace-driven, matrix-inspired design with high-contrast elements, compact density, and a hacker-chic aesthetic."
+  },
+  {
+    "slug": "awesome-neobrutalism",
+    "family": "awesome",
+    "skillPath": "skills/awesome-neobrutalism/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Modern take on brutalism with bold borders, vivid accent colors, and raw, high-contrast layouts on warm surfaces."
+  },
+  {
+    "slug": "awesome-neon",
+    "family": "awesome",
+    "skillPath": "skills/awesome-neon/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Electric neon glow effects with high-contrast color pairings for bold, attention-grabbing interfaces."
+  },
+  {
+    "slug": "awesome-neumorphism",
+    "family": "awesome",
+    "skillPath": "skills/awesome-neumorphism/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Soft, extruded UI elements with inner and outer shadows on monochromatic surfaces for a tactile, embedded look."
+  },
+  {
+    "slug": "awesome-pacman",
+    "family": "awesome",
+    "skillPath": "skills/awesome-pacman/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Retro arcade-inspired design with pixel fonts, dotted borders, playful high-contrast colors, and 8-bit game aesthetics."
+  },
+  {
+    "slug": "awesome-paper",
+    "family": "awesome",
+    "skillPath": "skills/awesome-paper/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Paper-textured, print-inspired design with minimal colors, clean serif/sans typography, and tactile surface qualities."
+  },
+  {
+    "slug": "awesome-perspective",
+    "family": "awesome",
+    "skillPath": "skills/awesome-perspective/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Spatial depth design with isometric views, vanishing points, and layered elements that guide attention through 3D-like realism."
+  },
+  {
+    "slug": "awesome-power",
+    "family": "awesome",
+    "skillPath": "skills/awesome-power/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "High-end dark aesthetic with bold headings, monochromatic palette, and premium feel for premium brand experiences."
+  },
+  {
+    "slug": "awesome-premium",
+    "family": "awesome",
+    "skillPath": "skills/awesome-premium/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Apple-inspired premium aesthetic with precise spacing, modern typography, and a refined, polished visual language."
+  },
+  {
+    "slug": "awesome-professional",
+    "family": "awesome",
+    "skillPath": "skills/awesome-professional/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Polished, business-ready design with modern typography, structured layouts, and a trustworthy visual identity."
+  },
+  {
+    "slug": "awesome-pulse",
+    "family": "awesome",
+    "skillPath": "skills/awesome-pulse/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Dynamic, vibrant style with thick borders, geometric shapes, high-contrast colors, and expressive typography conveying motion and vitality."
+  },
+  {
+    "slug": "awesome-refined",
+    "family": "awesome",
+    "skillPath": "skills/awesome-refined/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Carefully curated, modern minimal style with elegant serif typography and understated, sophisticated palettes."
+  },
+  {
+    "slug": "awesome-retro",
+    "family": "awesome",
+    "skillPath": "skills/awesome-retro/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Throwback design with vintage-inspired typography, high-contrast retro palettes, and nostalgic visual elements."
+  },
+  {
+    "slug": "awesome-riso",
+    "family": "awesome",
+    "skillPath": "skills/awesome-riso/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "A playful, joyful, two-color risograph print aesthetic built on a single warm off-white paper surface running through every section"
+  },
+  {
+    "slug": "awesome-roku",
+    "family": "awesome",
+    "skillPath": "skills/awesome-roku/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "App dashboard with purple-themed aesthetic, top-bar navigation, card-based layouts, and developer-first workflows."
+  },
+  {
+    "slug": "awesome-sega",
+    "family": "awesome",
+    "skillPath": "skills/awesome-sega/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "A playful, arcade-inspired interface for games \u2014 built on the VT323 pixel typeface, hard-edged 0px corners, chunky pill buttons that physically press into solid offset blocks"
+  },
+  {
+    "slug": "awesome-shadcn",
+    "family": "awesome",
+    "skillPath": "skills/awesome-shadcn/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Shadcn/ui-inspired design with minimal, clean components, monochrome palette, and utility-first patterns."
+  },
+  {
+    "slug": "awesome-sketch",
+    "family": "awesome",
+    "skillPath": "skills/awesome-sketch/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "A friendly, hand-drawn sketch interface inspired by pencil illustrations on warm cream paper. Soft teal brand accents, hand-written display headings, rounded pill controls."
+  },
+  {
+    "slug": "awesome-skeumorphism",
+    "family": "awesome",
+    "skillPath": "skills/awesome-skeumorphism/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Real-world mimicry with textured surfaces, 3D effects, and familiar physical metaphors for intuitive digital interfaces."
+  },
+  {
+    "slug": "awesome-sleek",
+    "family": "awesome",
+    "skillPath": "skills/awesome-sleek/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Modern minimalist aesthetic with clean lines, intentional color palette, subtle interactions, and consistent spacing."
+  },
+  {
+    "slug": "awesome-spacious",
+    "family": "awesome",
+    "skillPath": "skills/awesome-spacious/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Generous whitespace, consistent padding, and grid-based layouts for clean, readable, and breathing interfaces."
+  },
+  {
+    "slug": "awesome-square",
+    "family": "awesome",
+    "skillPath": "skills/awesome-square/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Graceful, refined aesthetic with delicate typography, minimal palettes, and polished layouts that exude sophistication."
+  },
+  {
+    "slug": "awesome-stitch",
+    "family": "awesome",
+    "skillPath": "skills/awesome-stitch/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Clean, high-contrast enterprise design for data-driven workflows with intuitive drag-and-drop patterns and structured layouts."
+  },
+  {
+    "slug": "awesome-storytelling",
+    "family": "awesome",
+    "skillPath": "skills/awesome-storytelling/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Narrative-driven design using visuals, copy, and interaction to guide users through engaging, emotionally resonant journeys."
+  },
+  {
+    "slug": "awesome-terracotta",
+    "family": "awesome",
+    "skillPath": "skills/awesome-terracotta/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "A sun-baked, clay-toned editorial interface built on warm cream surfaces, ink-brown headlines set in a display serif, and a single terracotta accent."
+  },
+  {
+    "slug": "awesome-tetris",
+    "family": "awesome",
+    "skillPath": "skills/awesome-tetris/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Classic block-game inspired design with playful colors, bold display fonts, and compact, high-energy layouts."
+  },
+  {
+    "slug": "awesome-vibrant",
+    "family": "awesome",
+    "skillPath": "skills/awesome-vibrant/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "Lively, colorful design with bold playful typography, warm accents, and dynamic visual energy."
+  },
+  {
+    "slug": "awesome-vintage",
+    "family": "awesome",
+    "skillPath": "skills/awesome-vintage/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN.md"
+    ],
+    "description": "1950s-1990s nostalgia with skeuomorphic touches, grainy textures, retro color palettes, and pixel-style typography."
+  },
+  {
+    "slug": "better-icons",
+    "family": "tonylee12",
+    "skillPath": "skills/better-icons/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [],
+    "description": "'Use when working with icons in any project. Provides CLI for searching 200+ icon libraries (Iconify) and retrieving SVGs. Commands: `better-icons search <query>` to find icons, `better-icons get <id>"
+  },
+  {
+    "slug": "cleanpro-gambetta-eco",
+    "family": "vercel",
+    "skillPath": "skills/cleanpro-gambetta-eco/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "CleanPro Gambetta Eco-Minimal \u2014 Cleaning / facility services. White eco-minimalism with emerald italic serif. Use when building interfaces that need this exact visual identity."
   },
   {
     "slug": "cream-island-violet-media",
-    "name": "Cream Island Violet Media",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/cream-island",
-    "category": "Creative agency / portfolio",
-    "dark": false,
-    "accent": "#5b3df5"
-  },
-  {
-    "slug": "terminal-cyan-ledger-dark",
-    "name": "Terminal Cyan Ledger Dark",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/terminal-cyan-ledger",
-    "category": "Developer tools / infrastructure",
-    "dark": true,
-    "accent": "#00e5cc"
-  },
-  {
-    "slug": "teal-corporate-gradient",
-    "name": "Teal Corporate Gradient Ledger",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/teal-ledger-corporate",
-    "category": "Enterprise B2B / corporate SaaS",
-    "dark": false,
-    "accent": "#0d9488"
-  },
-  {
-    "slug": "warm-frame-chestnut",
-    "name": "Warm Frame Chestnut Portfolio",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/warm-frame-portfolio-light",
-    "category": "Personal portfolio / studio",
-    "dark": false,
-    "accent": "#8a5a33"
-  },
-  {
-    "slug": "voltage-clickhouse-yellow",
-    "name": "Voltage Clickhouse Yellow",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/rationed-voltage-dark",
-    "category": "Data platforms / OLAP databases",
-    "dark": true,
-    "accent": "#f9d71c"
-  },
-  {
-    "slug": "heyski-emerald-aurora",
-    "name": "Heyski Emerald Aurora",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/heyski",
-    "category": "Travel / hospitality booking",
-    "dark": true,
-    "accent": "#34d399"
-  },
-  {
-    "slug": "sd-ai-builder-club",
-    "name": "Ai Builder Club Design System",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/ai-builder-club",
-    "category": "AI product / platform",
-    "dark": true,
-    "accent": "#3b82f6"
-  },
-  {
-    "slug": "sd-anthropic",
-    "name": "Anthropic",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/anthropic",
-    "category": "SaaS / product site",
-    "dark": false,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-apple",
-    "name": "Apple",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/apple",
-    "category": "SaaS / product site",
-    "dark": false,
-    "accent": "#3b82f6"
-  },
-  {
-    "slug": "sd-appscale-premium-apps-and-hosting-store",
-    "name": "Appscale Premium Apps Hosting Store Design System",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/appscale-premium-apps-and-hosting-store",
-    "category": "Enterprise B2B",
-    "dark": false,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-atelier-reveal-or-pomodoro",
-    "name": "Atelier Reveal Pomodoro",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/atelier-reveal-or-pomodoro",
-    "category": "Portfolio / editorial",
-    "dark": false,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-calcom",
-    "name": "Calcom Design System",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/calcom",
-    "category": "SaaS / product site",
-    "dark": true,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-chrome-void",
-    "name": "Chrome Void",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/chrome-void",
-    "category": "SaaS / product site",
-    "dark": true,
-    "accent": "#8b5cf6"
-  },
-  {
-    "slug": "sd-clay",
-    "name": "Clay",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/clay",
-    "category": "SaaS / product site",
-    "dark": false,
-    "accent": "#9fe870"
-  },
-  {
-    "slug": "sd-claymorphic-comic-ledger",
-    "name": "Claymorphic Comic Ledger",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/claymorphic-comic-ledger",
-    "category": "Fintech / dashboard",
-    "dark": false,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-confetti-minimal",
-    "name": "Confetti Minimal",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/confetti-minimal",
-    "category": "SaaS / product site",
-    "dark": false,
-    "accent": "#ef4444"
-  },
-  {
-    "slug": "sd-cream-island",
-    "name": "Cream Island",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/cream-island",
-    "category": "SaaS / product site",
-    "dark": false,
-    "accent": "#8b5cf6"
-  },
-  {
-    "slug": "sd-cream-island-c893c2",
-    "name": "Cream Island",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/cream-island-c893c2",
-    "category": "SaaS / product site",
-    "dark": false,
-    "accent": "#8b5cf6"
-  },
-  {
-    "slug": "sd-cursor",
-    "name": "Cursor",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/cursor",
-    "category": "SaaS / product site",
-    "dark": true,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-faceted-plum-institutional",
-    "name": "Faceted Plum Institutional",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/faceted-plum-institutional",
-    "category": "Enterprise B2B",
-    "dark": false,
-    "accent": "#b06ad2"
-  },
-  {
-    "slug": "sd-fieldwork-grotesk",
-    "name": "Fieldwork Grotesk",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/fieldwork-grotesk",
-    "category": "SaaS / product site",
-    "dark": false,
-    "accent": "#fb923c"
-  },
-  {
-    "slug": "sd-framer",
-    "name": "Framer",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/framer",
-    "category": "Portfolio / editorial",
-    "dark": true,
-    "accent": "#3b82f6"
-  },
-  {
-    "slug": "sd-frequency-based-extraction",
-    "name": "Frequency Based Extraction",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/frequency-based-extraction",
-    "category": "SaaS / product site",
-    "dark": false,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-global-enterprise-intelligence-design-system",
-    "name": "Global Enterprise Intelligence Design System",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/global-enterprise-intelligence-design-system",
-    "category": "Enterprise B2B",
-    "dark": false,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-heyski",
-    "name": "Heyski",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/heyski",
-    "category": "SaaS / product site",
-    "dark": true,
-    "accent": "#8b5cf6"
-  },
-  {
-    "slug": "sd-intelligence-ai",
-    "name": "Intelligence Ai",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/intelligence-ai",
-    "category": "AI product / platform",
-    "dark": false,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-lenisdev",
-    "name": "Lenisdev Design System",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/lenisdev",
-    "category": "SaaS / product site",
-    "dark": true,
-    "accent": "#ff7a59"
-  },
-  {
-    "slug": "sd-linear",
-    "name": "Linear",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/linear",
-    "category": "SaaS / product site",
-    "dark": true,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-minimalist-electric-cyan-portfolio",
-    "name": "Minimalist Electric Cyan Portfolio",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/minimalist-electric-cyan-portfolio",
-    "category": "Portfolio / editorial",
-    "dark": false,
-    "accent": "#22d3ee"
-  },
-  {
-    "slug": "sd-my-design-system",
-    "name": "My Design System",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/my-design-system",
-    "category": "SaaS / product site",
-    "dark": false,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-my-design-system-327dc8",
-    "name": "My Design System",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/my-design-system-327dc8",
-    "category": "SaaS / product site",
-    "dark": false,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-neon-db",
-    "name": "Neon Db",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/neon-db",
-    "category": "Database / backend platform",
-    "dark": false,
-    "accent": "#ef4444"
-  },
-  {
-    "slug": "sd-planetscale",
-    "name": "Planetscale",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/planetscale",
-    "category": "Database / backend platform",
-    "dark": false,
-    "accent": "#fb923c"
-  },
-  {
-    "slug": "sd-railway",
-    "name": "Railway",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/railway",
-    "category": "AI product / platform",
-    "dark": true,
-    "accent": "#8b5cf6"
-  },
-  {
-    "slug": "sd-ration-blue-gate-card",
-    "name": "Ration Blue Gate Card",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/ration-blue-gate-card",
-    "category": "Fintech / dashboard",
-    "dark": false,
-    "accent": "#ef4444"
-  },
-  {
-    "slug": "sd-rationed-aurora-light",
-    "name": "Rationed Aurora Light Design System",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/rationed-aurora-light",
-    "category": "SaaS / product site",
-    "dark": false,
-    "accent": "#8b5cf6"
-  },
-  {
-    "slug": "sd-rationed-voltage-dark",
-    "name": "Rationed Voltage Dark Design System",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/rationed-voltage-dark",
-    "category": "SaaS / product site",
-    "dark": true,
-    "accent": "#f9d71c"
-  },
-  {
-    "slug": "sd-scriptforge-ai-11-reference-match",
-    "name": "Scriptforge Ai 11 Reference Match Design System",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/scriptforge-ai-11-reference-match",
-    "category": "AI product / platform",
-    "dark": false,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-stack-ai",
-    "name": "Stack Ai",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/stack-ai",
-    "category": "AI product / platform",
-    "dark": false,
-    "accent": "#3b82f6"
-  },
-  {
-    "slug": "sd-supabase",
-    "name": "Supabase",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/supabase",
-    "category": "Database / backend platform",
-    "dark": false,
-    "accent": "#22c55e"
-  },
-  {
-    "slug": "sd-teal-ledger-corporate",
-    "name": "Teal Ledger Corporate",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/teal-ledger-corporate",
-    "category": "Enterprise B2B",
-    "dark": false,
-    "accent": "#22d3ee"
-  },
-  {
-    "slug": "sd-terminal-cyan-ledger",
-    "name": "Terminal Cyan Ledger",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/terminal-cyan-ledger",
-    "category": "Fintech / dashboard",
-    "dark": true,
-    "accent": "#22d3ee"
-  },
-  {
-    "slug": "sd-the-modern-scholar",
-    "name": "Modern Scholar",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/the-modern-scholar",
-    "category": "Portfolio / editorial",
-    "dark": false,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-traceso",
-    "name": "Traceso Design System",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/traceso",
-    "category": "SaaS / product site",
-    "dark": true,
-    "accent": "#ef4444"
-  },
-  {
-    "slug": "sd-vapi-ai",
-    "name": "Vapi Ai",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/vapi-ai",
-    "category": "AI product / platform",
-    "dark": true,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-viktor",
-    "name": "Viktor",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/viktor",
-    "category": "SaaS / product site",
-    "dark": false,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-violet-ledger-interface",
-    "name": "Violet Ledger Interface Design System",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/violet-ledger-interface",
-    "category": "Fintech / dashboard",
-    "dark": false,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-void-teal-ledger-glass",
-    "name": "Void Teal Ledger Glass",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/void-teal-ledger-glass",
-    "category": "Fintech / dashboard",
-    "dark": true,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-warm-frame-portfolio-light",
-    "name": "Warm Frame Portfolio Light",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/warm-frame-portfolio-light",
-    "category": "Portfolio / editorial",
-    "dark": false,
-    "accent": "#5e6ad2"
-  },
-  {
-    "slug": "sd-wdi",
-    "name": "Wdi Design System",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/wdi",
-    "category": "SaaS / product site",
-    "dark": false,
-    "accent": "#34d399"
-  },
-  {
-    "slug": "sd-wise",
-    "name": "Wise",
-    "origin": "superdesign",
-    "source": "https://superdesign.dev/design-systems/wise",
-    "category": "SaaS / product site",
-    "dark": false,
-    "accent": "#9fe870"
-  },
-  {
-    "slug": "keynote-clean-minimal",
-    "name": "Keynote Clean Minimal",
-    "origin": "lab-slides",
-    "source": "The Large SuperDesign Skills Lab",
-    "category": "Product launches / keynotes (slides)",
-    "dark": true,
-    "accent": "#2997ff"
-  },
-  {
-    "slug": "mckinsey-consult-deck",
-    "name": "McKinsey Consult Deck",
-    "origin": "lab-slides",
-    "source": "The Large SuperDesign Skills Lab",
-    "category": "Consulting / board presentations (slides)",
-    "dark": false,
-    "accent": "#2251ff"
-  },
-  {
-    "slug": "pitch-dark-startup",
-    "name": "Pitch Dark Startup",
-    "origin": "lab-slides",
-    "source": "The Large SuperDesign Skills Lab",
-    "category": "Startup fundraising decks (slides)",
-    "dark": true,
-    "accent": "#6ee7b7"
-  },
-  {
-    "slug": "editorial-quote-serif",
-    "name": "Editorial Quote Serif",
-    "origin": "lab-slides",
-    "source": "The Large SuperDesign Skills Lab",
-    "category": "Keynotes / culture talks / memorials (slides)",
-    "dark": false,
-    "accent": "#b08d57"
+    "family": "vercel",
+    "skillPath": "skills/cream-island-violet-media/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Cream Island Violet Media \u2014 Creative agency / portfolio. Cream-and-charcoal around one saturated violet media surface. Use when building interfaces that need this exact visual identity."
   },
   {
     "slug": "dataviz-standard-pro",
-    "name": "DataViz Standard Pro",
-    "origin": "lab-slides",
-    "source": "The Large SuperDesign Skills Lab",
-    "category": "Analytics reviews / data-heavy reports (slides)",
-    "dark": false,
-    "accent": "#0072b2"
+    "family": "slides",
+    "skillPath": "skills/dataviz-standard-pro/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "DataViz Standard Pro \u2014 Analytics reviews / data-heavy reports. Colorblind-safe categorical palette with direct labeling discipline. Use when building slide decks / presentation HTML for this context."
+  },
+  {
+    "slug": "dentacare-clinical-mint",
+    "family": "vercel",
+    "skillPath": "skills/dentacare-clinical-mint/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "DentaCare Clinical Mint \u2014 Healthcare / dental clinic. Airy clinical mint-sky with soft blob shapes. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "design-plugin",
+    "family": "tonylee12",
+    "skillPath": "skills/design-plugin/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "DESIGN_PRINCIPLES.md"
+    ],
+    "description": "Conduct design interviews, generate five distinct UI variations in a temporary design lab, collect feedback, and produce implementation plans. Use when the user wants to explore UI design options, red"
+  },
+  {
+    "slug": "designer-skills-collection",
+    "family": "tonylee12",
+    "skillPath": "skills/designer-skills-collection/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "CHANGELOG.md",
+      "COMMAND_TEMPLATE.md",
+      "CONTRIBUTING.md",
+      "INDEX.md",
+      "LICENSE",
+      "README.md",
+      "SKILL_TEMPLATE.md",
+      "design-ops",
+      "design-research",
+      "design-systems",
+      "designer-toolkit",
+      "interaction-design",
+      "prototyping-testing",
+      "scripts",
+      "ui-design",
+      "ux-strategy",
+      "visual-critique"
+    ],
+    "description": ""
+  },
+  {
+    "slug": "editorial-quote-serif",
+    "family": "slides",
+    "skillPath": "skills/editorial-quote-serif/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Editorial Quote Serif \u2014 Keynotes / culture talks / memorials. Magazine pull-quote system: serif giants on warm paper. Use when building slide decks / presentation HTML for this context."
+  },
+  {
+    "slug": "frontend-design-anthropic",
+    "family": "tonylee12",
+    "skillPath": "skills/frontend-design-anthropic/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [],
+    "description": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defau"
+  },
+  {
+    "slug": "glowup-fraunces-atelier",
+    "family": "vercel",
+    "skillPath": "skills/glowup-fraunces-atelier/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "GlowUp Fraunces Atelier \u2014 Beauty / wellness atelier. Warm cream editorial softness with rose italic voice. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "hallmark",
+    "family": "hallmark",
+    "skillPath": "skills/hallmark/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "references"
+    ],
+    "description": "Anti-AI-slop design skill for greenfield pages, audits, redesigns, and design extraction from URLs or screenshots. Use when the user asks to build a new app or landing page, wants to redesign somethin"
+  },
+  {
+    "slug": "heyski-emerald-aurora",
+    "family": "vercel",
+    "skillPath": "skills/heyski-emerald-aurora/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Heyski Emerald Aurora \u2014 Travel / hospitality booking. Near-black dark-default with aurora emerald-violet wash confined to hero. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "ironforge-volt-industrial",
+    "family": "vercel",
+    "skillPath": "skills/ironforge-volt-industrial/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "IronForge Volt Industrial \u2014 Fitness / athletic club. Black industrial slab with acid-lime voltage. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "keynote-clean-minimal",
+    "family": "slides",
+    "skillPath": "skills/keynote-clean-minimal/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Keynote Clean Minimal \u2014 Product launches / keynotes. Apple-style minimalism: one idea per slide, giant type. Use when building slide decks / presentation HTML for this context."
+  },
+  {
+    "slug": "legalline-paper-editorial",
+    "family": "vercel",
+    "skillPath": "skills/legalline-paper-editorial/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "LegalLine Paper Editorial \u2014 Legal / professional services. Cream-paper law journal with gold double rules. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "linear-near-black-indigo",
+    "family": "vercel",
+    "skillPath": "skills/linear-near-black-indigo/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Linear Near-Black Indigo \u2014 SaaS / product &amp; engineering tools. Product-screenshot-led near-black with single indigo accent. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "make-interfaces-feel-better",
+    "family": "tonylee12",
+    "skillPath": "skills/make-interfaces-feel-better/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "agents",
+      "animations.md",
+      "icons.md",
+      "performance.md",
+      "surfaces.md",
+      "typography.md"
+    ],
+    "description": ">-"
+  },
+  {
+    "slug": "mckinsey-consult-deck",
+    "family": "slides",
+    "skillPath": "skills/mckinsey-consult-deck/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "McKinsey Consult Deck \u2014 Consulting / board presentations. Governing-thought titles over evidence: pyramid principle on slides. Use when building slide decks / presentation HTML for this context."
+  },
+  {
+    "slug": "pitch-dark-startup",
+    "family": "slides",
+    "skillPath": "skills/pitch-dark-startup/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Pitch Dark Startup \u2014 Startup fundraising decks. Near-black investor deck with one electric accent and oversized proof numbers. Use when building slide decks / presentation HTML for this context."
+  },
+  {
+    "slug": "pro-banner-design",
+    "family": "pro",
+    "skillPath": "skills/pro-banner-design/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "references"
+    ],
+    "description": "Design banners for social media, ads, website heroes, creative assets, and print. Multiple art direction options with AI-generated visuals. Actions: design, create, generate banner. Platforms: Faceboo"
+  },
+  {
+    "slug": "pro-brand",
+    "family": "pro",
+    "skillPath": "skills/pro-brand/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "references",
+      "scripts",
+      "templates"
+    ],
+    "description": "Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets, brand compliance, style guides."
+  },
+  {
+    "slug": "pro-design",
+    "family": "pro",
+    "skillPath": "skills/pro-design/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "data",
+      "references",
+      "scripts"
+    ],
+    "description": "Comprehensive design skill: brand identity, design tokens, UI styling, logo generation (55 styles, Gemini AI), corporate identity program (50 deliverables, CIP mockups), HTML presentations (Chart.js),"
+  },
+  {
+    "slug": "pro-design-system",
+    "family": "pro",
+    "skillPath": "skills/pro-design-system/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "data",
+      "references",
+      "scripts",
+      "templates"
+    ],
+    "description": "Token architecture, component specifications, and slide generation. Three-layer tokens (primitive\u2192semantic\u2192component), CSS variables, spacing/typography scales, component specs, strategic slide creati"
+  },
+  {
+    "slug": "pro-slides",
+    "family": "pro",
+    "skillPath": "skills/pro-slides/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "references"
+    ],
+    "description": "Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies."
+  },
+  {
+    "slug": "pro-ui-styling",
+    "family": "pro",
+    "skillPath": "skills/pro-ui-styling/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "references",
+      "scripts"
+    ],
+    "description": "Create beautiful, accessible user interfaces with shadcn/ui components (built on Radix UI + Tailwind), Tailwind CSS utility-first styling, and canvas-based visual designs. Use when building user inter"
+  },
+  {
+    "slug": "pro-ui-ux-pro-max",
+    "family": "pro",
+    "skillPath": "skills/pro-ui-ux-pro-max/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "data",
+      "references",
+      "scripts"
+    ],
+    "description": "UI/UX design intelligence for web, mobile, and desktop. This skill should be used when designing, building, reviewing, or fixing interfaces, including pages, components, design systems, accessibility,"
+  },
+  {
+    "slug": "sakartvelo-forest-gold-realty",
+    "family": "vercel",
+    "skillPath": "skills/sakartvelo-forest-gold-realty/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Sakartvelo Forest &amp; Gold Realty \u2014 Real estate / investment advisory. Deep forest authority with gold-leaf accents. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-ai-builder-club",
+    "family": "superdesign",
+    "skillPath": "skills/sd-ai-builder-club/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Ai Builder Club Design System \u2014 AI product / platform. Dark-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-anthropic",
+    "family": "superdesign",
+    "skillPath": "skills/sd-anthropic/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Anthropic \u2014 SaaS / product site. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-apple",
+    "family": "superdesign",
+    "skillPath": "skills/sd-apple/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Apple \u2014 SaaS / product site. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-appscale-premium-apps-and-hosting-store",
+    "family": "superdesign",
+    "skillPath": "skills/sd-appscale-premium-apps-and-hosting-store/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Appscale Premium Apps Hosting Store Design System \u2014 Enterprise B2B. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-atelier-reveal-or-pomodoro",
+    "family": "superdesign",
+    "skillPath": "skills/sd-atelier-reveal-or-pomodoro/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Atelier Reveal Pomodoro \u2014 Portfolio / editorial. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-calcom",
+    "family": "superdesign",
+    "skillPath": "skills/sd-calcom/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Calcom Design System \u2014 SaaS / product site. Dark-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-chrome-void",
+    "family": "superdesign",
+    "skillPath": "skills/sd-chrome-void/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Chrome Void \u2014 SaaS / product site. Dark-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-clay",
+    "family": "superdesign",
+    "skillPath": "skills/sd-clay/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Clay \u2014 SaaS / product site. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-claymorphic-comic-ledger",
+    "family": "superdesign",
+    "skillPath": "skills/sd-claymorphic-comic-ledger/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Claymorphic Comic Ledger \u2014 Fintech / dashboard. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-confetti-minimal",
+    "family": "superdesign",
+    "skillPath": "skills/sd-confetti-minimal/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Confetti Minimal \u2014 SaaS / product site. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-cream-island",
+    "family": "superdesign",
+    "skillPath": "skills/sd-cream-island/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Cream Island \u2014 SaaS / product site. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-cream-island-c893c2",
+    "family": "superdesign",
+    "skillPath": "skills/sd-cream-island-c893c2/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Cream Island \u2014 SaaS / product site. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-cursor",
+    "family": "superdesign",
+    "skillPath": "skills/sd-cursor/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Cursor \u2014 SaaS / product site. Dark-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-faceted-plum-institutional",
+    "family": "superdesign",
+    "skillPath": "skills/sd-faceted-plum-institutional/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Faceted Plum Institutional \u2014 Enterprise B2B. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-fieldwork-grotesk",
+    "family": "superdesign",
+    "skillPath": "skills/sd-fieldwork-grotesk/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Fieldwork Grotesk \u2014 SaaS / product site. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-framer",
+    "family": "superdesign",
+    "skillPath": "skills/sd-framer/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Framer \u2014 Portfolio / editorial. Dark-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-frequency-based-extraction",
+    "family": "superdesign",
+    "skillPath": "skills/sd-frequency-based-extraction/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Frequency Based Extraction \u2014 SaaS / product site. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-global-enterprise-intelligence-design-system",
+    "family": "superdesign",
+    "skillPath": "skills/sd-global-enterprise-intelligence-design-system/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Global Enterprise Intelligence Design System \u2014 Enterprise B2B. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-heyski",
+    "family": "superdesign",
+    "skillPath": "skills/sd-heyski/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Heyski \u2014 SaaS / product site. Dark-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-intelligence-ai",
+    "family": "superdesign",
+    "skillPath": "skills/sd-intelligence-ai/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Intelligence Ai \u2014 AI product / platform. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-lenisdev",
+    "family": "superdesign",
+    "skillPath": "skills/sd-lenisdev/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Lenisdev Design System \u2014 SaaS / product site. Dark-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-linear",
+    "family": "superdesign",
+    "skillPath": "skills/sd-linear/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Linear \u2014 SaaS / product site. Dark-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-minimalist-electric-cyan-portfolio",
+    "family": "superdesign",
+    "skillPath": "skills/sd-minimalist-electric-cyan-portfolio/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Minimalist Electric Cyan Portfolio \u2014 Portfolio / editorial. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-my-design-system",
+    "family": "superdesign",
+    "skillPath": "skills/sd-my-design-system/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "My Design System \u2014 SaaS / product site. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-my-design-system-327dc8",
+    "family": "superdesign",
+    "skillPath": "skills/sd-my-design-system-327dc8/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "My Design System \u2014 SaaS / product site. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-neon-db",
+    "family": "superdesign",
+    "skillPath": "skills/sd-neon-db/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Neon Db \u2014 Database / backend platform. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-planetscale",
+    "family": "superdesign",
+    "skillPath": "skills/sd-planetscale/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Planetscale \u2014 Database / backend platform. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-railway",
+    "family": "superdesign",
+    "skillPath": "skills/sd-railway/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Railway \u2014 AI product / platform. Dark-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-ration-blue-gate-card",
+    "family": "superdesign",
+    "skillPath": "skills/sd-ration-blue-gate-card/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Ration Blue Gate Card \u2014 Fintech / dashboard. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-rationed-aurora-light",
+    "family": "superdesign",
+    "skillPath": "skills/sd-rationed-aurora-light/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Rationed Aurora Light Design System \u2014 SaaS / product site. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-rationed-voltage-dark",
+    "family": "superdesign",
+    "skillPath": "skills/sd-rationed-voltage-dark/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Rationed Voltage Dark Design System \u2014 SaaS / product site. Dark-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-scriptforge-ai-11-reference-match",
+    "family": "superdesign",
+    "skillPath": "skills/sd-scriptforge-ai-11-reference-match/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Scriptforge Ai 11 Reference Match Design System \u2014 AI product / platform. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-stack-ai",
+    "family": "superdesign",
+    "skillPath": "skills/sd-stack-ai/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Stack Ai \u2014 AI product / platform. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-supabase",
+    "family": "superdesign",
+    "skillPath": "skills/sd-supabase/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Supabase \u2014 Database / backend platform. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-teal-ledger-corporate",
+    "family": "superdesign",
+    "skillPath": "skills/sd-teal-ledger-corporate/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Teal Ledger Corporate \u2014 Enterprise B2B. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-terminal-cyan-ledger",
+    "family": "superdesign",
+    "skillPath": "skills/sd-terminal-cyan-ledger/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Terminal Cyan Ledger \u2014 Fintech / dashboard. Dark-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-the-modern-scholar",
+    "family": "superdesign",
+    "skillPath": "skills/sd-the-modern-scholar/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Modern Scholar \u2014 Portfolio / editorial. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-traceso",
+    "family": "superdesign",
+    "skillPath": "skills/sd-traceso/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Traceso Design System \u2014 SaaS / product site. Dark-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-vapi-ai",
+    "family": "superdesign",
+    "skillPath": "skills/sd-vapi-ai/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Vapi Ai \u2014 AI product / platform. Dark-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-viktor",
+    "family": "superdesign",
+    "skillPath": "skills/sd-viktor/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Viktor \u2014 SaaS / product site. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-violet-ledger-interface",
+    "family": "superdesign",
+    "skillPath": "skills/sd-violet-ledger-interface/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Violet Ledger Interface Design System \u2014 Fintech / dashboard. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-void-teal-ledger-glass",
+    "family": "superdesign",
+    "skillPath": "skills/sd-void-teal-ledger-glass/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Void Teal Ledger Glass \u2014 Fintech / dashboard. Dark-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-warm-frame-portfolio-light",
+    "family": "superdesign",
+    "skillPath": "skills/sd-warm-frame-portfolio-light/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Warm Frame Portfolio Light \u2014 Portfolio / editorial. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-wdi",
+    "family": "superdesign",
+    "skillPath": "skills/sd-wdi/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Wdi Design System \u2014 SaaS / product site. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sd-wise",
+    "family": "superdesign",
+    "skillPath": "skills/sd-wise/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Wise \u2014 SaaS / product site. Light-mode system \u2014 enhanced from superdesign.dev study. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "sweetest-warm-bakery",
+    "family": "vercel",
+    "skillPath": "skills/sweetest-warm-bakery/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Sweetest Warm Bakery \u2014 Food &amp; drink / artisan bakery. Honey-warm storybook bakery with handwritten notes. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "taste-skill",
+    "family": "tonylee12",
+    "skillPath": "skills/taste-skill/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "brandkit",
+      "brutalist-skill",
+      "gpt-tasteskill",
+      "image-to-code-skill",
+      "imagegen-frontend-mobile",
+      "imagegen-frontend-web",
+      "llms.txt",
+      "minimalist-skill",
+      "output-skill",
+      "redesign-skill",
+      "soft-skill",
+      "stitch-skill",
+      "taste-skill",
+      "taste-skill-v1"
+    ],
+    "description": ""
+  },
+  {
+    "slug": "teal-corporate-gradient",
+    "family": "vercel",
+    "skillPath": "skills/teal-corporate-gradient/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Teal Corporate Gradient Ledger \u2014 Enterprise B2B / corporate SaaS. Pale-gray canvas with full-width teal-to-cyan identity gradients. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "techfix-blueprint-terminal",
+    "family": "vercel",
+    "skillPath": "skills/techfix-blueprint-terminal/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "TechFix Blueprint Terminal \u2014 Electronics repair / technical lab. Blueprint-grid engineering terminal with teal instrumentation. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "terminal-cyan-ledger-dark",
+    "family": "vercel",
+    "skillPath": "skills/terminal-cyan-ledger-dark/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Terminal Cyan Ledger Dark \u2014 Developer tools / infrastructure. Monospace ledger with cyan ink on true black. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "ui-design-brain",
+    "family": "tonylee12",
+    "skillPath": "skills/ui-design-brain/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "LICENSE.txt",
+      "README.md",
+      "components.md"
+    ],
+    "description": "Generate production-grade UI using real component patterns and best practices from 60+ documented interface components. Use when the user asks to build web interfaces, pages, dashboards, forms, naviga"
+  },
+  {
+    "slug": "vercel-agent-skills",
+    "family": "tonylee12",
+    "skillPath": "skills/vercel-agent-skills/SKILL.md",
+    "hasDemo": false,
+    "hasDiagram": false,
+    "extraFiles": [
+      "composition-patterns",
+      "deploy-to-vercel",
+      "react-best-practices",
+      "react-native-skills",
+      "react-view-transitions",
+      "vercel-cli-with-tokens",
+      "vercel-optimize",
+      "web-design-guidelines",
+      "writing-guidelines"
+    ],
+    "description": ""
+  },
+  {
+    "slug": "voltage-clickhouse-yellow",
+    "family": "vercel",
+    "skillPath": "skills/voltage-clickhouse-yellow/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Voltage Clickhouse Yellow \u2014 Data platforms / OLAP databases. Engineering near-black with caustic yellow reserved for data. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "warm-frame-chestnut",
+    "family": "vercel",
+    "skillPath": "skills/warm-frame-chestnut/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Warm Frame Chestnut Portfolio \u2014 Personal portfolio / studio. White editorial with chestnut-framed device mockups and scrawled labels. Use when building interfaces that need this exact visual identity."
+  },
+  {
+    "slug": "wise-ultra-black-lime",
+    "family": "vercel",
+    "skillPath": "skills/wise-ultra-black-lime/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Wise Ultra-Black Lime \u2014 Fintech / money transfer. Lime-saturated hero with ultra-black condensed display. Use when building interfaces that need this exact visual identity."
   },
   {
     "slug": "workshop-facilitator-pop",
-    "name": "Workshop Facilitator Pop",
-    "origin": "lab-slides",
-    "source": "The Large SuperDesign Skills Lab",
-    "category": "Workshops / training / classrooms (slides)",
-    "dark": false,
-    "accent": "#ffd60a"
+    "family": "slides",
+    "skillPath": "skills/workshop-facilitator-pop/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "extraFiles": [],
+    "description": "Workshop Facilitator Pop \u2014 Workshops / training / classrooms. High-contrast facilitation slides readable from the back row. Use when building slide decks / presentation HTML for this context."
   }
 ]
