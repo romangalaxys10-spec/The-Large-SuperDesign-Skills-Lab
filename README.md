@@ -1,5 +1,8 @@
 # 🧪 The Large SuperDesign Skills Lab
 
+[![validate-skills](https://github.com/romangalaxys10-spec/The-Large-SuperDesign-Skills-Lab/actions/workflows/validate.yml/badge.svg)](https://github.com/romangalaxys10-spec/The-Large-SuperDesign-Skills-Lab/actions/workflows/validate.yml)
+[![browse the gallery](https://img.shields.io/badge/gallery-index.html-39e0d0)](https://romangalaxys10-spec.github.io/The-Large-SuperDesign-Skills-Lab/)
+
 **147 design-system skills for AI coding agents.**
 Each skill teaches an agent one complete visual identity — tokens, typography, layout grammar, components and guardrails — plus a live demo page and a token-anatomy diagram.
 
@@ -49,6 +52,12 @@ A good design skill answers four questions deterministically:
 Because each skill here was derived from either a **live production website** or a **published design.md study**, the tokens are proven — they already ship.
 
 ---
+
+> 🖥️ **Browse visually:** enable-free gallery lives at `index.html` (open locally) and on **GitHub Pages**: <https://romangalaxys10-spec.github.io/The-Large-SuperDesign-Skills-Lab/>
+>
+> 🧭 **Agent routing:** overlapping concerns disambiguated in [`ROUTING.md`](ROUTING.md)
+>
+> ✅ **CI:** every push runs `scripts/validate.py` (frontmatter schema, index sync, internal links)
 
 ## 📁 Repository structure
 

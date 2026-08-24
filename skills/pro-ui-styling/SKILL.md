@@ -322,3 +322,6 @@ export function LoginForm() {
 - Tailwind UI: https://tailwindui.com
 - Headless UI: https://headlessui.com
 - v0 (AI UI Generator): https://v0.dev
+
+
+> **NOTE (this lab):** `canvas-fonts/*.ttf` binaries were excluded to keep the repo lean. If a recipe needs them, download from the upstream repo: https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/tree/main/.claude/skills/ui-styling/canvas-fonts
