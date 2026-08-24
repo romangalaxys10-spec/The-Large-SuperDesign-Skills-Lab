@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" font-family="Inter,Arial,sans-serif">
+<rect width="960" height="620" fill="#0b0d12"/>
+<rect x="24" y="24" width="912" height="572" rx="18" fill="#141824" stroke="#232a3b"/>
+<text x="48" y="66" font-size="20" font-weight="800" fill="#ffffff">Pitch Dark Startup</text>
+<text x="48" y="88" font-size="12" fill="#9ca3af">Startup fundraising decks · slide-layout anatomy</text>
+<rect x="48" y="116" width="260" height="146" rx="10" fill="#141824" stroke="#232a3b"/><text x="178.0" y="282" text-anchor="middle" font-size="11" fill="#9ca3af" font-family="monospace">COVER — promise only</text>
+<text x="62" y="176" font-size="22" font-weight="800" fill="#ffffff">The deck investors remember</text>
+<text x="62" y="200" font-size="12" fill="#8b93a7">96–140px display</text>
+<rect x="338" y="116" width="260" height="146" rx="10" fill="#141824" stroke="#232a3b"/><text x="468.0" y="282" text-anchor="middle" font-size="11" fill="#9ca3af" font-family="monospace">STATEMENT — one idea</text>
+<text x="352" y="186" font-size="15" fill="#ffffff">44–64px action title</text>
+<text x="352" y="210" font-size="12" fill="#8b93a7">full-sentence takeaway</text>
+<rect x="628" y="116" width="284" height="146" rx="10" fill="#141824" stroke="#232a3b"/><text x="770.0" y="282" text-anchor="middle" font-size="11" fill="#9ca3af" font-family="monospace">HERO METRIC</text>
+<text x="650" y="196" font-size="42" font-weight="800" fill="#6ee7b7">2×</text>
+<text x="650" y="222" font-size="12" fill="#8b93a7">120–200px numerals</text>
+<rect x="48" y="290" width="420" height="170" rx="10" fill="#141824" stroke="#232a3b"/><text x="258.0" y="480" text-anchor="middle" font-size="11" fill="#9ca3af" font-family="monospace">EXHIBIT — insight title + chart</text>
+<g transform="translate(64,320)">
+<rect width="90" height="14" fill="#6ee7b7" opacity=".85"/><rect x="0" y="24" width="130" height="14" fill="#6ee7b7" opacity=".6"/>
+<rect x="0" y="48" width="100" height="14" fill="#6ee7b7" opacity=".4"/><rect x="0" y="72" width="60" height="14" fill="#232a3b"/>
+</g>
+<text x="64" y="436" font-size="11" fill="#8b93a7" font-family="monospace">source bottom-left · units in subtitle</text>
+<rect x="498" y="290" width="414" height="170" rx="10" fill="#141824" stroke="#232a3b"/><text x="705.0" y="480" text-anchor="middle" font-size="11" fill="#9ca3af" font-family="monospace">QUOTE / SECTION DIVIDER</text>
+<text x="520" y="350" font-size="30" fill="#ffffff" font-family="Georgia,serif" font-style="italic">“ quotable ”</text>
+<text x="520" y="386" font-size="12" fill="#6ee7b7" letter-spacing="4">ATTRIBUTION · SMALL CAPS</text>
+<text x="48" y="496" font-size="12" font-weight="700" letter-spacing="2" fill="#9ca3af">RULES</text>
+<text x="48" y="520" font-size="13" fill="#ffffff">Body ≥32px · one idea per slide · accent ≤10% · max 4 bullets × 6 words · sources on-slide</text>
+<text x="48" y="582" font-size="10" fill="#9ca3af">The Large SuperDesign Skills Lab · slide family</text>
+</svg>

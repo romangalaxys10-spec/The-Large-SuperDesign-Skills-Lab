@@ -583,5 +583,59 @@
     "category": "SaaS / product site",
     "dark": false,
     "accent": "#9fe870"
+  },
+  {
+    "slug": "keynote-clean-minimal",
+    "name": "Keynote Clean Minimal",
+    "origin": "lab-slides",
+    "source": "The Large SuperDesign Skills Lab",
+    "category": "Product launches / keynotes (slides)",
+    "dark": true,
+    "accent": "#2997ff"
+  },
+  {
+    "slug": "mckinsey-consult-deck",
+    "name": "McKinsey Consult Deck",
+    "origin": "lab-slides",
+    "source": "The Large SuperDesign Skills Lab",
+    "category": "Consulting / board presentations (slides)",
+    "dark": false,
+    "accent": "#2251ff"
+  },
+  {
+    "slug": "pitch-dark-startup",
+    "name": "Pitch Dark Startup",
+    "origin": "lab-slides",
+    "source": "The Large SuperDesign Skills Lab",
+    "category": "Startup fundraising decks (slides)",
+    "dark": true,
+    "accent": "#6ee7b7"
+  },
+  {
+    "slug": "editorial-quote-serif",
+    "name": "Editorial Quote Serif",
+    "origin": "lab-slides",
+    "source": "The Large SuperDesign Skills Lab",
+    "category": "Keynotes / culture talks / memorials (slides)",
+    "dark": false,
+    "accent": "#b08d57"
+  },
+  {
+    "slug": "dataviz-standard-pro",
+    "name": "DataViz Standard Pro",
+    "origin": "lab-slides",
+    "source": "The Large SuperDesign Skills Lab",
+    "category": "Analytics reviews / data-heavy reports (slides)",
+    "dark": false,
+    "accent": "#0072b2"
+  },
+  {
+    "slug": "workshop-facilitator-pop",
+    "name": "Workshop Facilitator Pop",
+    "origin": "lab-slides",
+    "source": "The Large SuperDesign Skills Lab",
+    "category": "Workshops / training / classrooms (slides)",
+    "dark": false,
+    "accent": "#ffd60a"
   }
 ]

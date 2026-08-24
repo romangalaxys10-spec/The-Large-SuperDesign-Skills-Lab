@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DataViz Standard Pro — slide deck demo</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#e8eaee;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#1a1f2b;padding:28px;display:flex;flex-direction:column;align-items:center;gap:26px}
+.rm-bar{position:fixed;top:0;left:0;right:0;background:#0b1120;padding:.55rem 1.25rem;border-bottom:1px solid rgba(148,163,184,.15);z-index:99}
+.rm-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.rm-label{color:#7dd3fc;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-decoration:none}
+.rm-hire{background:#2563eb;color:#fff;padding:.34rem .8rem;border-radius:999px;font-weight:700;font-size:.72rem;text-decoration:none}
+.slide{aspect-ratio:16/9;width:min(1100px,94vw);background:#fcfcfd;border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.35);overflow:hidden;position:relative;display:flex;margin-top:26px}
+.slide:first-of-type{margin-top:70px}
+.slide-inner{flex:1;display:flex;flex-direction:column;justify-content:center;padding:6% 7%;font-family:'IBM Plex Sans',sans-serif}
+.pageno{position:absolute;bottom:18px;right:24px;font-size:16px;color:#667085}
+h1{font-size:clamp(2.4rem,5vw,4.6rem);letter-spacing:-.02em;line-height:1.02;font-weight:800}
+h2{font-size:clamp(1.8rem,3.4vw,3rem);letter-spacing:-.02em;line-height:1.12;font-weight:700}
+.sub,.note{color:#667085;margin-top:.8rem;font-size:clamp(.9rem,1.4vw,1.25rem);font-family:'IBM Plex Sans',sans-serif}
+.kick{font-size:14px;letter-spacing:.24em;color:#0072b2;font-weight:700;display:block;margin-bottom:1.1rem;font-family:sans-serif}
+.brand-mark{color:#0072b2;font-weight:800;letter-spacing:.3em;font-size:15px;margin-bottom:1.6rem}
+.round-chip{display:inline-block;width:max-content;margin-top:1.8rem;border:1px solid #e4e7ec;border-radius:999px;padding:.5rem 1.2rem;color:#667085;font-size:.95rem}
+.s-state h2{font-size:clamp(2.6rem,5vw,4.4rem)}
+.exhibit{margin-top:1.6rem;display:flex;flex-direction:column;gap:12px;max-width:640px}
+.bar{height:26px;background:#e8f1fa;border-left:6px solid #0072b2;border-radius:4px}
+.exhibit small{color:#667085;font-size:13px;margin-top:.4rem}
+.reco{margin-top:1.4rem;background:#e8f1fa;border-left:5px solid #0072b2;padding:1rem 1.3rem;border-radius:8px;max-width:640px}
+table{margin-top:1.4rem;border-collapse:collapse;width:100%;max-width:720px}
+td{padding:.8rem .6rem;border-bottom:1px solid #e4e7ec;font-size:1.05rem}
+.s-num b{font-size:clamp(5rem,12vw,11rem);line-height:1;color:#0072b2;font-weight:800;display:block}
+.s-num span{font-size:clamp(1.2rem,2.4vw,2rem);color:#1a1f2b}
+.trio{display:flex;gap:4rem;margin-top:1.6rem} .trio b{font-size:clamp(2.4rem,5vw,4rem);color:#0072b2;display:block} .trio span{color:#667085}
+.bars .bar{margin-bottom:10px}
+.s-quote h2{font-family:Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(2rem,4.4vw,3.8rem);max-width:850px}
+.qmark{font-family:Georgia,serif;font-size:6rem;color:#0072b2;line-height:0;display:block;margin-bottom:-1rem}
+.s-attr{font-size:clamp(1rem,1.8vw,1.4rem);letter-spacing:.3em;color:#0072b2;text-transform:uppercase}
+.s-chap h2{color:#0072b2;font-style:italic}
+.s-act h2{font-size:clamp(2.2rem,4.4vw,3.6rem);max-width:900px}
+.chip{display:inline-block;background:#0072b2;color:#ffffff;font-weight:800;border-radius:999px;padding:.45rem 1.2rem;font-size:1.05rem;margin-bottom:1.4rem}
+mark{background:#0072b2;padding:0 .15em;border-radius:4px}
+.s-timer{font-size:clamp(6rem,16vw,14rem);font-weight:800;color:#1a1f2b;font-variant-numeric:tabular-nums}
+.s-recap ol{margin-top:1.4rem;padding-left:1.4rem;font-size:clamp(1.2rem,2.2vw,1.8rem);display:grid;gap:.8rem}
+.ph{font-size:9rem;color:#e4e7ec} 
+.lines svg{width:100%;max-width:640px;height:auto;margin-top:1.2rem}
+@media(max-width:700px){.slide{width:96vw}}
+</style></head><body>
+<div class="rm-bar"><div class="rm-inner"><a class="rm-label" href="https://www.rommark.dev">&#128640; SUPERDESIGN SKILLS LAB — dataviz-standard-pro</a><a class="rm-hire" href="https://www.rommark.dev">Hire Developer &#10132;</a></div></div>
+<section class="slide"><div class="slide-inner"><div class="s-ex"><span class="kick">EXHIBIT 1</span><h2>Revenue doubled while CAC held flat.</h2><div class="exhibit lines"><svg viewBox="0 0 600 220"><polyline points="20,190 160,150 300,120 440,70 580,40" fill="none" stroke="#0072b2" stroke-width="4"/><polyline points="20,195 160,185 300,180 440,178 580,175" fill="none" stroke="#667085" stroke-width="3"/><text x="584" y="44" font-size="14" fill="#0072b2">Revenue</text><text x="584" y="179" font-size="14" fill="#667085">CAC</text></svg></div></div></div><span class="pageno">01</span></section>
+<section class="slide"><div class="slide-inner"><div class="s-ex"><h2>Lines labeled at line-end.</h2><p class="note">No legend boxes. Ever.</p></div></div><span class="pageno">02</span></section>
+<section class="slide"><div class="slide-inner"><div class="s-ex"><h2>Subtitle carries units + period.</h2><p class="note">'€ millions, FY2024 vs FY2025'</p></div></div><span class="pageno">03</span></section>
+<section class="slide"><div class="slide-inner"><div class="s-ex"><h2>One exhibit per slide.</h2><p class="note">Two charts = two slides.</p></div></div><span class="pageno">04</span></section>
+</body></html>

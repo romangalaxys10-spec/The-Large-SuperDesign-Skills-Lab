@@ -1,12 +1,13 @@
 # 🧪 The Large SuperDesign Skills Lab
 
-**65 loadable design-system skills for AI coding agents.**
+**71 loadable design-system skills for AI coding agents.**
 Each skill teaches an agent one complete visual identity — tokens, typography, layout grammar, components and guardrails — plus a live demo page and a token-anatomy diagram.
 
 | | |
 |---|---|
 | 🟢 **Production Vercel systems** | 20 skills reverse-engineered from real, revenue-grade demos ([rommark.dev gallery](https://rommark.dev/)) |
 | 🔵 **SuperDesign studies** | All **45 published systems** from [superdesign.dev/design-systems](https://superdesign.dev/design-systems), re-tokenized and enhanced |
+| 🟡 **Presentation & slide systems** | 6 skills covering keynotes, consulting decks, pitch decks, editorial quotes, data-viz and workshop slides |
 | 📦 **Per skill you get** | `SKILL.md` (agent instructions) · `demo.html` (working reference) · `diagram.svg` (visual token anatomy) |
 
 Built by [Rommark.dev](https://www.rommark.dev) · MIT licensed
@@ -331,7 +332,20 @@ Visual: open [`index.html`](index.html) locally.
 
 *(+10 curated editions of the studies below with hand-tuned tokens)*
 
-### 🔵 SuperDesign studies — all 45 systems
+### 🟡 Presentation & slide systems (new)
+
+Slide-deck skills — each SKILL.md covers projection typography (32px back-row law), deck assembly grammar, layout patterns and chart rules; each demo.html renders an actual browsable deck:
+
+| Skill | Category | Accent |
+|---|---|---|
+| [keynote-clean-minimal](skills/keynote-clean-minimal/SKILL.md) | Product launches / keynotes | ![#2997ff](https://img.shields.io/badge/2997ff-%232997ff) |
+| [mckinsey-consult-deck](skills/mckinsey-consult-deck/SKILL.md) | Consulting / board decks | ![#2251ff](https://img.shields.io/badge/2251ff-%232251ff) |
+| [pitch-dark-startup](skills/pitch-dark-startup/SKILL.md) | Startup fundraising | ![#6ee7b7](https://img.shields.io/badge/6ee7b7-%236ee7b7) |
+| [editorial-quote-serif](skills/editorial-quote-serif/SKILL.md) | Culture talks / quotes | ![#b08d57](https://img.shields.io/badge/b08d57-%23b08d57) |
+| [dataviz-standard-pro](skills/dataviz-standard-pro/SKILL.md) | Analytics reviews / data-viz | ![#0072b2](https://img.shields.io/badge/0072b2-%230072b2) |
+| [workshop-facilitator-pop](skills/workshop-facilitator-pop/SKILL.md) | Workshops / training rooms | ![#ffd60a](https://img.shields.io/badge/ffd60a-%23ffd60a) |
+
+## 🔵 SuperDesign studies — all 45 systems
 
 `sd-*` prefixed skills map 1:1 to https://superdesign.dev/design-systems:
 ai-builder-club · anthropic · apple · appscale-premium-apps-and-hosting-store · atelier-reveal-or-pomodoro · calcom · chrome-void · clay · claymorphic-comic-ledger · confetti-minimal · cream-island (+variant) · cursor · faceted-plum-institutional · fieldwork-grotesk · framer · frequency-based-extraction · global-enterprise-intelligence-design-system · heyski · intelligence-ai · lenisdev · linear · minimalist-electric-cyan-portfolio · my-design-system (+variant) · neon-db · planetscale · railway · ration-blue-gate-card · rationed-aurora-light · rationed-voltage-dark · scriptforge-ai-11-reference-match · stack-ai · supabase · teal-ledger-corporate · terminal-cyan-ledger · the-modern-scholar · traceso · vapi-ai · viktor · violet-ledger-interface · void-teal-ledger-glass · warm-frame-portfolio-light · wdi · wise
