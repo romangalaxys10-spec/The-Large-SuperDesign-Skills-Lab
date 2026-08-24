@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fundamentals — Paddle Protocol — playable demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0b1120;color:#e5eaf2;font-family:'Inter',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;padding:80px 16px 60px}
+.rm-bar{position:fixed;top:0;left:0;right:0;background:#0f172a;padding:.55rem 1.25rem;border-bottom:1px solid rgba(148,163,184,.15);z-index:99;display:flex;justify-content:space-between;align-items:center}
+.rm-label{color:#7dd3fc;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-decoration:none}
+.rm-hire{background:#2563eb;color:#fff;padding:.34rem .8rem;border-radius:999px;font-weight:700;font-size:.72rem;text-decoration:none}
+h1{font-size:clamp(1.4rem,3vw,2rem);margin:0 0 6px;text-align:center}
+p.note{color:#8b93a0;margin-bottom:16px;font-size:.9rem;max-width:640px;text-align:center}
+.stage{position:relative;width:min(720px,94vw)}
+canvas,.dom-stage{display:block;width:100%;border-radius:14px;background:#10151f;border:1px solid #212b3d;box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.hud{position:absolute;top:10px;left:14px;right:14px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:14px;color:#9fe8ff;pointer-events:none;z-index:5}
+.overlay{position:absolute;inset:0;background:rgba(5,8,14,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border-radius:14px;text-align:center;padding:20px;z-index:10}
+.overlay h2{font-size:1.7rem}
+.btn{background:#22d3ee;color:#04121a;font-weight:800;border:none;border-radius:999px;padding:.65rem 1.5rem;cursor:pointer;font-size:.98rem}
+.btn:hover{transform:translateY(-2px)}
+.keys{color:#64748b;font-size:.83rem;margin-top:12px;text-align:center}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:50}
+.modal.open{display:flex}
+.panel{background:#141b28;border:1px solid #26314a;border-radius:14px;padding:1.4rem;max-width:400px;width:88%}
+.dom-grid{display:grid;gap:4px;padding:10px}
+.tile{aspect-align:center;background:#182234;border-radius:6px;display:grid;place-items:center;font-size:20px}
+.token{position:absolute;width:36px;height:36px;border-radius:50%;transition:left .45s ease,top .45s ease;box-shadow:0 4px 12px rgba(0,0,0,.5);display:grid;place-items:center;font-weight:800}
+</style></head><body>
+<div class="rm-bar"><a class="rm-label" href="https://www.rommark.dev">&#127918; SUPERDESIGN SKILLS LAB — game-fundamentals-2d</a><a class="rm-hire" href="https://www.rommark.dev">Hire Developer &#10132;</a></div>
+<h1>Fundamentals — Paddle Protocol</h1><p class="note">A complete duel showing BOOT→MENU→PLAY→PAUSE→OVER states, versioned localStorage best score, WebAudio blips, pause (P), mute (M), one-tap rematch.</p>
+<div class="stage">
+<div class="hud"><span id="hudL">YOU 0</span><span id="hudS">BEST 0</span><span id="hudR">CPU 0</span></div>
+<canvas id="c" width="720" height="440"></canvas>
+<div class="overlay" id="ov"><h2 id="ovT">PADDLE PROTOCOL</h2><p class="note">First to 5 wins.</p><button class="btn" id="go">START</button></div>
+</div><p class="keys">W/S or ↑/↓ · P pause · M mute</p>
+<script>
+/* ==== TUNING CONSTANTS — balance here ==== */
+
+const CFG={WIN:5,PAD_H:86,PAD_W:12,SPEED:330};
+const STATE={MENU:0,PLAY:1,PAUSE:2,OVER:3};let state=STATE.MENU;
+const cv=document.getElementById('c'),cx=cv.getContext('2d'),W=cv.width,H=cv.height;
+var px=W-30-CFG.PAD_W;
+const keys={};addEventListener('keydown',e=>{keys[e.code]=true;
+ if(e.code==='KeyM')toggleMute();
+ if(e.code==='KeyP'&&(state===STATE.PLAY||state===STATE.PAUSE))state=(state===STATE.PLAY?STATE.PAUSE:STATE.PLAY);});
+addEventListener('keyup',e=>keys[e.code]=false);
+let AC=null,muted=JSON.parse(localStorage.getItem('pp_mute')||'false');
+function initAudio(){if(!AC)try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}
+function sfx(f,d){if(muted||!AC)return;const o=AC.createOscillator(),g=AC.createGain();
+ o.frequency.value=f;g.gain.setValueAtTime(.07,AC.currentTime);
+ g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+d);
+ o.connect(g).connect(AC.destination);o.start();o.stop(AC.currentTime+d);}
+function toggleMute(){muted=!muted;localStorage.setItem('pp_mute',muted)}
+function loadSave(){try{return Object.assign({v:1,best:0},JSON.parse(localStorage.getItem('pp_save')||'{}'))}catch(e){return{v:1,best:0}}}
+let save=loadSave();if(save.v<2)save.v=2;   // migration point
+function writeSave(){try{localStorage.setItem('pp_save',JSON.stringify(save))}catch(e){}}
+const P={y:H/2-43},C={y:H/2-43},B={x:W/2,y:H/2,vx:0,vy:0};
+let sc={you:0,cpu:0};
+hudS.textContent='BEST '+save.best;
+function start(){initAudio();sc={you:0,cpu:0};serve(Math.random()<.5?1:-1);state=STATE.PLAY;ov.style.display='none';hud()}
+function serve(d){B.x=W/2;B.y=H/2;B.vx=CFG.SPEED*.6*d;B.vy=Math.random()*160-80}
+function over(){state=STATE.OVER;if(sc.you>save.best){save.best=sc.you;writeSave()}
+ ov.style.display='flex';ovT.textContent=sc.you>sc.cpu?'YOU WIN':'CPU WINS';
+ go.textContent='REMATCH';sfx(sc.you>sc.cpu?660:170,.3)}
+function hud(){hudL.textContent='YOU '+sc.you;hudR.textContent='CPU '+sc.cpu;hudS.textContent='BEST '+save.best}
+go.onclick=start;
+function update(dt){
+ const dir=(keys.ArrowUp||keys.KeyW?-1:0)+(keys.ArrowDown||keys.KeyS?1:0);
+ P.y=Math.max(0,Math.min(H-CFG.PAD_H,P.y+dir*400*dt));
+ C.y+=Math.sign(B.y-C.y-CFG.PAD_H/2)*215*dt;C.y=Math.max(0,Math.min(H-CFG.PAD_H,C.y));
+ B.x+=B.vx*dt;B.y+=B.vy*dt;
+ if(B.y<9||B.y>H-9)B.vy*=-1;
+ if(B.x<42&&B.x>28&&B.y>P.y-6&&B.y<P.y+CFG.PAD_H+6&&B.vx<0){B.vx=Math.abs(B.vx)*1.03;B.vy+=(B.y-P.y-CFG.PAD_H/2)*4;sfx(520,.05)}
+ if(B.x>px&&B.x<px+18&&B.y>C.y-6&&B.y<C.y+CFG.PAD_H+6&&B.vx>0){B.vx=-Math.abs(B.vx)*1.03;B.vy+=(B.y-C.y-CFG.PAD_H/2)*4;sfx(430,.05)}
+ if(B.x<-20){sc.cpu++;sfx(150,.2);hud();sc.cpu>=CFG.WIN?over():serve(1)}
+ if(B.x>W+20){sc.you++;sfx(700,.12);hud();sc.you>=CFG.WIN?over():serve(-1)}}
+function render(){
+ cx.fillStyle='#10151f';cx.fillRect(0,0,W,H);
+ cx.strokeStyle='#212b3d';cx.setLineDash([8,10]);cx.beginPath();cx.moveTo(W/2,0);cx.lineTo(W/2,H);cx.stroke();cx.setLineDash([]);
+ cx.fillStyle='#22d3ee';cx.fillRect(30,P.y,CFG.PAD_W,CFG.PAD_H);
+ cx.fillStyle='#fb7185';cx.fillRect(px,C.y,CFG.PAD_W,CFG.PAD_H);
+ cx.fillStyle='#fff';cx.beginPath();cx.arc(B.x,B.y,9,0,7);cx.fill();
+ if(state===STATE.PAUSE){cx.fillStyle='rgba(5,8,14,.7)';cx.fillRect(0,0,W,H);cx.fillStyle='#fff';cx.font='28px Inter';cx.textAlign='center';cx.fillText('PAUSED — press P',W/2,H/2)}}
+let last=0;function loop(t){const dt=Math.min((t-last)/1000,.05);last=t;
+ if(state===STATE.PLAY)update(dt);render();requestAnimationFrame(loop)}requestAnimationFrame(loop);
+
+</script></body></html>

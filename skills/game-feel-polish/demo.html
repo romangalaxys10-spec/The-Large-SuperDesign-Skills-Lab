@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Juice Lab — Same Game, Two Realities — playable demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0b1120;color:#e5eaf2;font-family:'Inter',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;padding:80px 16px 60px}
+.rm-bar{position:fixed;top:0;left:0;right:0;background:#0f172a;padding:.55rem 1.25rem;border-bottom:1px solid rgba(148,163,184,.15);z-index:99;display:flex;justify-content:space-between;align-items:center}
+.rm-label{color:#7dd3fc;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-decoration:none}
+.rm-hire{background:#2563eb;color:#fff;padding:.34rem .8rem;border-radius:999px;font-weight:700;font-size:.72rem;text-decoration:none}
+h1{font-size:clamp(1.4rem,3vw,2rem);margin:0 0 6px;text-align:center}
+p.note{color:#8b93a0;margin-bottom:16px;font-size:.9rem;max-width:640px;text-align:center}
+.stage{position:relative;width:min(720px,94vw)}
+canvas,.dom-stage{display:block;width:100%;border-radius:14px;background:#10151f;border:1px solid #212b3d;box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.hud{position:absolute;top:10px;left:14px;right:14px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:14px;color:#9fe8ff;pointer-events:none;z-index:5}
+.overlay{position:absolute;inset:0;background:rgba(5,8,14,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border-radius:14px;text-align:center;padding:20px;z-index:10}
+.overlay h2{font-size:1.7rem}
+.btn{background:#22d3ee;color:#04121a;font-weight:800;border:none;border-radius:999px;padding:.65rem 1.5rem;cursor:pointer;font-size:.98rem}
+.btn:hover{transform:translateY(-2px)}
+.keys{color:#64748b;font-size:.83rem;margin-top:12px;text-align:center}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:50}
+.modal.open{display:flex}
+.panel{background:#141b28;border:1px solid #26314a;border-radius:14px;padding:1.4rem;max-width:400px;width:88%}
+.dom-grid{display:grid;gap:4px;padding:10px}
+.tile{aspect-align:center;background:#182234;border-radius:6px;display:grid;place-items:center;font-size:20px}
+.token{position:absolute;width:36px;height:36px;border-radius:50%;transition:left .45s ease,top .45s ease;box-shadow:0 4px 12px rgba(0,0,0,.5);display:grid;place-items:center;font-weight:800}
+</style></head><body>
+<div class="rm-bar"><a class="rm-label" href="https://www.rommark.dev">&#127918; SUPERDESIGN SKILLS LAB — game-feel-polish</a><a class="rm-hire" href="https://www.rommark.dev">Hire Developer &#10132;</a></div>
+<h1>Juice Lab — Same Game, Two Realities</h1><p class="note">Spacebar launches a ball at a target. Toggle JUICE to compare raw vs polished: hit-stop, screenshake, squash&stretch, pitch-varied SFX.</p>
+<div class="stage">
+<div class="hud"><span>HITS <span id="hits">0</span></span><label style="pointer-events:auto;display:flex;gap:.4rem;align-items:center;cursor:pointer"><input type="checkbox" id="juice" checked style="accent-color:#22d3ee"> JUICE ON</label></div>
+<canvas id="c" width="720" height="440"></canvas>
+</div><p class="keys">SPACE to launch · toggle JUICE to feel the difference</p>
+<script>
+/* ==== TUNING CONSTANTS — balance here ==== */
+
+const CFG={POWER:900,HIT_STOP:.09,SHAKE:.45};
+const cv=document.getElementById('c'),cx=cv.getContext('2d'),W=cv.width,H=cv.height;
+const ball={x:80,y:H-70,vx:0,vy:0,fly:false,squash:1};
+const target={x:W-130,y:H/2-40,r:34,hit:false};
+let hits=0,hitStop=0,trauma=0,lastLaunch=0;
+const keys={};addEventListener('keydown',e=>{
+ if(e.code==='Space'){e.preventDefault();launch()}});
+cv.addEventListener('pointerdown',launch);
+function launch(){
+ if(ball.fly)return;
+ const now=performance.now();
+ if(now-lastLaunch<250)return;lastLaunch=now;
+ ball.fly=true;ball.squash=1.4;ball.vx=CFG.POWER;ball.vy=-(160+Math.random()*60);
+ sfx(220,.08);}
+let AC=null;
+function sfx(f,d){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();
+ const o=AC.createOscillator(),g=AC.createGain();o.frequency.value=f;
+ g.gain.setValueAtTime(.09,AC.currentTime);g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+d);
+ o.connect(g).connect(AC.destination);o.start();o.stop(AC.currentTime+d);}catch(e){}}
+juice.onchange=()=>{hits=0;hitsEl.textContent=0;resetBall()};
+function resetBall(){ball.fly=false;ball.x=80;ball.y=H-70;ball.vx=ball.vy=0;target.hit=false;
+ target.x=W-130;target.y=H/2-40+Math.random()*80-40;}
+function update(dt){
+ ball.vy+=1400*dt;ball.x+=ball.vx*dt;ball.y+=ball.vy*dt;
+ ball.squash+=(1-ball.squash)*Math.min(1,dt*10);
+ if(ball.y>H-50&&ball.fly){ball.vy*=-.55;ball.vx*=.98;ball.squash=.65;
+  if(juice.checked)sfx(160+Math.random()*40,.06);}
+ if(ball.x>W+30||ball.y<-40)resetBall();
+ if(!target.hit&&ball.fly&&Math.hypot(ball.x-target.x,ball.y-target.y)<target.r){
+  target.hit=true;hits++;hitsEl.textContent=hits;
+  if(juice.checked){hitStop=CFG.HIT_STOP;trauma=Math.min(1,trauma+CFG.SHAKE);
+   sfx(520+Math.random()*160,.22);setTimeout(()=>sfx(780,.15),90);}
+  else sfx(520,.1);
+  setTimeout(resetBall,juice.checked?550:350)}}
+function render(){
+ const sh=juice.checked?trauma*trauma*16:0;
+ cx.setTransform(1,0,0,1,(Math.random()*2-1)*sh,(Math.random()*2-1)*sh);
+ cx.fillStyle='#10151f';cx.fillRect(-20,-20,W+40,H+40);
+ for(let i=3;i>=1;i--){cx.beginPath();cx.arc(target.x,target.y,target.r*i/3,0,7);
+  cx.fillStyle=i%2?'rgba(57,224,208,.25)':'rgba(57,224,208,.12)';cx.fill();}
+ cx.strokeStyle=target.hit?'#4ade80':'#39e0d0';cx.lineWidth=3;cx.stroke();
+ cx.fillStyle='#26314a';cx.fillRect(60,H-44,80,14);
+ const sq=ball.fly?ball.squash:1,st=2-sq;
+ cx.save();cx.translate(ball.x,ball.y);
+ const ang=Math.atan2(ball.vy,ball.vx);
+ cx.fillStyle='#fbbf24';cx.beginPath();
+ cx.ellipse(0,0,13*sq,13/st,ang,0,7);cx.fill();cx.restore();
+ cx.fillStyle='#fff';cx.font='800 26px Inter';cx.textAlign='right';
+ cx.fillText(hits+(juice.checked?' ✨':''), W-36, 46);
+ cx.setTransform(1,0,0,1,0,0);}
+let last=0;function loop(t){
+ const dtRaw=Math.min((t-last)/1000,.05);last=t;
+ let dt=dtRaw;
+ if(hitStop>0){hitStop-=dtRaw;dt=0}
+ ball.vy+=1400*dt;ball.x+=ball.vx*dt;ball.y+=ball.vy*dt;
+ requestAnimationFrame(loop)}
+requestAnimationFrame(loop);
+
+</script></body></html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DOM Board — Dice Derby — playable demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0b1120;color:#e5eaf2;font-family:'Inter',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;padding:80px 16px 60px}
+.rm-bar{position:fixed;top:0;left:0;right:0;background:#0f172a;padding:.55rem 1.25rem;border-bottom:1px solid rgba(148,163,184,.15);z-index:99;display:flex;justify-content:space-between;align-items:center}
+.rm-label{color:#7dd3fc;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-decoration:none}
+.rm-hire{background:#2563eb;color:#fff;padding:.34rem .8rem;border-radius:999px;font-weight:700;font-size:.72rem;text-decoration:none}
+h1{font-size:clamp(1.4rem,3vw,2rem);margin:0 0 6px;text-align:center}
+p.note{color:#8b93a0;margin-bottom:16px;font-size:.9rem;max-width:640px;text-align:center}
+.stage{position:relative;width:min(720px,94vw)}
+canvas,.dom-stage{display:block;width:100%;border-radius:14px;background:#10151f;border:1px solid #212b3d;box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.hud{position:absolute;top:10px;left:14px;right:14px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:14px;color:#9fe8ff;pointer-events:none;z-index:5}
+.overlay{position:absolute;inset:0;background:rgba(5,8,14,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border-radius:14px;text-align:center;padding:20px;z-index:10}
+.overlay h2{font-size:1.7rem}
+.btn{background:#22d3ee;color:#04121a;font-weight:800;border:none;border-radius:999px;padding:.65rem 1.5rem;cursor:pointer;font-size:.98rem}
+.btn:hover{transform:translateY(-2px)}
+.keys{color:#64748b;font-size:.83rem;margin-top:12px;text-align:center}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:50}
+.modal.open{display:flex}
+.panel{background:#141b28;border:1px solid #26314a;border-radius:14px;padding:1.4rem;max-width:400px;width:88%}
+.dom-grid{display:grid;gap:4px;padding:10px}
+.tile{aspect-align:center;background:#182234;border-radius:6px;display:grid;place-items:center;font-size:20px}
+.token{position:absolute;width:36px;height:36px;border-radius:50%;transition:left .45s ease,top .45s ease;box-shadow:0 4px 12px rgba(0,0,0,.5);display:grid;place-items:center;font-weight:800}
+</style></head><body>
+<div class="rm-bar"><a class="rm-label" href="https://www.rommark.dev">&#127918; SUPERDESIGN SKILLS LAB — game-dom-board-games</a><a class="rm-hire" href="https://www.rommark.dev">Hire Developer &#10132;</a></div>
+<h1>DOM Board — Dice Derby</h1><p class="note">A two-player board race built entirely from DOM divs + CSS transitions: CSS-grid tiles, transform-moving tokens, turn FSM, decision modal, i18n-ready strings.</p>
+<div class="stage dom-stage" style="padding:18px">
+<div class="hud" style="top:-34px"><span id="turn">TURN: P1</span><span id="pos">P1 @ 0 · P2 @ 0</span></div>
+<div class="dom-grid" id="board" style="grid-template-columns:repeat(10,1fr)"></div>
+<div class="token" id="t1" style="background:#22d3ee">1</div>
+<div class="token" id="t2" style="background:#fb7185">2</div>
+</div>
+<p class="keys"><button class="btn" id="roll">🎲 ROLL DICE</button> &nbsp; first to tile 30 wins · boosts & traps on special tiles</p>
+<div class="modal" id="modal"><div class="panel"><h3 id="mT"></h3><p id="mB" style="color:#8b93a0;margin-top:.4rem"></p><button class="btn" style="margin-top:1rem" onclick="document.getElementById('modal').classList.remove('open')">CONTINUE</button></div></div>
+<script>
+/* ==== TUNING CONSTANTS — balance here ==== */
+
+const CFG={TILES:30,LADDERS:{5:14,11:22,19:27},TRAPS:{8:3,16:9,24:15}};
+const I18N={en:{turn:'TURN',win:'wins!',boost:'BOOST to',trap:'OUCH back to'}};
+const t=k=>I18N.en[k];
+const board=document.getElementById('board');
+for(let i=0;i<=CFG.TILES;i++){const d=document.createElement('div');d.className='tile';
+ if(CFG.LADDERS[i])d.style.background='#134e3a',d.textContent='▲';
+ else if(CFG.TRAPS[i])d.style.background='#4a1a24',d.textContent='✕';
+ else if(i===CFG.TILES)d.style.background='#1e3a5f',d.textContent='★';
+ d.dataset.i=i;d.style.position='relative';board.appendChild(d);}
+function cellPos(i){const tiles=board.children;if(i<0)i=0;
+ const r=tiles[Math.min(i,CFG.TILES)];return{x:r.offsetLeft+r.offsetWidth/2,y:r.offsetTop+r.offsetHeight/2}}
+const players=[{i:0,el:t1},{i:0,el:t2}];
+function place(p){const c=cellPos(p.i);p.el.style.left=c.x-18+'px';p.el.style.top=c.y-18+'px'}
+place(players[0]);place(players[1]);
+let cur=0,busy=false;
+roll.onclick=()=>{if(busy)return;busy=true;
+ const p=players[cur],die=1+Math.floor(Math.random()*6);
+ p.i=Math.min(CFG.TILES,p.i+die);place(p);
+ pos.textContent='P1 @ '+players[0].i+' · P2 @ '+players[1].i;
+ setTimeout(()=>{
+  if(CFG.LADDERS[p.i]){p.i=CFG.LADDERS[p.i];mT.textContent=t('boost');mB.textContent='to tile '+p.i;modal.classList.add('open')}
+  else if(CFG.TRAPS[p.i]){p.i=CFG.TRAPS[p.i];mT.textContent=t('trap');mB.textContent='to tile '+p.i;modal.classList.add('open')}
+  place(p);
+  if(p.i>=CFG.TILES){mT.textContent='P'+(cur+1)+' '+t('win');mB.textContent='rematch = reload';modal.classList.add('open');roll.disabled=true;busy=false;return}
+  cur=1-cur;turn.textContent=t('turn')+': P'+(cur+1);busy=false;
+ },500)};
+onresize=()=>{players.forEach(place)};
+
+</script></body></html>

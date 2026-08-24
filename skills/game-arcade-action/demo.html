@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arcade Feel — Gem Runner — playable demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0b1120;color:#e5eaf2;font-family:'Inter',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;padding:80px 16px 60px}
+.rm-bar{position:fixed;top:0;left:0;right:0;background:#0f172a;padding:.55rem 1.25rem;border-bottom:1px solid rgba(148,163,184,.15);z-index:99;display:flex;justify-content:space-between;align-items:center}
+.rm-label{color:#7dd3fc;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-decoration:none}
+.rm-hire{background:#2563eb;color:#fff;padding:.34rem .8rem;border-radius:999px;font-weight:700;font-size:.72rem;text-decoration:none}
+h1{font-size:clamp(1.4rem,3vw,2rem);margin:0 0 6px;text-align:center}
+p.note{color:#8b93a0;margin-bottom:16px;font-size:.9rem;max-width:640px;text-align:center}
+.stage{position:relative;width:min(720px,94vw)}
+canvas,.dom-stage{display:block;width:100%;border-radius:14px;background:#10151f;border:1px solid #212b3d;box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.hud{position:absolute;top:10px;left:14px;right:14px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:14px;color:#9fe8ff;pointer-events:none;z-index:5}
+.overlay{position:absolute;inset:0;background:rgba(5,8,14,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border-radius:14px;text-align:center;padding:20px;z-index:10}
+.overlay h2{font-size:1.7rem}
+.btn{background:#22d3ee;color:#04121a;font-weight:800;border:none;border-radius:999px;padding:.65rem 1.5rem;cursor:pointer;font-size:.98rem}
+.btn:hover{transform:translateY(-2px)}
+.keys{color:#64748b;font-size:.83rem;margin-top:12px;text-align:center}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:50}
+.modal.open{display:flex}
+.panel{background:#141b28;border:1px solid #26314a;border-radius:14px;padding:1.4rem;max-width:400px;width:88%}
+.dom-grid{display:grid;gap:4px;padding:10px}
+.tile{aspect-align:center;background:#182234;border-radius:6px;display:grid;place-items:center;font-size:20px}
+.token{position:absolute;width:36px;height:36px;border-radius:50%;transition:left .45s ease,top .45s ease;box-shadow:0 4px 12px rgba(0,0,0,.5);display:grid;place-items:center;font-weight:800}
+</style></head><body>
+<div class="rm-bar"><a class="rm-label" href="https://www.rommark.dev">&#127918; SUPERDESIGN SKILLS LAB — game-arcade-action</a><a class="rm-hire" href="https://www.rommark.dev">Hire Developer &#10132;</a></div>
+<h1>Arcade Feel — Gem Runner</h1><p class="note">Arrow-key movement with acceleration/friction, forgiving hitbox, 1s i-frames after hits, telegraphed hazards, combo multiplier that decays.</p>
+<div class="stage">
+<div class="hud"><span>SCORE <span id="sc">0</span></span><span>COMBO x<span id="cb">1</span></span><span>LIVES <span id="lv">♥♥♥</span></span></div>
+<canvas id="c" width="720" height="460"></canvas>
+<div class="overlay" id="ov"><h2>GEM RUNNER</h2><p class="note">Collect ◆ gems, dodge ● mines.<br>Combos multiply. You have 3 hearts.</p><button class="btn" id="go">START</button></div>
+</div><p class="keys">arrows / WASD</p>
+<script>
+/* ==== TUNING CONSTANTS — balance here ==== */
+
+const CFG={ACC:1400,FRICTION:6,MAXV:380,IFRAMES:1,COMBO_T:2.5,P_SPAWN:.9,M_SPAWN:.55};
+const STATE={MENU:0,PLAY:1,OVER:2};let state=STATE.MENU;
+const cv=document.getElementById('c'),cx=cv.getContext('2d'),W=cv.width,H=cv.height;
+const keys={};addEventListener('keydown',e=>keys[e.code]=true);addEventListener('keyup',e=>keys[e.code]=false);
+const player={x:W/2,y:H/2,vx:0,vy:0,r:13,lives:3,inv:0};
+let gems=[],mines=[],score=0,combo=1,comboT=0,tSpawnG=0,tSpawnM=0;
+function spawnGem(){gems.push({x:30+Math.random()*(W-60),y:30+Math.random()*(H-60),r:9,b:Math.random()*6})}
+function spawnMine(){mines.push({x:30+Math.random()*(W-60),y:30+Math.random()*(H-60),r:12,warn:.8});}  // telegraph .8s
+function reset(){player.x=W/2;player.y=H/2;player.vx=player.vy=0;player.lives=3;player.inv=0;
+ gems=[];mines=[];score=0;combo=1;state=STATE.PLAY;ov.style.display='none'}
+go.onclick=reset;
+function hit(){if(player.inv>0)return;player.lives--;player.inv=CFG.IFRAMES;combo=1;lv.textContent='♥'.repeat(Math.max(0,player.lives));
+ if(player.lives<=0){state=STATE.OVER;ov.style.display='flex';go.textContent='RETRY'}}
+function update(dt){
+ // acceleration + friction movement
+ let ax=(keys.ArrowRight||keys.KeyD?1:0)-(keys.ArrowLeft||keys.KeyA?1:0);
+ let ay=(keys.ArrowDown||keys.KeyS?1:0)-(keys.ArrowUp||keys.KeyW?1:0);
+ player.vx+=ax*CFG.ACC*dt;player.vy+=ay*CFG.ACC*dt;
+ player.vx-=player.vx*Math.min(1,CFG.FRICTION*dt);player.vy-=player.vy*Math.min(1,CFG.FRICTION*dt);
+ const sp=Math.hypot(player.vx,player.vy);if(sp>CFG.MAXV){player.vx*=CFG.MAXV/sp;player.vy*=CFG.MAXV/sp}
+ player.x=Math.max(20,Math.min(W-20,player.x+player.vx*dt));
+ player.y=Math.max(20,Math.min(H-20,player.y+player.vy*dt));
+ if(player.inv>0)player.inv-=dt;
+ comboT-=dt;if(comboT<=0)combo=1; cb.textContent=combo;
+ tSpawnG-=dt;tSpawnM-=dt;
+ if(tSpawnG<=0){spawnGem();tSpawnG=CFG.P_SPAWN}
+ if(tSpawnM<=0){spawnMine();tSpawnM=Math.max(.25,CFG.M_SPAWN-score/3000)}
+ gems=gems.filter(g=>{if(Math.hypot(g.x-player.x,g.y-player.y)<g.r+player.r){
+  score+=10*combo;combo=Math.min(8,combo+1);comboT=CFG.COMBO_T;sc.textContent=score;return false}return true});
+ mines=mines.filter(m=>{m.warn-=dt;if(m.warn>0)return true;
+  m.x+=m.vx||0;m.y+=m.vy||0;
+  return Math.hypot(m.x-player.x,m.y-player.y)>m.r+player.r-4 || (hit(),false)});}
+function render(){
+ cx.fillStyle='#10151f';cx.fillRect(0,0,W,H);
+ // gems
+ for(const g of gems){cx.save();cx.translate(g.x,g.y+Math.sin(g.b+performance.now()/300)*3);
+  cx.rotate(performance.now()/600);cx.fillStyle='#34d399';
+  cx.fillRect(-g.r,-g.r,g.r*2,g.r*2);cx.restore();}
+ // mines: telegraph then live
+ for(const m of mines){cx.beginPath();cx.arc(m.x,m.y,m.r,0,7);
+  cx.fillStyle=m.warn>0?'rgba(251,113,133,.35)':(Math.floor(performance.now()/200)%2?'#fb7185':'#f43f5e');cx.fill();}
+ // player (blink during i-frames)
+ if(player.inv<=0||Math.floor(performance.now()/90)%2){
+  cx.beginPath();cx.arc(player.x,player.y,player.r,0,7);cx.fillStyle='#38bdf8';cx.fill();}
+ else{cx.beginPath();cx.arc(player.x,player.y,player.r,0,7);cx.strokeStyle='#38bdf866';cx.stroke()}}
+let last=0;function loop(t){const dt=Math.min((t-last)/1000,.05);last=t;
+ if(state===STATE.PLAY)update(dt);render();requestAnimationFrame(loop)}requestAnimationFrame(loop);
+
+</script></body></html>

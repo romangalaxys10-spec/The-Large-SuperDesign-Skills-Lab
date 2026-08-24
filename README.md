@@ -10,6 +10,7 @@ Each skill teaches an agent one complete visual identity — tokens, typography,
 | 🟡 **Presentation & slide systems** | 6 skills covering keynotes, consulting decks, pitch decks, editorial quotes, data-viz and workshop slides |
 | 🟠 **Awesome style directions (vendored)** | 67 style skills from [bergside/awesome-design-skills](https://github.com/bergside/awesome-design-skills) — brutalism, glassmorphism, neubrutalism, bento, editorial, retro, ... |
 | 🔣 **UI/UX Pro Max intelligence (vendored)** | The full searchable design-intelligence engine from [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) — 84 UI styles, 192 palettes, 74 font pairings, 119 UX guidelines, 25 chart types, CSV search tooling + 6 sub-skills |
+| 🎮 **2D Game design skills** | 6 playable-skill pairs distilled from the [Games Suite](https://games-suite.vercel.app): fundamentals (state machine/save/audio), canvas FX, DOM board games, arcade feel, RPG quests, juice polish — every demo is a real playable micro-game |
 | 🦆 **Anti-slop & craft skills (vendored)** | Curated from [Nutlope/hallmark](https://github.com/Nutlope/hallmark) and Tony Lee's [12 free skills list](https://tonylee.im/en/blog/12-free-skills-escape-ai-slop-design/): Hallmark (58-gate slop test), Anthropic's official frontend-design plugin, taste-skill, better-icons, ui-design-brain, vercel-agent-skills, designer-skills-collection (107 SKILL.mds), design-plugin, make-interfaces-feel-better |
 | 📦 **Per skill you get** | `SKILL.md` (agent instructions) · `demo.html` (working reference) · `diagram.svg` (visual token anatomy) |
 
@@ -18,7 +19,6 @@ Built by [Rommark.dev](https://www.rommark.dev) · MIT licensed
 ---
 
 ## 📖 Table of contents
-- [🎮 Interactive Game Design Suite (`game design/`)](#-️-interactive-game-design-suite-game-design)
 
 1. [What is a design skill?](#-what-is-a-design-skill)
 2. [Repository structure](#-repository-structure)
@@ -159,6 +159,21 @@ verify vs demo.html → done
 ### Multi-page consistency
 
 ### Vendored families (`awesome-*` and `pro-*`)
+### 🎮 Game skill family (`game-*`)
+
+Six skills that teach agents to **build 2D browser games at the Games Suite bar** (single-file HTML, zero assets, offline, one paste):
+
+| Skill | Teaches | Playable demo |
+|---|---|---|
+| [`game-fundamentals-2d`](skills/game-fundamentals-2d/SKILL.md) | State machine, dt-clamped loop, versioned saves, synth audio | pong duel |
+| [`game-canvas-rendering`](skills/game-canvas-rendering/SKILL.md) | Layer pipeline, pooled particles, trauma screenshake | FX playground |
+| [`game-dom-board-games`](skills/game-dom-board-games/SKILL.md) | CSS-grid boards, transform tokens, turn FSM | dice race |
+| [`game-arcade-action`](skills/game-arcade-action/SKILL.md) | Accel/friction movement, i-frames, combo scoring | gem runner |
+| [`game-rpg-quest-worlds`](skills/game-rpg-quest-worlds/SKILL.md) | ASCII tilemaps, quest flags, typewriter dialogs | walkable quest world |
+| [`game-feel-polish`](skills/game-feel-polish/SKILL.md) | Hit-stop, squash&stretch, juice A/B toggle | juice lab |
+
+Build order for any game brief: `fundamentals` → genre skill (board / arcade / rpg) → `canvas-rendering` → always finish with `feel-polish`.
+
 ### Anti-slop & craft families
 
 - **`hallmark/`** — the strongest quality gate in this lab. After building any UI with another skill, run its verbs mentally: `audit` (score against 58 slop gates), `redesign`, `study`. Always run the pre-emit self-critique stamp.
@@ -379,30 +394,6 @@ ai-builder-club · anthropic · apple · appscale-premium-apps-and-hosting-store
 Plus 10 curated editions: `linear-near-black-indigo` · `wise-ultra-black-lime` · `anthropic-cream-grotesque` · `apple-flat-retail-light` · `cream-island-violet-media` · `terminal-cyan-ledger-dark` · `teal-corporate-gradient` · `warm-frame-chestnut` · `voltage-clickhouse-yellow` · `heyski-emerald-aurora`
 
 ---
-
-
----
-
-## 🎮 🕹️ Interactive Game Design Suite (`game design/`)
-
-A full production suite of **5 playable cartoon & strategic web games + unified Arcade Hub**, built with deep state-machine mechanics, procedural Web Audio SFX engines, multi-language localization (6 languages with RTL), and SuperDesign / Canva visual design identities.
-
-| Game | Theme & Core Mechanics | Play Modes | Live Production Demo |
-| :--- | :--- | :--- | :--- |
-| 🕹️ **Arcade Hub Portal** | Central retro-futuristic arcade portal to launch and explore all games in the suite. | Navigation Hub | [Launch Arcade Hub](https://games-suite.vercel.app/) |
-| 🎩 **Breakout Monopoly** | 9-to-5 escape board game. Dual-loop perimeter board, property color groups, title deeds, bandwidth energy, burnout recovery, and freedom threshold. | Single & Local 2–4P | [Play Monopoly](https://games-suite.vercel.app/breakout-game/) |
-| 🚀 **Venture Quest: Silicon Hustle** | Tech & AI startup empire simulator. Manage runway vs. burn rate, tech trees, hiring, server outages, and VC pitch decks to IPO. | vs. AI Bots & 2–4P | [Play Venture Quest](https://games-suite.vercel.app/venture-quest/) |
-| 🍕 **Street Mogul: Urban Tycoon** | Street food cart to city franchise monopoly. Recipe upgrades, dynamic supply costs, weather fluctuations, and turf wars. | vs. AI Bots & 2–4P | [Play Street Mogul](https://games-suite.vercel.app/street-mogul/) |
-| 🧘 **Balance of Life: Fulfillment Sim** | High-stakes life strategy simulator. Balance 4 vital meters (Wealth 💰, Health ❤️, Relationships 🤝, Passion 🎨) across life phases. | vs. AI Bots & 2–4P | [Play Balance of Life](https://games-suite.vercel.app/life-odyssey/) |
-| 🧙‍♂️ **Cyber-Quest: Roguelike Battler** | Indie dev comedy tabletop RPG. Defeat Tech Debt, Scope Creep, and Legacy Monolith bosses using tactical strategy cards. | vs. AI Bots & 2–4P | [Play Cyber-Quest](https://games-suite.vercel.app/cyber-quest/) |
-
-### 🛠️ Game Design & Technical Highlights:
-- **🎨 Cartoon Motion & Visual Identity**: Ben-Day halftone comic dot patterns, squash-and-stretch token animations, and comic action badges designed with SuperDesign & Canva principles.
-- **🔊 Procedural Web Audio Engines**: Zero external audio assets — all dice rolls, cash chimes, crisis alarms, and victory fanfares are synthesized dynamically in code via the Web Audio API.
-- **🌍 6 Isolated Full Translations**: 100% localized in **English (`EN`)**, **Русский (`RU`)**, **Français (`FR`)**, **Español (`ES`)**, **العربية (`AR`)**, and **עברית (`HE`)** with native bidirectional RTL support.
-- **👥 Single-Player vs. AI & Local Pass-and-Play (2–4 Players)**: Full setup modals with custom cartoon avatars and customizable player rosters.
-- **📦 Clean Architecture**: Vanilla ES6+ single-file architectures per game, zero heavy runtime dependencies, instant global deployment on Vercel.
-
 
 ## 🙌 Credits & license
 

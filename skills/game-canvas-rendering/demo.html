@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Canvas FX — Particle Pool &amp; Screenshake — playable demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0b1120;color:#e5eaf2;font-family:'Inter',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;padding:80px 16px 60px}
+.rm-bar{position:fixed;top:0;left:0;right:0;background:#0f172a;padding:.55rem 1.25rem;border-bottom:1px solid rgba(148,163,184,.15);z-index:99;display:flex;justify-content:space-between;align-items:center}
+.rm-label{color:#7dd3fc;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-decoration:none}
+.rm-hire{background:#2563eb;color:#fff;padding:.34rem .8rem;border-radius:999px;font-weight:700;font-size:.72rem;text-decoration:none}
+h1{font-size:clamp(1.4rem,3vw,2rem);margin:0 0 6px;text-align:center}
+p.note{color:#8b93a0;margin-bottom:16px;font-size:.9rem;max-width:640px;text-align:center}
+.stage{position:relative;width:min(720px,94vw)}
+canvas,.dom-stage{display:block;width:100%;border-radius:14px;background:#10151f;border:1px solid #212b3d;box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.hud{position:absolute;top:10px;left:14px;right:14px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:14px;color:#9fe8ff;pointer-events:none;z-index:5}
+.overlay{position:absolute;inset:0;background:rgba(5,8,14,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border-radius:14px;text-align:center;padding:20px;z-index:10}
+.overlay h2{font-size:1.7rem}
+.btn{background:#22d3ee;color:#04121a;font-weight:800;border:none;border-radius:999px;padding:.65rem 1.5rem;cursor:pointer;font-size:.98rem}
+.btn:hover{transform:translateY(-2px)}
+.keys{color:#64748b;font-size:.83rem;margin-top:12px;text-align:center}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:50}
+.modal.open{display:flex}
+.panel{background:#141b28;border:1px solid #26314a;border-radius:14px;padding:1.4rem;max-width:400px;width:88%}
+.dom-grid{display:grid;gap:4px;padding:10px}
+.tile{aspect-align:center;background:#182234;border-radius:6px;display:grid;place-items:center;font-size:20px}
+.token{position:absolute;width:36px;height:36px;border-radius:50%;transition:left .45s ease,top .45s ease;box-shadow:0 4px 12px rgba(0,0,0,.5);display:grid;place-items:center;font-weight:800}
+</style></head><body>
+<div class="rm-bar"><a class="rm-label" href="https://www.rommark.dev">&#127918; SUPERDESIGN SKILLS LAB — game-canvas-rendering</a><a class="rm-hire" href="https://www.rommark.dev">Hire Developer &#10132;</a></div>
+<h1>Canvas FX — Particle Pool &amp; Screenshake</h1><p class="note">Click/drag to burst pooled particles. Demonstrates fixed draw layers, zero-allocation pooling, decaying trauma-based screenshake and additive glow.</p>
+<div class="stage"><canvas id="c" width="720" height="460"></canvas>
+<div class="hud"><span>POOL <span id="pcount">0</span>/300</span><span>SHAKE <span id="shk">0%</span></span><span>[C]LEAR</span></div></div>
+<p class="keys">click / drag to emit · particles are POOLED (never new() inside loop)</p>
+<script>
+/* ==== TUNING CONSTANTS — balance here ==== */
+
+const CFG={POOL:300,GRAV:340,DECAY:.9};
+const cv=document.getElementById('c'),cx=cv.getContext('2d'),W=cv.width,H=cv.height;
+// POOL: preallocated objects, reused forever
+const pool=[];for(let i=0;i<CFG.POOL;i++)pool.push({x:0,y:0,vx:0,vy:0,life:0,max:1,size:4,hue:180});
+let shakeTrauma=0;
+addEventListener('keydown',e=>{if(e.code==='KeyC'){pool.forEach(p=>p.life=0)}})
+cv.addEventListener('pointerdown',burst);cv.addEventListener('pointermove',e=>{if(e.buttons)burst(e)});
+function burst(e){
+ const r=cv.getBoundingClientRect(),x=(e.clientX-r.left)*(W/r.width),y=(e.clientY-r.top)*(H/r.height);
+ let n=24;
+ for(const p of pool){if(n<=0)break;if(p.life<=0){
+  p.x=x;p.y=y;const a=Math.random()*6.28,s=120+Math.random()*260;
+  p.vx=Math.cos(a)*s;p.vy=Math.sin(a)*s;p.life=p.max=.6+Math.random()*.5;
+  p.size=2+Math.random()*4;p.hue=175+Math.random()*40;n--;}}
+ shakeTrauma=Math.min(1,shakeTrauma+.25);}
+let last=0;
+function loop(t){const dt=Math.min((t-last)/1000,.05);last=t;
+ // update
+ for(const p of pool){if(p.life<=0)continue;p.life-=dt;p.vy+=CFG.GRAV*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;}
+ shakeTrauma=Math.max(0,shakeTrauma-dt*1.4);
+ pcount.textContent=pool.filter(p=>p.life>0).length;
+ shk.textContent=Math.round(shakeTrauma*100)+'%';
+ // render: bg -> fx (single layer here) with trauma shake
+ const sh=shakeTrauma*shakeTrauma*14;
+ cx.setTransform(1,0,0,1,(Math.random()*2-1)*sh,(Math.random()*2-1)*sh);
+ cx.fillStyle='#10151f';cx.fillRect(-20,-20,W+40,H+40);
+ cx.globalCompositeOperation='lighter';
+ for(const p of pool){if(p.life<=0)continue;
+  cx.globalAlpha=p.life/p.max;cx.fillStyle=`hsl(${p.hue},90%,60%)`;
+  cx.beginPath();cx.arc(p.x,p.y,p.size*(p.life/p.max)+.5,0,7);cx.fill();}
+ cx.globalAlpha=1;cx.globalCompositeOperation='source-over';
+ cx.setTransform(1,0,0,1,0,0);}
+requestAnimationFrame(loop);
+
+</script></body></html>

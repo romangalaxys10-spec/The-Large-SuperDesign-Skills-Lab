@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RPG World — Quest of the Golden Gear — playable demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0b1120;color:#e5eaf2;font-family:'Inter',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;padding:80px 16px 60px}
+.rm-bar{position:fixed;top:0;left:0;right:0;background:#0f172a;padding:.55rem 1.25rem;border-bottom:1px solid rgba(148,163,184,.15);z-index:99;display:flex;justify-content:space-between;align-items:center}
+.rm-label{color:#7dd3fc;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-decoration:none}
+.rm-hire{background:#2563eb;color:#fff;padding:.34rem .8rem;border-radius:999px;font-weight:700;font-size:.72rem;text-decoration:none}
+h1{font-size:clamp(1.4rem,3vw,2rem);margin:0 0 6px;text-align:center}
+p.note{color:#8b93a0;margin-bottom:16px;font-size:.9rem;max-width:640px;text-align:center}
+.stage{position:relative;width:min(720px,94vw)}
+canvas,.dom-stage{display:block;width:100%;border-radius:14px;background:#10151f;border:1px solid #212b3d;box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.hud{position:absolute;top:10px;left:14px;right:14px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:14px;color:#9fe8ff;pointer-events:none;z-index:5}
+.overlay{position:absolute;inset:0;background:rgba(5,8,14,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border-radius:14px;text-align:center;padding:20px;z-index:10}
+.overlay h2{font-size:1.7rem}
+.btn{background:#22d3ee;color:#04121a;font-weight:800;border:none;border-radius:999px;padding:.65rem 1.5rem;cursor:pointer;font-size:.98rem}
+.btn:hover{transform:translateY(-2px)}
+.keys{color:#64748b;font-size:.83rem;margin-top:12px;text-align:center}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:50}
+.modal.open{display:flex}
+.panel{background:#141b28;border:1px solid #26314a;border-radius:14px;padding:1.4rem;max-width:400px;width:88%}
+.dom-grid{display:grid;gap:4px;padding:10px}
+.tile{aspect-align:center;background:#182234;border-radius:6px;display:grid;place-items:center;font-size:20px}
+.token{position:absolute;width:36px;height:36px;border-radius:50%;transition:left .45s ease,top .45s ease;box-shadow:0 4px 12px rgba(0,0,0,.5);display:grid;place-items:center;font-weight:800}
+</style></head><body>
+<div class="rm-bar"><a class="rm-label" href="https://www.rommark.dev">&#127918; SUPERDESIGN SKILLS LAB — game-rpg-quest-worlds</a><a class="rm-hire" href="https://www.rommark.dev">Hire Developer &#10132;</a></div>
+<h1>RPG World — Quest of the Golden Gear</h1><p class="note">ASCII-tilemap world with camera follow, interaction radius (E), typewriter dialog with quest flags, inventory pickup, and a quest lifecycle available→active→done.</p>
+<div class="stage">
+<div class="hud"><span>🪙 <span id="gold">0</span></span><span>QUEST: <span id="q">find the elder</span></span></div>
+<canvas id="c" width="720" height="460"></canvas>
+<div class="overlay" id="ov"><h2>GOLDEN GEAR</h2><p class="note">Arrows/WASD move · E interact<br>Talk to the elder → fetch 3 gears → return.</p><button class="btn" id="go">BEGIN</button></div>
+</div><p class="keys">arrows/WASD · E interact</p>
+<script>
+/* ==== TUNING CONSTANTS — balance here ==== */
+
+const CFG={TS:46,SPEED:210};
+const TILE={'.':'grass','#':'tree','~':'water','E':'elder','G':'gear','D':'door'};
+const MAP=[
+ "##########",
+ "#..#.....#",
+ "#..#..G..#",
+ "#.E......#",
+ "#...~~...#",
+ "#.G.~~.G.#",
+ "#........#",
+ "#...##...#",
+ "#..D.....#",
+ "##########"].map(r=>r.split(''));
+const STATE={MENU:0,PLAY:1,DIALOG:2};let state=STATE.MENU;
+const cv=document.getElementById('c'),cx=cv.getContext('2d'),W=cv.width,H=cv.height;
+const hero={x:2.5*CFG.TS,y:6.5*CFG.TS,r:14};
+let quest='available',gears=0,gold=0;
+const COL={grass:'#1c3b2f',tree:'#12301f',water:'#153a52'};
+function solid(x,y){const c=MAP[y]&&MAP[y][x];return c==='#'||c==='~'}
+function near(sym){const tx=Math.floor(hero.x/CFG.TS),ty=Math.floor(hero.y/CFG.TS);
+ for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(MAP[ty+dy]&&MAP[ty+dy][tx+dx]===sym)return{tx:tx+dx,ty:ty+dy}}return null}
+const keys={};addEventListener('keydown',e=>{keys[e.code]=true;
+ if(e.code==='KeyE'&&state===STATE.PLAY)interact();
+ else if((e.code==='KeyE'||e.code==='Enter')&&state===STATE.DIALOG)advanceDialog();});
+addEventListener('keyup',e=>keys[e.code]=false);
+go.onclick=()=>{state=STATE.PLAY;ov.style.display='none'};
+let dq=[],typing='',ti=0;
+function say(lines){dq=lines.slice();state=STATE.DIALOG;next()}
+function next(){if(!dq.length){state=STATE.PLAY;qbox.style.display='none';return}
+ typing=dq.shift();ti=0;qbox.style.display='block'}
+function advanceDialog(){if(ti<typing.length){ti=typing.length}else next()}
+setInterval(()=>{if(state===STATE.DIALOG&&ti<typing.length)ti++},30);
+function interact(){
+ const e=near('E');
+ if(e){ if(quest==='available')say(["Ah, traveler! Our gears were stolen by crows.","Bring me 3 GEARS (the glowing G tiles) and I will pay in gold."]),
+        quest='active',q.textContent='collect 3 gears (E to grab)';
+   else if(quest==='active'&&gears>=3){quest='done';gold+=100;gears=0;q.textContent='DONE ✔';
+        say(["You found them all! 100 gold, as promised.","The forge thanks you, hero."]),goldEl.textContent=gold}
+   else if(quest==='active')say("3 gears, remember? They glow. Hard to miss.");
+   else say("The forge hums gratefully."); return;}
+ const g=near('G');
+ if(g && quest==='active'){MAP[g.ty][g.tx]='.';gears++;
+   say([gears>=3?"That's all 3! Return to the elder.":"Gear "+gears+" of 3 collected."]);}}
+function update(dt){if(state!==STATE.PLAY)return;
+ let dx=(keys.ArrowRight||keys.KeyD?1:0)-(keys.ArrowLeft||keys.KeyA?1:0);
+ let dy=(keys.ArrowDown||keys.KeyS?1:0)-(keys.ArrowUp||keys.KeyW?1:0);
+ if(dx&&dy){dx*=.707;dy*=.707}
+ const nx=hero.x+dx*CFG.SPEED*dt,ny=hero.y+dy*CFG.SPEED*dt;
+ if(!solid(Math.floor(nx/CFG.TS),Math.floor(hero.y/CFG.TS)))hero.x=nx;
+ if(!solid(Math.floor(hero.x/CFG.TS),Math.floor(ny/CFG.TS)))hero.y=ny;}
+function render(){
+ cx.fillStyle='#0e1622';cx.fillRect(0,0,W,H);
+ const camX=hero.x-W/2,camY=hero.y-H/2;
+ for(let ty=0;ty<MAP.length;ty++)for(let tx=0;tx<MAP[ty].length;tx++){
+  const sx=tx*CFG.TS-camX,sy=ty*CFG.TS-camY;
+  if(sx<-CFG.TS||sy<-CFG.TS||sx>W||sy>H)continue;
+  const c=MAP[ty][tx];cx.fillStyle=COL[TILE[c]]||COL.grass;cx.fillRect(sx,sy,CFG.TS-1,CFG.TS-1);
+  if(c==='E'){cx.fillStyle='#fbbf24';cx.font='26px serif';cx.fillText('🧙',sx+8,sy+32)}
+  if(c==='G'){cx.fillStyle='#39e0d0';cx.font='24px serif';cx.fillText('⚙',sx+9,sy+31)}
+  if(c==='D'){cx.fillStyle='#94a3b8';cx.font='22px serif';cx.fillText('🚪',sx+9,sy+32)}}
+ // hero
+ cx.fillStyle='#38bdf8';cx.beginPath();cx.arc(hero.x-camX,hero.y-camY,hero.r,0,7);cx.fill();
+ // dialog box
+ if(state===STATE.DIALOG){cx.fillStyle='rgba(8,12,20,.92)';cx.fillRect(30,H-110,W-60,84);
+  cx.strokeStyle='#26314a';cx.strokeRect(30,H-110,W-60,84);
+  cx.fillStyle='#dbe4f3';cx.font='17px Inter';cx.fillText(typing.slice(0,ti)+(ti<typing.length?'▌':''),48,H-78);
+  cx.fillStyle='#64748b';cx.font='12px JetBrains Mono';cx.fillText('[E] continue',48,H-40)}}
+let last=0;function loop(t){const dt=Math.min((t-last)/1000,.05);last=t;
+ update(dt);render();requestAnimationFrame(loop)}requestAnimationFrame(loop);
+
+</script></body></html>

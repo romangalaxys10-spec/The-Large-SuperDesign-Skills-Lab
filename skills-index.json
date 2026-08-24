@@ -1600,5 +1600,53 @@
     "hasDiagram": true,
     "extraFiles": [],
     "description": "Workshop Facilitator Pop \u2014 Workshops / training / classrooms. High-contrast facilitation slides readable from the back row. Use when building slide decks / presentation HTML for this context."
+  },
+  {
+    "slug": "game-fundamentals-2d",
+    "family": "games",
+    "skillPath": "skills/game-fundamentals-2d/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "category": "Any 2D browser game"
+  },
+  {
+    "slug": "game-canvas-rendering",
+    "family": "games",
+    "skillPath": "skills/game-canvas-rendering/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "category": "Action / visual-heavy games"
+  },
+  {
+    "slug": "game-dom-board-games",
+    "family": "games",
+    "skillPath": "skills/game-dom-board-games/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "category": "Board / card / puzzle / tycoon"
+  },
+  {
+    "slug": "game-arcade-action",
+    "family": "games",
+    "skillPath": "skills/game-arcade-action/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "category": "Arcade / action / shooter / platformer"
+  },
+  {
+    "slug": "game-rpg-quest-worlds",
+    "family": "games",
+    "skillPath": "skills/game-rpg-quest-worlds/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "category": "RPG / adventure / exploration"
+  },
+  {
+    "slug": "game-feel-polish",
+    "family": "games",
+    "skillPath": "skills/game-feel-polish/SKILL.md",
+    "hasDemo": true,
+    "hasDiagram": true,
+    "category": "Every finished game"
   }
 ]
