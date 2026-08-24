@@ -18,6 +18,7 @@ Built by [Rommark.dev](https://www.rommark.dev) · MIT licensed
 ---
 
 ## 📖 Table of contents
+- [🎮 Interactive Game Design Suite ()](#-️-interactive-game-design-suite-game-design)
 
 1. [What is a design skill?](#-what-is-a-design-skill)
 2. [Repository structure](#-repository-structure)
@@ -378,6 +379,30 @@ ai-builder-club · anthropic · apple · appscale-premium-apps-and-hosting-store
 Plus 10 curated editions: `linear-near-black-indigo` · `wise-ultra-black-lime` · `anthropic-cream-grotesque` · `apple-flat-retail-light` · `cream-island-violet-media` · `terminal-cyan-ledger-dark` · `teal-corporate-gradient` · `warm-frame-chestnut` · `voltage-clickhouse-yellow` · `heyski-emerald-aurora`
 
 ---
+
+
+---
+
+## 🎮 🕹️ Interactive Game Design Suite ()
+
+A full production suite of **5 playable cartoon & strategic web games + unified Arcade Hub**, built with deep state-machine mechanics, procedural Web Audio SFX engines, multi-language localization (6 languages with RTL), and SuperDesign / Canva visual design identities.
+
+| Game | Theme & Core Mechanics | Play Modes | Live Production Demo |
+| :--- | :--- | :--- | :--- |
+| 🕹️ **Arcade Hub Portal** | Central retro-futuristic arcade portal to launch and explore all games in the suite. | Navigation Hub | [Launch Arcade Hub](https://games-suite.vercel.app/) |
+| 🎩 **Breakout Monopoly** | 9-to-5 escape board game. Dual-loop perimeter board, property color groups, title deeds, bandwidth energy, burnout recovery, and freedom threshold. | Single & Local 2–4P | [Play Monopoly](https://games-suite.vercel.app/breakout-game/) |
+| 🚀 **Venture Quest: Silicon Hustle** | Tech & AI startup empire simulator. Manage runway vs. burn rate, tech trees, hiring, server outages, and VC pitch decks to IPO. | vs. AI Bots & 2–4P | [Play Venture Quest](https://games-suite.vercel.app/venture-quest/) |
+| 🍕 **Street Mogul: Urban Tycoon** | Street food cart to city franchise monopoly. Recipe upgrades, dynamic supply costs, weather fluctuations, and turf wars. | vs. AI Bots & 2–4P | [Play Street Mogul](https://games-suite.vercel.app/street-mogul/) |
+| 🧘 **Balance of Life: Fulfillment Sim** | High-stakes life strategy simulator. Balance 4 vital meters (Wealth 💰, Health ❤️, Relationships 🤝, Passion 🎨) across life phases. | vs. AI Bots & 2–4P | [Play Balance of Life](https://games-suite.vercel.app/life-odyssey/) |
+| 🧙‍♂️ **Cyber-Quest: Roguelike Battler** | Indie dev comedy tabletop RPG. Defeat Tech Debt, Scope Creep, and Legacy Monolith bosses using tactical strategy cards. | vs. AI Bots & 2–4P | [Play Cyber-Quest](https://games-suite.vercel.app/cyber-quest/) |
+
+### 🛠️ Game Design & Technical Highlights:
+- **🎨 Cartoon Motion & Visual Identity**: Ben-Day halftone comic dot patterns, squash-and-stretch token animations, and comic action badges designed with SuperDesign & Canva principles.
+- **🔊 Procedural Web Audio Engines**: Zero external audio assets — all dice rolls, cash chimes, crisis alarms, and victory fanfares are synthesized dynamically in code via the Web Audio API.
+- **🌍 6 Isolated Full Translations**: 100% localized in **English ()**, **Русский ()**, **Français ()**, **Español ()**, **العربية ()**, and **עברית ()** with native bidirectional RTL support.
+- **👥 Single-Player vs. AI & Local Pass-and-Play (2–4 Players)**: Full setup modals with custom cartoon avatars and customizable player rosters.
+- **📦 Clean Architecture**: Vanilla ES6+ single-file architectures per game, zero heavy runtime dependencies, instant global deployment on Vercel.
+
 
 ## 🙌 Credits & license
 
