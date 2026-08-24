@@ -1,0 +1,587 @@
+[
+  {
+    "slug": "aquafix-hydro-ledger",
+    "name": "AquaFix Hydro Ledger",
+    "origin": "vercel",
+    "source": "https://aquafix-sandy.vercel.app",
+    "category": "Home services / emergency trade",
+    "dark": false,
+    "accent": "#0891b2"
+  },
+  {
+    "slug": "autopro-voltage-dark",
+    "name": "AutoPro Voltage Dark",
+    "origin": "vercel",
+    "source": "https://autopro-pi.vercel.app",
+    "category": "Automotive / performance workshop",
+    "dark": true,
+    "accent": "#ff3b2f"
+  },
+  {
+    "slug": "glowup-fraunces-atelier",
+    "name": "GlowUp Fraunces Atelier",
+    "origin": "vercel",
+    "source": "https://glowup-bice.vercel.app",
+    "category": "Beauty / wellness atelier",
+    "dark": false,
+    "accent": "#b5674f"
+  },
+  {
+    "slug": "sakartvelo-forest-gold-realty",
+    "name": "Sakartvelo Forest & Gold Realty",
+    "origin": "vercel",
+    "source": "https://sakartvelo-homes.vercel.app",
+    "category": "Real estate / investment advisory",
+    "dark": false,
+    "accent": "#c8a45e"
+  },
+  {
+    "slug": "dentacare-clinical-mint",
+    "name": "DentaCare Clinical Mint",
+    "origin": "vercel",
+    "source": "https://dentacare-hazel.vercel.app",
+    "category": "Healthcare / dental clinic",
+    "dark": false,
+    "accent": "#1e8fd6"
+  },
+  {
+    "slug": "legalline-paper-editorial",
+    "name": "LegalLine Paper Editorial",
+    "origin": "vercel",
+    "source": "https://legalline.vercel.app",
+    "category": "Legal / professional services",
+    "dark": false,
+    "accent": "#9a6b15"
+  },
+  {
+    "slug": "cleanpro-gambetta-eco",
+    "name": "CleanPro Gambetta Eco-Minimal",
+    "origin": "vercel",
+    "source": "https://cleanpro-snowy-sigma.vercel.app",
+    "category": "Cleaning / facility services",
+    "dark": false,
+    "accent": "#0f9d6c"
+  },
+  {
+    "slug": "ironforge-volt-industrial",
+    "name": "IronForge Volt Industrial",
+    "origin": "vercel",
+    "source": "https://ironforge-bice.vercel.app",
+    "category": "Fitness / athletic club",
+    "dark": true,
+    "accent": "#e8ff47"
+  },
+  {
+    "slug": "sweetest-warm-bakery",
+    "name": "Sweetest Warm Bakery",
+    "origin": "vercel",
+    "source": "https://sweetest-house.vercel.app",
+    "category": "Food & drink / artisan bakery",
+    "dark": false,
+    "accent": "#eda63c"
+  },
+  {
+    "slug": "techfix-blueprint-terminal",
+    "name": "TechFix Blueprint Terminal",
+    "origin": "vercel",
+    "source": "https://techfix-five.vercel.app",
+    "category": "Electronics repair / technical lab",
+    "dark": true,
+    "accent": "#39e0d0"
+  },
+  {
+    "slug": "linear-near-black-indigo",
+    "name": "Linear Near-Black Indigo",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/linear",
+    "category": "SaaS / product & engineering tools",
+    "dark": true,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "wise-ultra-black-lime",
+    "name": "Wise Ultra-Black Lime",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/wise",
+    "category": "Fintech / money transfer",
+    "dark": false,
+    "accent": "#9fe870"
+  },
+  {
+    "slug": "anthropic-cream-grotesque",
+    "name": "Anthropic Cream Grotesque Editorial",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/anthropic",
+    "category": "AI research / long-form product",
+    "dark": false,
+    "accent": "#c96442"
+  },
+  {
+    "slug": "apple-flat-retail-light",
+    "name": "Apple Flat Retail Light",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/apple",
+    "category": "Consumer hardware retail",
+    "dark": false,
+    "accent": "#0071e3"
+  },
+  {
+    "slug": "cream-island-violet-media",
+    "name": "Cream Island Violet Media",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/cream-island",
+    "category": "Creative agency / portfolio",
+    "dark": false,
+    "accent": "#5b3df5"
+  },
+  {
+    "slug": "terminal-cyan-ledger-dark",
+    "name": "Terminal Cyan Ledger Dark",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/terminal-cyan-ledger",
+    "category": "Developer tools / infrastructure",
+    "dark": true,
+    "accent": "#00e5cc"
+  },
+  {
+    "slug": "teal-corporate-gradient",
+    "name": "Teal Corporate Gradient Ledger",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/teal-ledger-corporate",
+    "category": "Enterprise B2B / corporate SaaS",
+    "dark": false,
+    "accent": "#0d9488"
+  },
+  {
+    "slug": "warm-frame-chestnut",
+    "name": "Warm Frame Chestnut Portfolio",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/warm-frame-portfolio-light",
+    "category": "Personal portfolio / studio",
+    "dark": false,
+    "accent": "#8a5a33"
+  },
+  {
+    "slug": "voltage-clickhouse-yellow",
+    "name": "Voltage Clickhouse Yellow",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/rationed-voltage-dark",
+    "category": "Data platforms / OLAP databases",
+    "dark": true,
+    "accent": "#f9d71c"
+  },
+  {
+    "slug": "heyski-emerald-aurora",
+    "name": "Heyski Emerald Aurora",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/heyski",
+    "category": "Travel / hospitality booking",
+    "dark": true,
+    "accent": "#34d399"
+  },
+  {
+    "slug": "sd-ai-builder-club",
+    "name": "Ai Builder Club Design System",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/ai-builder-club",
+    "category": "AI product / platform",
+    "dark": true,
+    "accent": "#3b82f6"
+  },
+  {
+    "slug": "sd-anthropic",
+    "name": "Anthropic",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/anthropic",
+    "category": "SaaS / product site",
+    "dark": false,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-apple",
+    "name": "Apple",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/apple",
+    "category": "SaaS / product site",
+    "dark": false,
+    "accent": "#3b82f6"
+  },
+  {
+    "slug": "sd-appscale-premium-apps-and-hosting-store",
+    "name": "Appscale Premium Apps Hosting Store Design System",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/appscale-premium-apps-and-hosting-store",
+    "category": "Enterprise B2B",
+    "dark": false,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-atelier-reveal-or-pomodoro",
+    "name": "Atelier Reveal Pomodoro",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/atelier-reveal-or-pomodoro",
+    "category": "Portfolio / editorial",
+    "dark": false,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-calcom",
+    "name": "Calcom Design System",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/calcom",
+    "category": "SaaS / product site",
+    "dark": true,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-chrome-void",
+    "name": "Chrome Void",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/chrome-void",
+    "category": "SaaS / product site",
+    "dark": true,
+    "accent": "#8b5cf6"
+  },
+  {
+    "slug": "sd-clay",
+    "name": "Clay",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/clay",
+    "category": "SaaS / product site",
+    "dark": false,
+    "accent": "#9fe870"
+  },
+  {
+    "slug": "sd-claymorphic-comic-ledger",
+    "name": "Claymorphic Comic Ledger",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/claymorphic-comic-ledger",
+    "category": "Fintech / dashboard",
+    "dark": false,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-confetti-minimal",
+    "name": "Confetti Minimal",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/confetti-minimal",
+    "category": "SaaS / product site",
+    "dark": false,
+    "accent": "#ef4444"
+  },
+  {
+    "slug": "sd-cream-island",
+    "name": "Cream Island",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/cream-island",
+    "category": "SaaS / product site",
+    "dark": false,
+    "accent": "#8b5cf6"
+  },
+  {
+    "slug": "sd-cream-island-c893c2",
+    "name": "Cream Island",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/cream-island-c893c2",
+    "category": "SaaS / product site",
+    "dark": false,
+    "accent": "#8b5cf6"
+  },
+  {
+    "slug": "sd-cursor",
+    "name": "Cursor",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/cursor",
+    "category": "SaaS / product site",
+    "dark": true,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-faceted-plum-institutional",
+    "name": "Faceted Plum Institutional",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/faceted-plum-institutional",
+    "category": "Enterprise B2B",
+    "dark": false,
+    "accent": "#b06ad2"
+  },
+  {
+    "slug": "sd-fieldwork-grotesk",
+    "name": "Fieldwork Grotesk",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/fieldwork-grotesk",
+    "category": "SaaS / product site",
+    "dark": false,
+    "accent": "#fb923c"
+  },
+  {
+    "slug": "sd-framer",
+    "name": "Framer",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/framer",
+    "category": "Portfolio / editorial",
+    "dark": true,
+    "accent": "#3b82f6"
+  },
+  {
+    "slug": "sd-frequency-based-extraction",
+    "name": "Frequency Based Extraction",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/frequency-based-extraction",
+    "category": "SaaS / product site",
+    "dark": false,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-global-enterprise-intelligence-design-system",
+    "name": "Global Enterprise Intelligence Design System",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/global-enterprise-intelligence-design-system",
+    "category": "Enterprise B2B",
+    "dark": false,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-heyski",
+    "name": "Heyski",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/heyski",
+    "category": "SaaS / product site",
+    "dark": true,
+    "accent": "#8b5cf6"
+  },
+  {
+    "slug": "sd-intelligence-ai",
+    "name": "Intelligence Ai",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/intelligence-ai",
+    "category": "AI product / platform",
+    "dark": false,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-lenisdev",
+    "name": "Lenisdev Design System",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/lenisdev",
+    "category": "SaaS / product site",
+    "dark": true,
+    "accent": "#ff7a59"
+  },
+  {
+    "slug": "sd-linear",
+    "name": "Linear",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/linear",
+    "category": "SaaS / product site",
+    "dark": true,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-minimalist-electric-cyan-portfolio",
+    "name": "Minimalist Electric Cyan Portfolio",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/minimalist-electric-cyan-portfolio",
+    "category": "Portfolio / editorial",
+    "dark": false,
+    "accent": "#22d3ee"
+  },
+  {
+    "slug": "sd-my-design-system",
+    "name": "My Design System",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/my-design-system",
+    "category": "SaaS / product site",
+    "dark": false,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-my-design-system-327dc8",
+    "name": "My Design System",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/my-design-system-327dc8",
+    "category": "SaaS / product site",
+    "dark": false,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-neon-db",
+    "name": "Neon Db",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/neon-db",
+    "category": "Database / backend platform",
+    "dark": false,
+    "accent": "#ef4444"
+  },
+  {
+    "slug": "sd-planetscale",
+    "name": "Planetscale",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/planetscale",
+    "category": "Database / backend platform",
+    "dark": false,
+    "accent": "#fb923c"
+  },
+  {
+    "slug": "sd-railway",
+    "name": "Railway",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/railway",
+    "category": "AI product / platform",
+    "dark": true,
+    "accent": "#8b5cf6"
+  },
+  {
+    "slug": "sd-ration-blue-gate-card",
+    "name": "Ration Blue Gate Card",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/ration-blue-gate-card",
+    "category": "Fintech / dashboard",
+    "dark": false,
+    "accent": "#ef4444"
+  },
+  {
+    "slug": "sd-rationed-aurora-light",
+    "name": "Rationed Aurora Light Design System",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/rationed-aurora-light",
+    "category": "SaaS / product site",
+    "dark": false,
+    "accent": "#8b5cf6"
+  },
+  {
+    "slug": "sd-rationed-voltage-dark",
+    "name": "Rationed Voltage Dark Design System",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/rationed-voltage-dark",
+    "category": "SaaS / product site",
+    "dark": true,
+    "accent": "#f9d71c"
+  },
+  {
+    "slug": "sd-scriptforge-ai-11-reference-match",
+    "name": "Scriptforge Ai 11 Reference Match Design System",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/scriptforge-ai-11-reference-match",
+    "category": "AI product / platform",
+    "dark": false,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-stack-ai",
+    "name": "Stack Ai",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/stack-ai",
+    "category": "AI product / platform",
+    "dark": false,
+    "accent": "#3b82f6"
+  },
+  {
+    "slug": "sd-supabase",
+    "name": "Supabase",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/supabase",
+    "category": "Database / backend platform",
+    "dark": false,
+    "accent": "#22c55e"
+  },
+  {
+    "slug": "sd-teal-ledger-corporate",
+    "name": "Teal Ledger Corporate",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/teal-ledger-corporate",
+    "category": "Enterprise B2B",
+    "dark": false,
+    "accent": "#22d3ee"
+  },
+  {
+    "slug": "sd-terminal-cyan-ledger",
+    "name": "Terminal Cyan Ledger",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/terminal-cyan-ledger",
+    "category": "Fintech / dashboard",
+    "dark": true,
+    "accent": "#22d3ee"
+  },
+  {
+    "slug": "sd-the-modern-scholar",
+    "name": "Modern Scholar",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/the-modern-scholar",
+    "category": "Portfolio / editorial",
+    "dark": false,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-traceso",
+    "name": "Traceso Design System",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/traceso",
+    "category": "SaaS / product site",
+    "dark": true,
+    "accent": "#ef4444"
+  },
+  {
+    "slug": "sd-vapi-ai",
+    "name": "Vapi Ai",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/vapi-ai",
+    "category": "AI product / platform",
+    "dark": true,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-viktor",
+    "name": "Viktor",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/viktor",
+    "category": "SaaS / product site",
+    "dark": false,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-violet-ledger-interface",
+    "name": "Violet Ledger Interface Design System",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/violet-ledger-interface",
+    "category": "Fintech / dashboard",
+    "dark": false,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-void-teal-ledger-glass",
+    "name": "Void Teal Ledger Glass",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/void-teal-ledger-glass",
+    "category": "Fintech / dashboard",
+    "dark": true,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-warm-frame-portfolio-light",
+    "name": "Warm Frame Portfolio Light",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/warm-frame-portfolio-light",
+    "category": "Portfolio / editorial",
+    "dark": false,
+    "accent": "#5e6ad2"
+  },
+  {
+    "slug": "sd-wdi",
+    "name": "Wdi Design System",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/wdi",
+    "category": "SaaS / product site",
+    "dark": false,
+    "accent": "#34d399"
+  },
+  {
+    "slug": "sd-wise",
+    "name": "Wise",
+    "origin": "superdesign",
+    "source": "https://superdesign.dev/design-systems/wise",
+    "category": "SaaS / product site",
+    "dark": false,
+    "accent": "#9fe870"
+  }
+]
