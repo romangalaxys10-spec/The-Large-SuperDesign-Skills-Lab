@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber-Quest: The Indie Dev Roguelike 🧙‍♂️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Space+Grotesk:wght@500;700;800&family=Cairo:wght@600;800&family=Heebo:wght@500;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Space Grotesk', sans-serif; background: #1e1b4b; }
+        [dir="rtl"] { font-family: 'Cairo', 'Heebo', sans-serif; }
+        .comic-border { border: 3px solid #000; box-shadow: 4px 4px 0px #000; }
+        .comic-border-lg { border: 4px solid #000; box-shadow: 6px 6px 0px #000; }
+        .comic-border-sm { border: 2px solid #000; box-shadow: 2px 2px 0px #000; }
+        .comic-btn { transition: all 0.15s ease; }
+        .comic-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000; }
+        .comic-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #000; }
+        .pawn-active-tile { animation: pulse-ring 1.5s infinite; border-color: #a855f7 !important; box-shadow: 0 0 16px rgba(168, 85, 247, 0.8), inset 0 0 10px rgba(168, 85, 247, 0.5) !important; }
+        @keyframes pulse-ring { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+        .dice-rolling { animation: dice-shake 0.4s ease-in-out infinite; }
+        @keyframes dice-shake { 0% { transform: rotate(0deg) scale(1); } 25% { transform: rotate(-12deg) scale(1.1); } 50% { transform: rotate(12deg) scale(1.1); } 75% { transform: rotate(-8deg) scale(1.05); } 100% { transform: rotate(0deg) scale(1); } }
+        .halftone { background-image: radial-gradient(#312e81 18%, transparent 19%); background-size: 14px 14px; }
+    </style>
+</head>
+<body class="text-indigo-100 min-h-screen flex flex-col justify-between">
+    <script>
+    class SoundEngine {
+        constructor() { this.ctx = null; this.enabled = true; }
+        init() {
+            if (!this.ctx) { const AC = window.AudioContext || window.webkitAudioContext; this.ctx = new AC(); }
+            if (this.ctx && this.ctx.state === 'suspended') { this.ctx.resume(); }
+        }
+        toggle() { this.enabled = !this.enabled; return this.enabled; }
+        play(freq, type='sine', dur=0.15, gain=0.2) {
+            if (!this.enabled) return; this.init();
+            try {
+                const osc = this.ctx.createOscillator(); const g = this.ctx.createGain();
+                osc.type = type; osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+                g.gain.setValueAtTime(gain, this.ctx.currentTime);
+                g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + dur);
+                osc.connect(g); g.connect(this.ctx.destination);
+                osc.start(); osc.stop(this.ctx.currentTime + dur);
+            } catch(e){}
+        }
+        dice() { for(let i=0; i<5; i++) setTimeout(()=>this.play(280+Math.random()*220, 'square', 0.04, 0.12), i*40); }
+        cash() { this.play(587.33, 'triangle', 0.1, 0.2); setTimeout(()=>this.play(880, 'triangle', 0.25, 0.25), 80); }
+        alert() { this.play(260, 'sawtooth', 0.15, 0.2); setTimeout(()=>this.play(150, 'sawtooth', 0.25, 0.2), 110); }
+        upgrade() { [392, 523.25, 659.25, 783.99, 1046.5].forEach((f, i)=>setTimeout(()=>this.play(f, 'square', 0.1, 0.12), i*60)); }
+        win() { [523.25, 659.25, 783.99, 1046.5, 1318.5, 1567.98].forEach((f, i)=>setTimeout(()=>this.play(f, 'sawtooth', 0.2, 0.15), i*100)); if(window.confetti) window.confetti({particleCount:120, spread:80, origin:{y:0.6}}); }
+    }
+    const audio = new SoundEngine();
+    </script>
+
+    <!-- Header -->
+    <header class="bg-indigo-950 border-b-4 border-black px-4 py-3 sticky top-0 z-30 shadow-xl">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <span class="text-3xl animate-bounce">🧙‍♂️</span>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-black tracking-wider text-purple-400 uppercase drop-shadow-[2px_2px_0px_#000]" id="app-title">CYBER-QUEST: DEV ROGUELIKE</h1>
+                    <p class="text-xs text-indigo-300 font-semibold" id="app-subtitle">Indie Coder Tabletop Battler • Slay Tech Debt & Ship v1.0</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+                <button onclick="toggleAudio()" id="btn-audio" class="comic-border-sm bg-purple-700 hover:bg-purple-600 text-white font-bold px-3 py-1.5 rounded text-xs comic-btn">
+                    <i class="fa-solid fa-volume-high"></i> <span id="lbl-sound">Sound: ON</span>
+                </button>
+                <button onclick="openPlayersModal()" class="comic-border-sm bg-amber-500 hover:bg-amber-400 text-indigo-950 font-black px-3 py-1.5 rounded text-xs comic-btn">
+                    <i class="fa-solid fa-users"></i> <span id="lbl-players-btn">Coders (1-4)</span>
+                </button>
+                <button onclick="openCardsModal()" class="comic-border-sm bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-bold px-3 py-1.5 rounded text-xs comic-btn">
+                    <i class="fa-solid fa-wand-magic"></i> <span id="lbl-spell-cards">Code Spells</span>
+                </button>
+                <button onclick="openHintsModal()" class="comic-border-sm bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-1.5 rounded text-xs comic-btn">
+                    <i class="fa-solid fa-lightbulb"></i> <span id="lbl-hints-btn">RPG Rules</span>
+                </button>
+                <select id="lang-select" onchange="setLanguage(this.value)" class="comic-border-sm bg-indigo-900 text-purple-300 font-bold px-2 py-1.5 rounded text-xs">
+                    <option value="en">🇺🇸 EN</option>
+                    <option value="ru">🇷🇺 РУС</option>
+                    <option value="fr">🇫🇷 FR</option>
+                    <option value="es">🇪🇸 ES</option>
+                    <option value="ar">🇸🇦 العربية</option>
+                    <option value="he">🇮🇱 עברית</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto p-4 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- Left 8 Cols -->
+        <div class="lg:col-span-8 flex flex-col gap-4">
+            <div id="position-bar" class="comic-border bg-indigo-900/90 rounded-xl p-2.5 flex items-center justify-between gap-2 overflow-x-auto text-xs font-bold"></div>
+
+            <div class="comic-border-lg bg-indigo-950 p-2 sm:p-3 rounded-2xl shadow-2xl relative halftone">
+                <div id="board-grid" class="grid grid-cols-6 grid-rows-6 gap-1 sm:gap-2 aspect-square max-h-[640px] mx-auto w-full"></div>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="comic-border bg-indigo-900 rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="flex gap-2 text-3xl sm:text-4xl bg-indigo-950 p-2.5 rounded-xl comic-border-sm" id="dice-container">
+                        <span id="die-1" class="inline-block transition-transform">🎲</span>
+                        <span id="die-2" class="inline-block transition-transform">🎲</span>
+                    </div>
+                    <div>
+                        <div class="text-xs text-indigo-300 font-bold uppercase" id="lbl-last-roll">Sprint Steps</div>
+                        <div class="text-2xl font-black text-purple-400" id="roll-total">-</div>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 flex-wrap items-center">
+                    <button id="btn-roll" onclick="rollDice()" class="comic-border bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white font-black px-6 py-3 rounded-xl text-sm sm:text-base comic-btn flex items-center gap-2">
+                        <i class="fa-solid fa-dice"></i> <span id="lbl-btn-roll">ROLL 2 DICE</span>
+                    </button>
+                    <button id="btn-spell" onclick="drawSpellCard()" class="comic-border bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-bold px-4 py-3 rounded-xl text-sm comic-btn">
+                        <i class="fa-solid fa-scroll"></i> <span id="lbl-btn-spell">Cast Spell</span>
+                    </button>
+                    <button id="btn-upgrade" onclick="openDeedsModal()" class="comic-border bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-3 rounded-xl text-sm comic-btn">
+                        <i class="fa-solid fa-shield-halved"></i> <span id="lbl-btn-upgrade">Refactor Gear</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Activity Log -->
+            <div class="comic-border bg-indigo-900 rounded-xl p-3">
+                <div class="text-xs font-bold text-indigo-300 uppercase mb-1 flex items-center justify-between">
+                    <span id="lbl-terminal"><i class="fa-solid fa-terminal mr-1"></i> Dungeon Terminal Log</span>
+                    <span class="text-[10px] text-purple-300" id="round-counter">Sprint 1</span>
+                </div>
+                <div id="game-log" class="h-24 overflow-y-auto space-y-1 text-xs font-mono bg-indigo-950 p-2 rounded border border-indigo-800">
+                    <div class="text-purple-400">> Dungeon initialized. Beware of merge conflicts and legacy bugs!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right 4 Cols: Dashboard -->
+        <div class="lg:col-span-4 flex flex-col gap-4">
+            <div class="comic-border bg-indigo-900 p-2 rounded-xl flex gap-1 justify-between overflow-x-auto" id="player-tabs"></div>
+
+            <div id="player-card" class="comic-border-lg bg-gradient-to-b from-indigo-900 to-indigo-950 rounded-2xl p-5 shadow-xl flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div id="player-avatar" class="text-4xl p-2 bg-indigo-800 rounded-2xl comic-border-sm">🧙‍♂️</div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h2 id="player-name" class="text-lg font-black text-white">Dev Gandalf</h2>
+                                <span id="player-type-badge" class="bg-purple-500/20 text-purple-300 text-[10px] font-bold px-2 py-0.5 rounded border border-purple-500">HUMAN</span>
+                            </div>
+                            <p id="player-role" class="text-xs text-indigo-300 font-semibold">10x TypeScript Wizard</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-[10px] text-indigo-300 uppercase font-bold" id="lbl-pos-title">Location</div>
+                        <div id="player-loc-badge" class="text-xs font-black text-amber-300 bg-amber-950/60 px-2 py-1 rounded border border-amber-600">[#0] GIT PUSH MAIN</div>
+                    </div>
+                </div>
+
+                <!-- Stats Gauges -->
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="bg-indigo-950/80 p-3 rounded-xl comic-border-sm">
+                        <div class="text-indigo-300 font-bold" id="lbl-hp">💖 Mental HP</div>
+                        <div class="text-xl font-black text-rose-400" id="val-hp">100 / 100</div>
+                    </div>
+                    <div class="bg-indigo-950/80 p-3 rounded-xl comic-border-sm">
+                        <div class="text-indigo-300 font-bold" id="lbl-mana">☕ Caffeine Mana</div>
+                        <div class="text-xl font-black text-amber-400" id="val-mana">80 / 100</div>
+                    </div>
+                    <div class="bg-indigo-950/80 p-3 rounded-xl comic-border-sm">
+                        <div class="text-indigo-300 font-bold" id="lbl-gold">🪙 Bounty Gold</div>
+                        <div class="text-lg font-black text-yellow-300" id="val-gold">2,500 Gold</div>
+                    </div>
+                    <div class="bg-indigo-950/80 p-3 rounded-xl comic-border-sm">
+                        <div class="text-indigo-300 font-bold" id="lbl-xp">📜 Dev Rank</div>
+                        <div class="text-lg font-black text-cyan-300" id="val-xp">Senior Lvl 3</div>
+                    </div>
+                </div>
+
+                <!-- Spells & Artifacts Owned -->
+                <div class="bg-indigo-950 p-3 rounded-xl border border-indigo-800">
+                    <div class="text-xs font-bold text-indigo-200 mb-2 flex items-center justify-between">
+                        <span id="lbl-owned-gear">🛡️ Mastered Code Modules (<span id="owned-count">0</span>)</span>
+                        <button onclick="openDeedsModal()" class="text-purple-400 hover:underline text-[11px]" id="lbl-view-deeds">View All</button>
+                    </div>
+                    <div id="owned-assets-list" class="space-y-1.5 max-h-32 overflow-y-auto pr-1">
+                        <div class="text-xs text-indigo-400 italic" id="lbl-no-gear">No modules refactored yet. Tame bugs on dungeon tiles!</div>
+                    </div>
+                </div>
+
+                <!-- Victory Condition -->
+                <div class="bg-gradient-to-r from-purple-950/60 to-fuchsia-950/60 border border-purple-800/80 p-3 rounded-xl flex items-center justify-between">
+                    <div>
+                        <div class="text-[10px] text-purple-300 font-bold uppercase" id="lbl-win-cond-title">🏆 Release Citadel Win</div>
+                        <div class="text-xs font-black text-white" id="lbl-win-cond-desc">Defeat Legacy Monolith + 5,000 XP</div>
+                    </div>
+                    <span class="text-2xl animate-pulse">🏰</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div id="modal-players" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="comic-border-lg bg-indigo-950 rounded-2xl max-w-lg w-full p-5 space-y-4 text-white">
+            <div class="flex items-center justify-between border-b border-indigo-800 pb-3">
+                <h3 class="text-lg font-black text-purple-300 flex items-center gap-2"><i class="fa-solid fa-users"></i> Dungeon Party Setup (1-4)</h3>
+                <button onclick="closeModal('modal-players')" class="text-indigo-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="players-config-list" class="space-y-3 max-h-80 overflow-y-auto pr-1"></div>
+            <div class="flex justify-between gap-2 pt-2">
+                <button onclick="addPlayerSlot()" class="comic-border-sm bg-indigo-900 hover:bg-indigo-800 px-3 py-2 rounded text-xs font-bold"><i class="fa-solid fa-user-plus"></i> Add Coder</button>
+                <button onclick="savePlayersConfig()" class="comic-border bg-purple-500 hover:bg-purple-400 text-white font-black px-5 py-2 rounded text-xs comic-btn">ENTER DUNGEON</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-hints" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="comic-border-lg bg-indigo-950 rounded-2xl max-w-xl w-full p-6 space-y-4 text-white">
+            <div class="flex items-center justify-between border-b border-indigo-800 pb-3">
+                <h3 class="text-lg font-black text-emerald-400 flex items-center gap-2"><i class="fa-solid fa-lightbulb"></i> Roguelike Battle Rules</h3>
+                <button onclick="closeModal('modal-hints')" class="text-indigo-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-3 text-xs leading-relaxed text-indigo-200 max-h-96 overflow-y-auto pr-1" id="hints-content"></div>
+            <div class="text-right pt-2">
+                <button onclick="closeModal('modal-hints')" class="comic-border bg-emerald-500 hover:bg-emerald-400 text-indigo-950 font-black px-4 py-2 rounded text-xs comic-btn">Ready to Hack!</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-card" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="comic-border-lg bg-indigo-950 rounded-2xl max-w-md w-full p-6 space-y-4 text-white text-center">
+            <div id="card-badge" class="inline-block text-4xl p-3 bg-fuchsia-900/60 rounded-2xl comic-border-sm mb-2">📜</div>
+            <h3 id="card-title" class="text-xl font-black text-fuchsia-300">ChatGPT 5-Shot Prompt!</h3>
+            <p id="card-desc" class="text-sm text-indigo-200 leading-relaxed">Instantly generated unit tests for your spaghetti function.</p>
+            <div id="card-effect" class="text-emerald-400 font-bold text-base bg-indigo-900 p-2.5 rounded-xl border border-indigo-800">+500 XP | +20 Mana</div>
+            <button onclick="closeModal('modal-card')" class="comic-border bg-purple-500 hover:bg-purple-400 text-white font-black px-6 py-2.5 rounded-xl text-sm comic-btn w-full">CONTINUE</button>
+        </div>
+    </div>
+
+    <div id="modal-deeds" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="comic-border-lg bg-indigo-950 rounded-2xl max-w-2xl w-full p-6 space-y-4 text-white">
+            <div class="flex items-center justify-between border-b border-indigo-800 pb-3">
+                <h3 class="text-lg font-black text-purple-300 flex items-center gap-2"><i class="fa-solid fa-shield-halved"></i> Refactored Modules & Gear</h3>
+                <button onclick="closeModal('modal-deeds')" class="text-indigo-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="deeds-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-96 overflow-y-auto pr-1"></div>
+        </div>
+    </div>
+
+    <div id="modal-how" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="comic-border-lg bg-indigo-950 rounded-2xl max-w-xl w-full p-6 space-y-4 text-white">
+            <div class="flex items-center justify-between border-b border-indigo-800 pb-3">
+                <h3 class="text-lg font-black text-purple-300 flex items-center gap-2"><i class="fa-solid fa-code"></i> <span id="how-title">How Cyber-Quest Was Made</span></h3>
+                <button onclick="closeModal('modal-how')" class="text-indigo-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-3 text-xs leading-relaxed text-indigo-200 max-h-96 overflow-y-auto pr-1" id="how-content"></div>
+            <div class="text-right pt-2">
+                <button onclick="closeModal('modal-how')" class="comic-border bg-purple-500 hover:bg-purple-400 text-white font-black px-4 py-2 rounded text-xs comic-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Attribution -->
+    <footer class="bg-indigo-950 border-t-2 border-indigo-800 py-4 px-4 text-center text-xs text-indigo-400">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div id="footer-attr">
+                Created by <span class="font-bold text-purple-400">Roman</span> | <a href="https://www.rommark.dev" target="_blank" class="text-purple-300 hover:underline font-bold">www.rommark.dev</a> using <span class="text-white font-bold">ZCode</span>
+            </div>
+            <button onclick="openHowModal()" class="comic-border-sm bg-gradient-to-r from-purple-600 to-indigo-700 hover:from-purple-500 hover:to-indigo-600 text-white font-bold px-3 py-1.5 rounded text-xs comic-btn">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> <span id="lbl-how-btn">🛠️ How was it made?</span>
+            </button>
+        </div>
+    </footer>
+
+    <!-- Game Engine -->
+    <script>
+    const i18n = {
+        en: {
+            title: "CYBER-QUEST: DEV ROGUELIKE",
+            subtitle: "Indie Coder Tabletop Battler • Slay Tech Debt & Ship v1.0",
+            soundOn: "Sound: ON", soundOff: "Sound: OFF",
+            playersBtn: "Coders (1-4)", spellCards: "Code Spells", hintsBtn: "RPG Rules",
+            lastRoll: "Sprint Steps", rollBtn: "ROLL 2 DICE", spellBtn: "Cast Spell", upgradeBtn: "Refactor Gear",
+            logTitle: "Dungeon Terminal Log", locationTitle: "Location",
+            hp: "💖 Mental HP", mana: "☕ Caffeine Mana", gold: "🪙 Bounty Gold", xp: "📜 Dev Rank",
+            ownedGear: "🛡️ Mastered Modules", viewAll: "View All", noGear: "No modules refactored yet. Tame bugs on dungeon tiles!",
+            winTitle: "🏆 Release Citadel Win", winDesc: "Defeat Legacy Monolith + 5,000 XP",
+            howTitle: "How Cyber-Quest Was Made", howBtn: "🛠️ How was it made?",
+            footerAttr: 'Created by <span class="font-bold text-purple-400">Roman</span> | <a href="https://www.rommark.dev" target="_blank" class="text-purple-300 hover:underline font-bold">www.rommark.dev</a> using <span class="text-white font-bold">ZCode</span>',
+            hintsHtml: `
+                <p><b>🧙‍♂️ 1. The Roguelike Goal:</b> Navigate through software architecture dungeons, battle tech debt monsters, and release bug-free code!</p>
+                <p><b>👾 2. Monster Modules:</b> Tame bugs like CSS Slimes and Memory Goblins into clean modules that earn XP and bounty gold!</p>
+                <p><b>☕ 3. Mana & Health:</b> Keep your Mental HP above 0 and consume coffee to cast powerful refactoring spells.</p>
+            `,
+            howHtml: `
+                <p><b>🤖 ZCode Autonomous Engine:</b> Turn-based tabletop RPG mechanics, combat state tracking, and Web Audio SFX.</p>
+                <p><b>🎨 Cartoon Motion:</b> Full 6x6 perimeter coordinates, halftone cyber styling, and 6 full languages with RTL.</p>
+            `,
+            tiles: [
+                { name: "GIT COMMIT / MAIN (GO)", sub: "+500 Gold & Full Mana", color: "bg-emerald-600", type: "go" },
+                { name: "CSS Centering Slime", cost: 600, xp: 200, color: "bg-amber-800", type: "bug" },
+                { name: "Code Spell Scroll", sub: "Draw Spell", color: "bg-fuchsia-700", type: "card" },
+                { name: "Memory Leak Goblin", cost: 900, xp: 350, color: "bg-amber-800", type: "bug" },
+                { name: "Production Crash 500", sub: "-15 Mental HP", color: "bg-red-700", type: "tax" },
+                { name: "GIT MERGE CONFLICT", sub: "Detained / 1 Turn", color: "bg-red-600", type: "jail" },
+                { name: "Spaghetti Code Hydra", cost: 1400, xp: 550, color: "bg-indigo-700", type: "bug" },
+                { name: "StackOverflow Epiphany", sub: "Draw Card", color: "bg-orange-600", type: "card" },
+                { name: "Zero-Day Vulnerability", cost: 1800, xp: 750, color: "bg-indigo-700", type: "bug" },
+                { name: "Undefined Variable Ghost", cost: 2200, xp: 900, color: "bg-indigo-700", type: "bug" },
+                { name: "COFFEE LOUNGE REST", sub: "+50 Mana & +20 HP", color: "bg-blue-600", type: "rest" },
+                { name: "Regex Nightmare Golem", cost: 2600, xp: 1100, color: "bg-purple-700", type: "bug" },
+                { name: "Push to Prod on Friday", sub: "Gamble Card", color: "bg-fuchsia-700", type: "card" },
+                { name: "Scope Creep Dragon", cost: 3200, xp: 1400, color: "bg-purple-700", type: "bug" },
+                { name: "Docker Container Daemon", cost: 3800, xp: 1700, color: "bg-purple-700", type: "bug" },
+                { name: "CITADEL GATE", sub: "Architecture Milestone", color: "bg-yellow-500", type: "gate" },
+                { name: "Legacy Monolith Overlord", cost: 4800, xp: 2200, color: "bg-rose-700", type: "bug" },
+                { name: "Tech Debt Interest Tax", sub: "-$500 Bounty Gold", color: "bg-red-700", type: "tax" },
+                { name: "Quantum Microservice AI", cost: 6000, xp: 3000, color: "bg-rose-700", type: "bug" },
+                { name: "God-Tier Refactor Spell", sub: "Draw Legendary Card", color: "bg-fuchsia-700", type: "card" }
+            ]
+        },
+        ru: {
+            title: "CYBER-QUEST: ROGUELIKE РАЗРАБОТЧИКА",
+            subtitle: "Настольный RPG Баттлер • Победи Техдолг и Зарелизь v1.0",
+            soundOn: "Звук: ВКЛ", soundOff: "Звук: ВЫКЛ",
+            playersBtn: "Кодеры (1-4)", spellCards: "Заклинания", hintsBtn: "Правила RPG",
+            lastRoll: "Шаг Спринта", rollBtn: "БРОСИТЬ 2 КУБИКА", spellBtn: "Заклинание", upgradeBtn: "Рефакторинг",
+            logTitle: "Терминал Подземелья", locationTitle: "Локация",
+            hp: "💖 Ментальное HP", mana: "☕ Мана (Кофе)", gold: "🪙 Золото Баунти", xp: "📜 Ранг Кодера",
+            ownedGear: "🛡️ Освоенные Модули", viewAll: "Все", noGear: "Пока нет модулей. Укрощайте баги на тайлах!",
+            winTitle: "🏆 Релиз в Цитадели", winDesc: "Победить Монолит + 5,000 XP",
+            howTitle: "Как создавалась игра Cyber-Quest", howBtn: "🛠️ Как создавалась игра?",
+            footerAttr: 'Создано разработчиком <span class="font-bold text-purple-400">Roman</span> | <a href="https://www.rommark.dev" target="_blank" class="text-purple-300 hover:underline font-bold">www.rommark.dev</a> с помощью <span class="text-white font-bold">ZCode</span>',
+            hintsHtml: `<p><b>🧙‍♂️ 1. Цель:</b> Пройдите подземелья техдолга и выпустите чистый релиз без багов!</p>`,
+            howHtml: `<p><b>🤖 ZCode:</b> Пошаговая настольная RPG с комедийным сюжетом и синтезом Web Audio.</p>`,
+            tiles: [
+                { name: "GIT COMMIT / MAIN (GO)", sub: "+500 Золота & Мана", color: "bg-emerald-600", type: "go" },
+                { name: "Слизень Центрирования CSS", cost: 600, xp: 200, color: "bg-amber-800", type: "bug" },
+                { name: "Свиток Заклинания Кода", sub: "Карта Магии", color: "bg-fuchsia-700", type: "card" },
+                { name: "Гоблин Утечки Памяти", cost: 900, xp: 350, color: "bg-amber-800", type: "bug" },
+                { name: "Падение Прода 500", sub: "-15 Ментального HP", color: "bg-red-700", type: "tax" },
+                { name: "GIT MERGE КОНФЛИКТ", sub: "Темница / 1 Ход", color: "bg-red-600", type: "jail" },
+                { name: "Гидра Спагетти-Кода", cost: 1400, xp: 550, color: "bg-indigo-700", type: "bug" },
+                { name: "Ответ со StackOverflow", sub: "Карта", color: "bg-orange-600", type: "card" },
+                { name: "Уязвимость Zero-Day", cost: 1800, xp: 750, color: "bg-indigo-700", type: "bug" },
+                { name: "Призрак Undefined", cost: 2200, xp: 900, color: "bg-indigo-700", type: "bug" },
+                { name: "КОФЕЙНЫЙ РЕЛАКС", sub: "+50 Маны & +20 HP", color: "bg-blue-600", type: "rest" },
+                { name: "Голем Регулярных Выражений", cost: 2600, xp: 1100, color: "bg-purple-700", type: "bug" },
+                { name: "Деплой в Пятницу", sub: "Риск Карта", color: "bg-fuchsia-700", type: "card" },
+                { name: "Дракон Раздутого Скоупа", cost: 3200, xp: 1400, color: "bg-purple-700", type: "bug" },
+                { name: "Демон Docker Контейнеров", cost: 3800, xp: 1700, color: "bg-purple-700", type: "bug" },
+                { name: "ВОРОТА ЦИТАДЕЛИ", sub: "Рубеж Архитектуры", color: "bg-yellow-500", type: "gate" },
+                { name: "Владыка Легаси Монолита", cost: 4800, xp: 2200, color: "bg-rose-700", type: "bug" },
+                { name: "Проценты по Техдолгу", sub: "-500 Золота", color: "bg-red-700", type: "tax" },
+                { name: "Квантовый AI Микросервис", cost: 6000, xp: 3000, color: "bg-rose-700", type: "bug" },
+                { name: "Божественный Рефакторинг", sub: "Легендарная Карта", color: "bg-fuchsia-700", type: "card" }
+            ]
+        },
+        fr: {
+            title: "CYBER-QUEST: DEV ROGUELIKE",
+            subtitle: "Jeu de Plateau RPG Développeur • Éliminez la Dette Tech",
+            soundOn: "Son: OUI", soundOff: "Son: NON",
+            playersBtn: "Codeurs (1-4)", spellCards: "Sorts", hintsBtn: "Règles",
+            lastRoll: "Pas", rollBtn: "LANCER 2 DÉS", spellBtn: "Lancer Sort", upgradeBtn: "Refactorer",
+            logTitle: "Terminal Donjon", locationTitle: "Position",
+            hp: "💖 PV Mental", mana: "☕ Mana Café", gold: "🪙 Or Prime", xp: "📜 Rang Dev",
+            ownedGear: "🛡️ Modules Maîtrisés", viewAll: "Voir Tout", noGear: "Aucun module pour le moment!",
+            winTitle: "🏆 Victoire Citadelle", winDesc: "Vaincre le Monolithe + 5 000 XP",
+            howTitle: "Comment Cyber-Quest a été créé", howBtn: "🛠️ Comment c'est fait?",
+            footerAttr: 'Créé par <span class="font-bold text-purple-400">Roman</span> | <a href="https://www.rommark.dev" target="_blank" class="text-purple-300 hover:underline font-bold">www.rommark.dev</a> avec <span class="text-white font-bold">ZCode</span>',
+            hintsHtml: `<p><b>🧙‍♂️ But:</b> Terrassez les monstres de dette technique et déployez la v1.0!</p>`,
+            howHtml: `<p><b>🤖 ZCode:</b> Roguelike au tour par tour et audio Web Audio procédural.</p>`,
+            tiles: [
+                { name: "GIT COMMIT / MAIN (GO)", sub: "+500 Or & Plein Mana", color: "bg-emerald-600", type: "go" },
+                { name: "Slime Centrage CSS", cost: 600, xp: 200, color: "bg-amber-800", type: "bug" },
+                { name: "Parchemin de Sort", sub: "Carte Magie", color: "bg-fuchsia-700", type: "card" },
+                { name: "Gobelin Fuite Mémoire", cost: 900, xp: 350, color: "bg-amber-800", type: "bug" },
+                { name: "Crash Prod 500", sub: "-15 PV Mental", color: "bg-red-700", type: "tax" },
+                { name: "CONFLIT GIT MERGE", sub: "Donjon / 1 Tour", color: "bg-red-600", type: "jail" },
+                { name: "Hydre Code Spaghetti", cost: 1400, xp: 550, color: "bg-indigo-700", type: "bug" },
+                { name: "Réponse StackOverflow", sub: "Carte", color: "bg-orange-600", type: "card" },
+                { name: "Faille Zero-Day", cost: 1800, xp: 750, color: "bg-indigo-700", type: "bug" },
+                { name: "Fantôme Undefined", cost: 2200, xp: 900, color: "bg-indigo-700", type: "bug" },
+                { name: "PAUSE CAFÉ DÉTENTE", sub: "+50 Mana & +20 PV", color: "bg-blue-600", type: "rest" },
+                { name: "Golem Regex Infernal", cost: 2600, xp: 1100, color: "bg-purple-700", type: "bug" },
+                { name: "Déploiement Vendredi", sub: "Carte Risque", color: "bg-fuchsia-700", type: "card" },
+                { name: "Dragon Scope Creep", cost: 3200, xp: 1400, color: "bg-purple-700", type: "bug" },
+                { name: "Démon Conteneur Docker", cost: 3800, xp: 1700, color: "bg-purple-700", type: "bug" },
+                { name: "PORTE CITADELLE", sub: "Étape Clé", color: "bg-yellow-500", type: "gate" },
+                { name: "Seigneur Monolithe Legacy", cost: 4800, xp: 2200, color: "bg-rose-700", type: "bug" },
+                { name: "Intérêts Dette Tech", sub: "-500 Or", color: "bg-red-700", type: "tax" },
+                { name: "Microservice IA Quantique", cost: 6000, xp: 3000, color: "bg-rose-700", type: "bug" },
+                { name: "Refactor Divin Suprême", sub: "Carte Mythique", color: "bg-fuchsia-700", type: "card" }
+            ]
+        },
+        es: {
+            title: "CYBER-QUEST: DEV ROGUELIKE",
+            subtitle: "Juego de Tablero RPG para Programadores • Vence la Deuda Técnica",
+            soundOn: "Sonido: SÍ", soundOff: "Sonido: NO",
+            playersBtn: "Coders (1-4)", spellCards: "Hechizos", hintsBtn: "Reglas",
+            lastRoll: "Paso", rollBtn: "TIRAR 2 DADOS", spellBtn: "Lanzar Hechizo", upgradeBtn: "Refactorizar",
+            logTitle: "Terminal Mazmorra", locationTitle: "Ubicación",
+            hp: "💖 Vida Mental", mana: "☕ Maná Café", gold: "🪙 Oro Recompensa", xp: "📜 Rango Dev",
+            ownedGear: "🛡️ Módulos Limpios", viewAll: "Ver Todo", noGear: "¡Sin módulos aún!",
+            winTitle: "🏆 Victoria Ciudadela", winDesc: "Vencer Monolito + 5,000 XP",
+            howTitle: "Cómo se creó Cyber-Quest", howBtn: "🛠️ ¿Cómo se creó?",
+            footerAttr: 'Creado por <span class="font-bold text-purple-400">Roman</span> | <a href="https://www.rommark.dev" target="_blank" class="text-purple-300 hover:underline font-bold">www.rommark.dev</a> con <span class="text-white font-bold">ZCode</span>',
+            hintsHtml: `<p><b>🧙‍♂️ Objetivo:</b> Supera la mazmorra de bugs y despliega tu código a producción.</p>`,
+            howHtml: `<p><b>🤖 ZCode:</b> RPG táctico por turnos con audio sintético Web Audio.</p>`,
+            tiles: [
+                { name: "GIT COMMIT / MAIN (GO)", sub: "+500 Oro y Maná", color: "bg-emerald-600", type: "go" },
+                { name: "Slime Centrar CSS", cost: 600, xp: 200, color: "bg-amber-800", type: "bug" },
+                { name: "Pergamino de Hechizo", sub: "Carta Magia", color: "bg-fuchsia-700", type: "card" },
+                { name: "Goblin Fuga de Memoria", cost: 900, xp: 350, color: "bg-amber-800", type: "bug" },
+                { name: "Caída de Prod 500", sub: "-15 Vida Mental", color: "bg-red-700", type: "tax" },
+                { name: "CONFLICTO GIT MERGE", sub: "Mazmorra / 1 Turno", color: "bg-red-600", type: "jail" },
+                { name: "Hidra Código Spaghetti", cost: 1400, xp: 550, color: "bg-indigo-700", type: "bug" },
+                { name: "Solución StackOverflow", sub: "Carta", color: "bg-orange-600", type: "card" },
+                { name: "Vulnerabilidad Zero-Day", cost: 1800, xp: 750, color: "bg-indigo-700", type: "bug" },
+                { name: "Fantasma Undefined", cost: 2200, xp: 900, color: "bg-indigo-700", type: "bug" },
+                { name: "DESCANSO CON CAFÉ", sub: "+50 Maná y +20 Vida", color: "bg-blue-600", type: "rest" },
+                { name: "Gólem Regex Pesadilla", cost: 2600, xp: 1100, color: "bg-purple-700", type: "bug" },
+                { name: "Deploy en Viernes", sub: "Carta Riesgo", color: "bg-fuchsia-700", type: "card" },
+                { name: "Dragón Scope Creep", cost: 3200, xp: 1400, color: "bg-purple-700", type: "bug" },
+                { name: "Demonio Docker", cost: 3800, xp: 1700, color: "bg-purple-700", type: "bug" },
+                { name: "PUERTA CIUDADELA", sub: "Hito Arquitectura", color: "bg-yellow-500", type: "gate" },
+                { name: "Señor Monolito Legacy", cost: 4800, xp: 2200, color: "bg-rose-700", type: "bug" },
+                { name: "Intereses Deuda Tech", sub: "-500 Oro", color: "bg-red-700", type: "tax" },
+                { name: "Microservicio IA Cuántica", cost: 6000, xp: 3000, color: "bg-rose-700", type: "bug" },
+                { name: "Refactorización Divina", sub: "Carta Legendaria", color: "bg-fuchsia-700", type: "card" }
+            ]
+        },
+        ar: {
+            title: "مغامرة المطور: روجلايك البرمجة 🧙‍♂️",
+            subtitle: "معركة المبرمجين • اهزم الديون التقنية وأطلق الإصدار الأول",
+            soundOn: "الصوت: مفعّل", soundOff: "الصوت: معطّل",
+            playersBtn: "المبرمجون (1-4)", spellCards: "تعويذات الكود", hintsBtn: "القواعد",
+            lastRoll: "الخطوة", rollBtn: "رمي النردين 🎲", spellBtn: "إطلاق تعويذة", upgradeBtn: "إعادة الهيكلة",
+            logTitle: "سجل المغامرة", locationTitle: "الموقع",
+            hp: "💖 الصحة النفسية", mana: "☕ طاقة القهوة", gold: "🪙 مكافآت الذهب", xp: "📜 رتبة المطور",
+            ownedGear: "🛡️ الوحدات النظيفة", viewAll: "عرض الكل", noGear: "لا توجد وحدات بعد!",
+            winTitle: "🏆 النصر والتحرير", winDesc: "هزيمة النظام القديم + 5000 نقطة خبرة",
+            howTitle: "كيف تم تطوير اللعبة؟", howBtn: "🛠️ كيف صُنعت اللعبة؟",
+            footerAttr: 'تم التطوير بواسطة <span class="font-bold text-purple-400">Roman</span> | <a href="https://www.rommark.dev" target="_blank" class="text-purple-300 hover:underline font-bold">www.rommark.dev</a> باستخدام <span class="text-white font-bold">ZCode</span>',
+            hintsHtml: `<p><b>🧙‍♂️ الهدف:</b> اهزم وحوش الأخطاء البرمجية واطلق كوداً خالياً من العيوب!</p>`,
+            howHtml: `<p><b>🤖 ZCode:</b> لعبة روجلايك تكتيكية تدعم العربية والذكاء الاصطناعي.</p>`,
+            tiles: [
+                { name: "GIT COMMIT / MAIN (GO)", sub: "+500 ذهب وطاقة كاملة", color: "bg-emerald-600", type: "go" },
+                { name: "وحش توسيط CSS", cost: 600, xp: 200, color: "bg-amber-800", type: "bug" },
+                { name: "مخطوطة برمجية", sub: "بطاقة سحرية", color: "bg-fuchsia-700", type: "card" },
+                { name: "عفريت تسريب الذاكرة", cost: 900, xp: 350, color: "bg-amber-800", type: "bug" },
+                { name: "انهيار الخادم 500", sub: "-15 صحة نفسية", color: "bg-red-700", type: "tax" },
+                { name: "تعارض دمج GIT", sub: "حبس / جولة واحدة", color: "bg-red-600", type: "jail" },
+                { name: "أفعى الكود المتشابك", cost: 1400, xp: 550, color: "bg-indigo-700", type: "bug" },
+                { name: "إجابة ستاك أوفر فلو", sub: "بطاقة", color: "bg-orange-600", type: "card" },
+                { name: "ثغرة يوم الصفر", cost: 1800, xp: 750, color: "bg-indigo-700", type: "bug" },
+                { name: "شبح القيمة غير المعرفة", cost: 2200, xp: 900, color: "bg-indigo-700", type: "bug" },
+                { name: "استراحة القهوة", sub: "+50 طاقة و +20 صحة", color: "bg-blue-600", type: "rest" },
+                { name: "عملاق التعابير النمطية", cost: 2600, xp: 1100, color: "bg-purple-700", type: "bug" },
+                { name: "نشر يوم الجمعة", sub: "بطاقة مخاطرة", color: "bg-fuchsia-700", type: "card" },
+                { name: "تنين تمدد المتطلبات", cost: 3200, xp: 1400, color: "bg-purple-700", type: "bug" },
+                { name: "شيطان حاويات دوكر", cost: 3800, xp: 1700, color: "bg-purple-700", type: "bug" },
+                { name: "بوابة القلعة", sub: "محطة المعمارية", color: "bg-yellow-500", type: "gate" },
+                { name: "وحش النظام القديم المتجانس", cost: 4800, xp: 2200, color: "bg-rose-700", type: "bug" },
+                { name: "ضريبة الديون التقنية", sub: "-500 ذهب", color: "bg-red-700", type: "tax" },
+                { name: "خدمة ذكاء اصطناعي كمية", cost: 6000, xp: 3000, color: "bg-rose-700", type: "bug" },
+                { name: "إعادة هيكلة أسطورية", sub: "بطاقة نادرة", color: "bg-fuchsia-700", type: "card" }
+            ]
+        },
+        he: {
+            title: "סייבר-קווסט: רוגלייק מתכנתים 🧙‍♂️",
+            subtitle: "קרב תפקידים למפתחים • הבס חוב טכנולוגי ושחרר גרסה 1.0",
+            soundOn: "קול: פועל", soundOff: "קול: מושתק",
+            playersBtn: "מתכנתים (1-4)", spellCards: "לחשי קוד", hintsBtn: "חוקים",
+            lastRoll: "צעד", rollBtn: "הטל 2 קוביות 🎲", spellBtn: "הטל לחש", upgradeBtn: "ריפקטורינג",
+            logTitle: "יומן מבוך", locationTitle: "מיקום",
+            hp: "💖 בריאות נפשית", mana: "☕ מאנת קפה", gold: "🪙 זהב באונטי", xp: "📜 דרגת מפתח",
+            ownedGear: "🛡️ מודולים נקיים", viewAll: "הכל", noGear: "אין מודולים עדיין!",
+            winTitle: "🏆 ניצחון במצודת הייצור", winDesc: "הבס מונולית ישן + 5000 XP",
+            howTitle: "כיצד נוצר המשחק?", howBtn: "🛠️ איך זה נבנה?",
+            footerAttr: 'נוצר על ידי <span class="font-bold text-purple-400">Roman</span> | <a href="https://www.rommark.dev" target="_blank" class="text-purple-300 hover:underline font-bold">www.rommark.dev</a> באמצעות <span class="text-white font-bold">ZCode</span>',
+            hintsHtml: `<p><b>🧙‍♂️ המטרה:</b> נצח באגים מפלצתיים ושחרר קוד מושלם לפרודקשן!</p>`,
+            howHtml: `<p><b>🤖 ZCode:</b> משחק תפקידים טקטי מבוסס תורות עם סאונד מובנה ותמיכה בעברית.</p>`,
+            tiles: [
+                { name: "GIT COMMIT / MAIN (GO)", sub: "+500 זהב ומאנה מלאה", color: "bg-emerald-600", type: "go" },
+                { name: "סליים מירכוז CSS", cost: 600, xp: 200, color: "bg-amber-800", type: "bug" },
+                { name: "מגילת לחש קוד", sub: "קלף קסם", color: "bg-fuchsia-700", type: "card" },
+                { name: "גובלין זליגת זיכרון", cost: 900, xp: 350, color: "bg-amber-800", type: "bug" },
+                { name: "קריסת שרת 500", sub: "-15 בריאות נפשית", color: "bg-red-700", type: "tax" },
+                { name: "קונפליקט GIT MERGE", sub: "צינוק / תור 1", color: "bg-red-600", type: "jail" },
+                { name: "הידרת קוד ספגטי", cost: 1400, xp: 550, color: "bg-indigo-700", type: "bug" },
+                { name: "תשובה מ-StackOverflow", sub: "קלף", color: "bg-orange-600", type: "card" },
+                { name: "פרצת אבטחה Zero-Day", cost: 1800, xp: 750, color: "bg-indigo-700", type: "bug" },
+                { name: "רוח רפאים Undefined", cost: 2200, xp: 900, color: "bg-indigo-700", type: "bug" },
+                { name: "לאונג' קפה ומנוחה", sub: "+50 מאנה ו-+20 HP", color: "bg-blue-600", type: "rest" },
+                { name: "גולם סיוט ביטויים רגולריים", cost: 2600, xp: 1100, color: "bg-purple-700", type: "bug" },
+                { name: "דיפלוי ביום שישי", sub: "קלף סיכון", color: "bg-fuchsia-700", type: "card" },
+                { name: "דרקון זחילת דרישות", cost: 3200, xp: 1400, color: "bg-purple-700", type: "bug" },
+                { name: "שד קונטיינרים דוקר", cost: 3800, xp: 1700, color: "bg-purple-700", type: "bug" },
+                { name: "שער המצודה", sub: "אבן דרך", color: "bg-yellow-500", type: "gate" },
+                { name: "שליט המונולית הישן", cost: 4800, xp: 2200, color: "bg-rose-700", type: "bug" },
+                { name: "ריבית חוב טכנולוגי", sub: "-500 זהב", color: "bg-red-700", type: "tax" },
+                { name: "מיקרו-סרוויס קוונטי AI", cost: 6000, xp: 3000, color: "bg-rose-700", type: "bug" },
+                { name: "ריפקטורינג אלוהי", sub: "קלף אגדי", color: "bg-fuchsia-700", type: "card" }
+            ]
+        }
+    };
+
+    let currentLang = 'en';
+    let players = [
+        { id: 0, name: "Dev Gandalf", avatar: "🧙‍♂️", isAI: false, role: "10x TypeScript Wizard", pos: 0, hp: 100, mana: 80, gold: 2500, xp: 600, deeds: [] },
+        { id: 1, name: "Vim Wizard (Bot)", avatar: "🤖", isAI: true, role: "Terminal Monk", pos: 0, hp: 90, mana: 90, gold: 2000, xp: 750, deeds: [] }
+    ];
+    let activePlayerIdx = 0;
+    let roundCount = 1;
+    let isRolling = false;
+    let titleDeedOwners = {};
+
+    const PERIMETER_MAP = [
+        { r: 5, c: 5, idx: 0 }, { r: 5, c: 4, idx: 1 }, { r: 5, c: 3, idx: 2 }, { r: 5, c: 2, idx: 3 }, { r: 5, c: 1, idx: 4 },
+        { r: 5, c: 0, idx: 5 }, { r: 4, c: 0, idx: 6 }, { r: 3, c: 0, idx: 7 }, { r: 2, c: 0, idx: 8 }, { r: 1, c: 0, idx: 9 },
+        { r: 0, c: 0, idx: 10 }, { r: 0, c: 1, idx: 11 }, { r: 0, c: 2, idx: 12 }, { r: 0, c: 3, idx: 13 }, { r: 0, c: 4, idx: 14 },
+        { r: 0, c: 5, idx: 15 }, { r: 1, c: 5, idx: 16 }, { r: 2, c: 5, idx: 17 }, { r: 3, c: 5, idx: 18 }, { r: 4, c: 5, idx: 19 }
+    ];
+
+    function initBoard() {
+        const board = document.getElementById('board-grid');
+        board.innerHTML = '';
+        for (let r = 0; r < 6; r++) {
+            for (let c = 0; c < 6; c++) {
+                const cell = document.createElement('div');
+                cell.id = `cell-${r}-${c}`;
+                const pTile = PERIMETER_MAP.find(p => p.r === r && p.c === c);
+                if (pTile) {
+                    const tData = i18n[currentLang].tiles[pTile.idx];
+                    cell.className = `comic-border-sm ${tData.color} rounded-lg p-1 sm:p-1.5 flex flex-col justify-between relative overflow-hidden transition-all duration-300`;
+                    let ownerBadge = '';
+                    if (titleDeedOwners[pTile.idx] !== undefined) {
+                        const o = titleDeedOwners[pTile.idx];
+                        ownerBadge = `<div class="absolute top-0 right-0 bg-black/80 text-[9px] font-black text-purple-300 px-1 rounded-bl">P${o.playerIdx+1} ★${o.level}</div>`;
+                    }
+                    cell.innerHTML = `
+                        ${ownerBadge}
+                        <div class="text-[9px] sm:text-[11px] font-black uppercase tracking-tight leading-tight line-clamp-2">${tData.name}</div>
+                        <div class="text-[8px] sm:text-[9px] font-bold text-indigo-100/90 leading-none">${tData.sub || (tData.cost ? `${tData.cost} Gold` : '')}</div>
+                        <div id="pawns-tile-${pTile.idx}" class="flex gap-0.5 justify-end flex-wrap min-h-[16px]"></div>
+                    `;
+                } else if (r === 1 && c === 1) {
+                    cell.className = "col-span-4 row-span-4 bg-indigo-950/90 rounded-2xl comic-border p-4 flex flex-col items-center justify-center text-center relative overflow-hidden";
+                    cell.innerHTML = `
+                        <div class="text-4xl sm:text-5xl mb-2 animate-bounce">🧙‍♂️</div>
+                        <div class="text-base sm:text-xl font-black text-purple-400 uppercase tracking-widest drop-shadow">CYBER-QUEST</div>
+                        <div class="text-xs text-indigo-300 font-bold max-w-xs mt-1" id="center-status-text">Turn: ${players[activePlayerIdx].name}</div>
+                    `;
+                }
+                if (pTile || (r === 1 && c === 1)) board.appendChild(cell);
+            }
+        }
+        renderPawns();
+        renderPositionBar();
+    }
+
+    function renderPawns() {
+        for (let i = 0; i < 20; i++) {
+            const container = document.getElementById(`pawns-tile-${i}`);
+            if (container) container.innerHTML = '';
+            const pTile = PERIMETER_MAP.find(p => p.idx === i);
+            if (pTile) {
+                const cell = document.getElementById(`cell-${pTile.r}-${pTile.c}`);
+                if (cell) cell.classList.remove('pawn-active-tile');
+            }
+        }
+        players.forEach((p, pIdx) => {
+            const container = document.getElementById(`pawns-tile-${p.pos}`);
+            if (container) {
+                const badge = document.createElement('span');
+                badge.className = `text-xs sm:text-sm p-0.5 rounded-full bg-indigo-950 border-2 ${pIdx === activePlayerIdx ? 'border-purple-400 animate-pulse' : 'border-indigo-700'} shadow-md`;
+                badge.textContent = p.avatar;
+                container.appendChild(badge);
+                if (pIdx === activePlayerIdx) {
+                    const pTile = PERIMETER_MAP.find(pt => pt.idx === p.pos);
+                    if (pTile) {
+                        const cell = document.getElementById(`cell-${pTile.r}-${pTile.c}`);
+                        if (cell) cell.classList.add('pawn-active-tile');
+                    }
+                }
+            }
+        });
+    }
+
+    function renderPositionBar() {
+        const bar = document.getElementById('position-bar');
+        if (!bar) return;
+        bar.innerHTML = players.map((p, idx) => {
+            const tData = i18n[currentLang].tiles[p.pos];
+            const active = idx === activePlayerIdx ? 'border-purple-400 bg-purple-950/60' : 'border-indigo-800 bg-indigo-900';
+            return `
+                <div onclick="selectPlayerTab(${idx})" class="comic-border-sm ${active} cursor-pointer px-3 py-1.5 rounded-lg flex items-center gap-2 whitespace-nowrap">
+                    <span class="text-base">${p.avatar}</span>
+                    <div>
+                        <span class="text-purple-300 font-black">P${idx+1}: ${p.name.split(' ')[0]}</span>
+                        <span class="text-indigo-200 ml-1">[#${p.pos}] ${tData.name}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function updateHUD() {
+        const p = players[activePlayerIdx];
+        document.getElementById('player-name').textContent = p.name;
+        document.getElementById('player-avatar').textContent = p.avatar;
+        document.getElementById('player-role').textContent = p.role;
+        document.getElementById('player-type-badge').textContent = p.isAI ? 'AI BOT' : 'HUMAN';
+
+        document.getElementById('val-hp').textContent = `${p.hp} / 100`;
+        document.getElementById('val-mana').textContent = `${p.mana} / 100`;
+        document.getElementById('val-gold').textContent = `${p.gold} Gold`;
+        document.getElementById('val-xp').textContent = `XP: ${p.xp}`;
+
+        const tData = i18n[currentLang].tiles[p.pos];
+        document.getElementById('player-loc-badge').textContent = `[#${p.pos}] ${tData.name}`;
+
+        const count = Object.values(titleDeedOwners).filter(o => o.playerIdx === activePlayerIdx).length;
+        document.getElementById('owned-count').textContent = count;
+
+        const list = document.getElementById('owned-assets-list');
+        const myDeeds = Object.entries(titleDeedOwners).filter(([idx, o]) => o.playerIdx === activePlayerIdx);
+        if (myDeeds.length === 0) {
+            list.innerHTML = `<div class="text-xs text-indigo-400 italic">${i18n[currentLang].noGear}</div>`;
+        } else {
+            list.innerHTML = myDeeds.map(([tileIdx, o]) => {
+                const tile = i18n[currentLang].tiles[tileIdx];
+                return `
+                    <div class="flex items-center justify-between bg-indigo-950 px-2 py-1 rounded border border-indigo-800 text-xs">
+                        <span class="font-bold text-indigo-200">★${o.level} ${tile.name}</span>
+                        <span class="text-emerald-400 font-mono">+${tile.xp * o.level} XP/turn</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        renderPositionBar();
+        renderPawns();
+        const centerStatus = document.getElementById('center-status-text');
+        if (centerStatus) centerStatus.textContent = `Turn: ${p.name} (Sprint ${roundCount})`;
+    }
+
+    function rollDice() {
+        if (isRolling) return;
+        isRolling = true;
+        audio.dice();
+
+        const d1 = document.getElementById('die-1');
+        const d2 = document.getElementById('die-2');
+        d1.classList.add('dice-rolling');
+        d2.classList.add('dice-rolling');
+
+        setTimeout(() => {
+            const v1 = Math.floor(Math.random() * 6) + 1;
+            const v2 = Math.floor(Math.random() * 6) + 1;
+            const sum = v1 + v2;
+
+            d1.textContent = ['⚀','⚁','⚂','⚃','⚄','⚅'][v1-1];
+            d2.textContent = ['⚀','⚁','⚂','⚃','⚄','⚅'][v2-1];
+            d1.classList.remove('dice-rolling');
+            d2.classList.remove('dice-rolling');
+
+            document.getElementById('roll-total').textContent = sum;
+            log(`🎲 ${players[activePlayerIdx].name} rolled ${v1} + ${v2} = ${sum}`);
+            movePlayer(sum);
+        }, 500);
+    }
+
+    function movePlayer(steps) {
+        const p = players[activePlayerIdx];
+        const oldPos = p.pos;
+        let newPos = (oldPos + steps) % 20;
+
+        if (newPos < oldPos || oldPos + steps >= 20) {
+            audio.cash();
+            p.gold += 500;
+            p.mana = 100;
+            p.xp += 200;
+            log(`🚀 ${p.name} pushed to main branch! Received +500 Gold, Full Mana & +200 XP.`);
+        }
+
+        p.pos = newPos;
+        updateHUD();
+        handleTileEvent(newPos);
+    }
+
+    function handleTileEvent(tileIdx) {
+        const p = players[activePlayerIdx];
+        const tile = i18n[currentLang].tiles[tileIdx];
+
+        if (tile.type === 'bug') {
+            if (!titleDeedOwners[tileIdx]) {
+                if (p.isAI) {
+                    if (p.gold >= tile.cost * 1.1) {
+                        buyTile(tileIdx);
+                    } else {
+                        log(`🤖 ${p.name} bypassed ${tile.name}.`);
+                        endTurn();
+                    }
+                } else {
+                    showOpportunityModal(
+                        "👾 Bug Monster Spotted!",
+                        `${tile.name} can be refactored into a clean module for ${tile.cost} Gold. Generates +${tile.xp} XP!`,
+                        `Cost: ${tile.cost} Gold | +${tile.xp} XP`,
+                        () => buyTile(tileIdx)
+                    );
+                }
+            } else {
+                const owner = titleDeedOwners[tileIdx];
+                if (owner.playerIdx !== activePlayerIdx) {
+                    const fee = Math.floor(tile.xp * 0.5 * owner.level);
+                    audio.alert();
+                    p.gold = Math.max(0, p.gold - fee);
+                    players[owner.playerIdx].gold += fee;
+                    log(`⚔️ ${p.name} paid ${fee} Gold license to ${players[owner.playerIdx].name} for ${tile.name}.`);
+                }
+                endTurn();
+            }
+        } else if (tile.type === 'card') {
+            drawSpellCard();
+        } else if (tile.type === 'tax') {
+            audio.alert();
+            p.hp = Math.max(10, p.hp - 15);
+            log(`💥 ${p.name} suffered a production incident (-15 Mental HP).`);
+            endTurn();
+        } else if (tile.type === 'jail') {
+            audio.alert();
+            log(`⚠️ ${p.name} trapped in Git merge conflict hell!`);
+            endTurn();
+        } else if (tile.type === 'rest') {
+            audio.upgrade();
+            p.mana = 100;
+            p.hp = Math.min(100, p.hp + 20);
+            log(`☕ ${p.name} visited Coffee Lounge! Restored +50 Mana & +20 HP.`);
+            endTurn();
+        } else {
+            endTurn();
+        }
+    }
+
+    function buyTile(tileIdx) {
+        const p = players[activePlayerIdx];
+        const tile = i18n[currentLang].tiles[tileIdx];
+        if (p.gold >= tile.cost) {
+            audio.upgrade();
+            p.gold -= tile.cost;
+            p.xp += tile.xp;
+            titleDeedOwners[tileIdx] = { playerIdx: activePlayerIdx, level: 1 };
+            log(`🎉 ${p.name} refactored ${tile.name} into clean architecture!`);
+            initBoard();
+            updateHUD();
+        }
+        endTurn();
+    }
+
+    function drawSpellCard() {
+        const cards = [
+            { title: "ChatGPT 5-Shot Prompt 🧠", desc: "Automated unit tests with 100% code coverage.", gold: 400, xp: 500, mana: 20 },
+            { title: "Espresso Triple Shot ☕", desc: "Supercharged focus sprint through the night.", gold: 200, xp: 300, mana: 40 },
+            { title: "Refactor Shield Protocol 🛡️", desc: "Blocked a critical zero-day exploit.", gold: 600, xp: 600, mana: 10 },
+            { title: "Friday Deploy Gamble 🎲", desc: "Pushed straight to prod with zero staging... and it worked!", gold: 1000, xp: 800, mana: -30 }
+        ];
+        const card = cards[Math.floor(Math.random() * cards.length)];
+        const p = players[activePlayerIdx];
+
+        p.gold += card.gold;
+        p.xp += card.xp;
+        p.mana = Math.min(100, Math.max(0, p.mana + card.mana));
+
+        audio.upgrade();
+        log(`📜 [Spell] ${p.name}: ${card.title}`);
+
+        if (!p.isAI) {
+            showOpportunityModal(card.title, card.desc, `+${card.gold} Gold | +${card.xp} XP`, () => endTurn());
+        } else {
+            endTurn();
+        }
+    }
+
+    function endTurn() {
+        isRolling = false;
+        checkWin();
+        activePlayerIdx = (activePlayerIdx + 1) % players.length;
+        if (activePlayerIdx === 0) roundCount++;
+        document.getElementById('round-counter').textContent = `Sprint ${roundCount}`;
+        updateHUD();
+
+        if (players[activePlayerIdx].isAI) {
+            setTimeout(() => {
+                log(`🤖 ${players[activePlayerIdx].name} is casting algorithms...`);
+                setTimeout(() => rollDice(), 800);
+            }, 600);
+        }
+    }
+
+    function checkWin() {
+        players.forEach(p => {
+            if (p.xp >= 5000) {
+                audio.win();
+                showOpportunityModal(
+                    "🏰 PRODUCTION CITADEL CONQUERED!",
+                    `Legendary! ${p.name} defeated the Legacy Monolith and shipped bug-free v1.0!`,
+                    `Total XP: ${p.xp} | Bounty Gold: ${p.gold}`,
+                    () => location.reload()
+                );
+            }
+        });
+    }
+
+    function showOpportunityModal(title, desc, effect, onAction) {
+        document.getElementById('card-title').textContent = title;
+        document.getElementById('card-desc').textContent = desc;
+        document.getElementById('card-effect').textContent = effect;
+        document.getElementById('modal-card').classList.remove('hidden');
+        document.getElementById('modal-card').querySelector('button').onclick = () => {
+            closeModal('modal-card');
+            if (onAction) onAction();
+        };
+    }
+
+    function log(msg) {
+        const container = document.getElementById('game-log');
+        const row = document.createElement('div');
+        row.className = "text-indigo-300";
+        row.innerHTML = `> ${msg}`;
+        container.appendChild(row);
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        const isRtl = lang === 'ar' || lang === 'he';
+        document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+        document.documentElement.lang = lang;
+        const dict = i18n[lang];
+
+        document.getElementById('app-title').textContent = dict.title;
+        document.getElementById('app-subtitle').textContent = dict.subtitle;
+        document.getElementById('lbl-sound').textContent = audio.enabled ? dict.soundOn : dict.soundOff;
+        document.getElementById('lbl-players-btn').textContent = dict.playersBtn;
+        document.getElementById('lbl-spell-cards').textContent = dict.spellCards;
+        document.getElementById('lbl-hints-btn').textContent = dict.hintsBtn;
+        document.getElementById('lbl-last-roll').textContent = dict.lastRoll;
+        document.getElementById('lbl-btn-roll').textContent = dict.rollBtn;
+        document.getElementById('lbl-btn-spell').textContent = dict.spellBtn;
+        document.getElementById('lbl-btn-upgrade').textContent = dict.upgradeBtn;
+        document.getElementById('lbl-terminal').textContent = dict.logTitle;
+        document.getElementById('lbl-pos-title').textContent = dict.locationTitle;
+        document.getElementById('lbl-hp').textContent = dict.hp;
+        document.getElementById('lbl-mana').textContent = dict.mana;
+        document.getElementById('lbl-gold').textContent = dict.gold;
+        document.getElementById('lbl-xp').textContent = dict.xp;
+        document.getElementById('lbl-owned-gear').innerHTML = `${dict.ownedGear} (<span id="owned-count">0</span>)`;
+        document.getElementById('lbl-view-deeds').textContent = dict.viewAll;
+        document.getElementById('lbl-win-cond-title').textContent = dict.winTitle;
+        document.getElementById('lbl-win-cond-desc').textContent = dict.winDesc;
+        document.getElementById('how-title').textContent = dict.howTitle;
+        document.getElementById('lbl-how-btn').textContent = dict.howBtn;
+        document.getElementById('footer-attr').innerHTML = dict.footerAttr;
+        document.getElementById('hints-content').innerHTML = dict.hintsHtml;
+        document.getElementById('how-content').innerHTML = dict.howHtml;
+
+        initBoard();
+        updateHUD();
+    }
+
+    function toggleAudio() {
+        const on = audio.toggle();
+        document.getElementById('lbl-sound').textContent = on ? i18n[currentLang].soundOn : i18n[currentLang].soundOff;
+    }
+
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    function openHintsModal() { openModal('modal-hints'); }
+    function openHowModal() { openModal('modal-how'); }
+    function openCardsModal() { drawSpellCard(); }
+
+    function openPlayersModal() {
+        const list = document.getElementById('players-config-list');
+        list.innerHTML = players.map((p, idx) => `
+            <div class="flex items-center justify-between bg-indigo-950 p-2.5 rounded-xl border border-indigo-800 text-xs">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">${p.avatar}</span>
+                    <input type="text" id="p-name-${idx}" value="${p.name}" class="bg-indigo-900 text-white px-2 py-1 rounded border border-indigo-700 font-bold w-36">
+                </div>
+                <div class="flex items-center gap-2">
+                    <select id="p-type-${idx}" class="bg-indigo-900 text-purple-300 font-bold px-2 py-1 rounded border border-indigo-700">
+                        <option value="human" ${!p.isAI ? 'selected' : ''}>Human</option>
+                        <option value="ai" ${p.isAI ? 'selected' : ''}>AI Bot</option>
+                    </select>
+                </div>
+            </div>
+        `).join('');
+        openModal('modal-players');
+    }
+
+    function addPlayerSlot() {
+        if (players.length >= 4) return;
+        const idx = players.length;
+        const avatars = ["🧑‍💻", "🧙‍♀️", "🤖", "🥷"];
+        players.push({
+            id: idx,
+            name: `Coder ${idx+1}`,
+            avatar: avatars[idx % avatars.length],
+            isAI: true,
+            role: "Indie Hacker",
+            pos: 0, hp: 100, mana: 80, gold: 2000, xp: 500, deeds: []
+        });
+        openPlayersModal();
+    }
+
+    function savePlayersConfig() {
+        players.forEach((p, idx) => {
+            const nameEl = document.getElementById(`p-name-${idx}`);
+            const typeEl = document.getElementById(`p-type-${idx}`);
+            if (nameEl) p.name = nameEl.value;
+            if (typeEl) p.isAI = (typeEl.value === 'ai');
+        });
+        closeModal('modal-players');
+        updateHUD();
+        log(`👥 Party roster updated (${players.length} coders active).`);
+    }
+
+    function openDeedsModal() {
+        const grid = document.getElementById('deeds-grid');
+        grid.innerHTML = Object.entries(titleDeedOwners).map(([tileIdx, o]) => {
+            const tile = i18n[currentLang].tiles[tileIdx];
+            const p = players[o.playerIdx];
+            return `
+                <div class="comic-border-sm bg-indigo-950 p-3 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-xs font-black text-purple-400">★ Refactor Tier ${o.level}</span>
+                            <span class="text-[10px] text-indigo-300 font-bold">Owner: ${p.name}</span>
+                        </div>
+                        <h4 class="font-black text-white text-sm">${tile.name}</h4>
+                        <p class="text-xs text-emerald-400 font-mono mt-1">+${tile.xp * o.level} XP/turn</p>
+                    </div>
+                    <button onclick="upgradeDeed(${tileIdx})" class="mt-3 comic-border-sm bg-purple-600 hover:bg-purple-500 text-white font-bold py-1 px-2 rounded text-xs">
+                        Upgrade Module (+${Math.floor(tile.cost * 0.5)} Gold)
+                    </button>
+                </div>
+            `;
+        }).join('') || `<div class="text-indigo-400 text-xs italic col-span-2 text-center p-4">No modules refactored yet. Land on bug tiles to tame!</div>`;
+        openModal('modal-deeds');
+    }
+
+    function upgradeDeed(tileIdx) {
+        const o = titleDeedOwners[tileIdx];
+        if (!o) return;
+        const p = players[o.playerIdx];
+        const tile = i18n[currentLang].tiles[tileIdx];
+        const upCost = Math.floor(tile.cost * 0.5);
+
+        if (p.gold >= upCost) {
+            audio.upgrade();
+            p.gold -= upCost;
+            o.level++;
+            p.xp += Math.floor(tile.xp * 0.6);
+            log(`⭐ ${p.name} upgraded ${tile.name} to Tier ${o.level}!`);
+            updateHUD();
+            openDeedsModal();
+        } else {
+            alert("Not enough bounty gold!");
+        }
+    }
+
+    function selectPlayerTab(idx) {
+        activePlayerIdx = idx;
+        updateHUD();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => setLanguage('en'));
+    </script>
+</body>
+</html>

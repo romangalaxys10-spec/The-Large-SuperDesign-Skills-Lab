@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZCode Grand Arcade: 5-Game Monopoly Suite 🕹️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Space+Grotesk:wght@500;700;800&family=Cairo:wght@600;800&family=Heebo:wght@500;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Space Grotesk', sans-serif; background: #09090b; }
+        [dir="rtl"] { font-family: 'Cairo', 'Heebo', sans-serif; }
+        .comic-border { border: 3px solid #000; box-shadow: 4px 4px 0px #000; }
+        .comic-border-lg { border: 4px solid #000; box-shadow: 6px 6px 0px #000; }
+        .comic-border-sm { border: 2px solid #000; box-shadow: 2px 2px 0px #000; }
+        .comic-btn { transition: all 0.15s ease; }
+        .comic-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000; }
+        .comic-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #000; }
+        .halftone { background-image: radial-gradient(#27272a 18%, transparent 19%); background-size: 14px 14px; }
+    </style>
+</head>
+<body class="text-zinc-100 min-h-screen flex flex-col justify-between">
+    <!-- Header -->
+    <header class="bg-zinc-900 border-b-4 border-black px-4 py-4 sticky top-0 z-30 shadow-xl">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <span class="text-4xl animate-bounce">🕹️</span>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-black tracking-wider text-amber-400 uppercase drop-shadow-[2px_2px_0px_#000]" id="hub-title">ZCODE GRAND ARCADE</h1>
+                    <p class="text-xs text-zinc-400 font-semibold" id="hub-subtitle">5 Complete End-to-End Monopoly & Roguelike Simulation Games</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+                <button onclick="openHowModal()" class="comic-border-sm bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-zinc-950 font-black px-3 py-1.5 rounded text-xs comic-btn">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> <span id="lbl-how-btn">🛠️ How was it made?</span>
+                </button>
+                <select id="lang-select" onchange="setLanguage(this.value)" class="comic-border-sm bg-zinc-800 text-amber-300 font-bold px-2 py-1.5 rounded text-xs">
+                    <option value="en">🇺🇸 EN</option>
+                    <option value="ru">🇷🇺 РУС</option>
+                    <option value="fr">🇫🇷 FR</option>
+                    <option value="es">🇪🇸 ES</option>
+                    <option value="ar">🇸🇦 العربية</option>
+                    <option value="he">🇮🇱 עברית</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Arcade Portal -->
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 flex-1 w-full space-y-8">
+        <!-- Hero Banner -->
+        <div class="comic-border-lg bg-gradient-to-r from-zinc-900 via-zinc-950 to-zinc-900 p-6 sm:p-8 rounded-3xl relative overflow-hidden halftone">
+            <div class="max-w-2xl space-y-3">
+                <span class="bg-amber-500/20 text-amber-300 text-xs font-black px-3 py-1 rounded-full border border-amber-500/40 uppercase tracking-widest" id="badge-suite">Full Multi-Game Arcade Suite</span>
+                <h2 class="text-2xl sm:text-4xl font-black text-white leading-tight" id="hero-heading">Pick Your Arena & Break Out of the Routine</h2>
+                <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed" id="hero-desc">
+                    Every game features a complete Monopoly 6x6 perimeter board, AI bots, local pass-and-play multiplayer (2-4 players), Web Audio sound synthesizers, cartoon motion graphics, and full translations across 6 languages.
+                </p>
+            </div>
+        </div>
+
+        <!-- 5 Game Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="games-grid">
+            <!-- Game 0: Breakout: Daily Grind -->
+            <div class="comic-border-lg bg-zinc-900 rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-amber-400 transition-all">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-3xl p-2 bg-indigo-950 rounded-xl comic-border-sm">🎩</span>
+                        <span class="text-[10px] font-bold bg-indigo-900 text-indigo-200 px-2 py-0.5 rounded border border-indigo-700">DUAL-LOOP ESCAPE</span>
+                    </div>
+                    <h3 class="text-lg font-black text-white">Breakout: Daily Grind to Freedom</h3>
+                    <p class="text-xs text-zinc-400 leading-relaxed">Escape the 9-to-5 rat race, build digital cashflow assets, and graduate into the Outer High-Roller Freedom Track.</p>
+                    <div class="flex gap-1.5 flex-wrap text-[10px] font-bold text-zinc-300">
+                        <span class="bg-zinc-800 px-2 py-0.5 rounded border border-zinc-700">💼 Career Escape</span>
+                        <span class="bg-zinc-800 px-2 py-0.5 rounded border border-zinc-700">📜 Title Deeds</span>
+                    </div>
+                </div>
+                <a href="/breakout-game/index.html" class="comic-border bg-indigo-600 hover:bg-indigo-500 text-white font-black py-2.5 rounded-xl text-xs text-center comic-btn block">
+                    <i class="fa-solid fa-play mr-1"></i> PLAY BREAKOUT
+                </a>
+            </div>
+
+            <!-- Game 1: Venture Quest -->
+            <div class="comic-border-lg bg-zinc-900 rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-cyan-400 transition-all">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-3xl p-2 bg-cyan-950 rounded-xl comic-border-sm">🚀</span>
+                        <span class="text-[10px] font-bold bg-cyan-900 text-cyan-200 px-2 py-0.5 rounded border border-cyan-700">AI STARTUP TYCOON</span>
+                    </div>
+                    <h3 class="text-lg font-black text-white">Venture Quest: Silicon Hustle</h3>
+                    <p class="text-xs text-zinc-400 leading-relaxed">Scale your tech company from a $25k garage MVP to a $1B Unicorn IPO while managing GPU compute & burn rate.</p>
+                    <div class="flex gap-1.5 flex-wrap text-[10px] font-bold text-zinc-300">
+                        <span class="bg-zinc-800 px-2 py-0.5 rounded border border-zinc-700">⚡ GPU Compute</span>
+                        <span class="bg-zinc-800 px-2 py-0.5 rounded border border-zinc-700">📈 MRR Payouts</span>
+                    </div>
+                </div>
+                <a href="../venture-quest/index.html" class="comic-border bg-cyan-500 hover:bg-cyan-400 text-zinc-950 font-black py-2.5 rounded-xl text-xs text-center comic-btn block">
+                    <i class="fa-solid fa-play mr-1"></i> PLAY VENTURE QUEST
+                </a>
+            </div>
+
+            <!-- Game 2: Street Mogul -->
+            <div class="comic-border-lg bg-zinc-900 rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-amber-400 transition-all">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-3xl p-2 bg-amber-950 rounded-xl comic-border-sm">🍕</span>
+                        <span class="text-[10px] font-bold bg-amber-900 text-amber-200 px-2 py-0.5 rounded border border-amber-700">URBAN COMMERCE</span>
+                    </div>
+                    <h3 class="text-lg font-black text-white">Street Mogul: Urban Tycoon</h3>
+                    <p class="text-xs text-zinc-400 leading-relaxed">Build a food & retail empire from sidewalk taco carts to Michelin-starred restaurants and luxury rooftop lounges.</p>
+                    <div class="flex gap-1.5 flex-wrap text-[10px] font-bold text-zinc-300">
+                        <span class="bg-zinc-800 px-2 py-0.5 rounded border border-zinc-700">📦 Supply Chains</span>
+                        <span class="bg-zinc-800 px-2 py-0.5 rounded border border-zinc-700">⭐ Yelp Reputation</span>
+                    </div>
+                </div>
+                <a href="../street-mogul/index.html" class="comic-border bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black py-2.5 rounded-xl text-xs text-center comic-btn block">
+                    <i class="fa-solid fa-play mr-1"></i> PLAY STREET MOGUL
+                </a>
+            </div>
+
+            <!-- Game 3: Life Odyssey -->
+            <div class="comic-border-lg bg-zinc-900 rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-emerald-400 transition-all">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-3xl p-2 bg-emerald-950 rounded-xl comic-border-sm">⚖️</span>
+                        <span class="text-[10px] font-bold bg-emerald-900 text-emerald-200 px-2 py-0.5 rounded border border-emerald-700">HOLISTIC IKIGAI</span>
+                    </div>
+                    <h3 class="text-lg font-black text-white">Life Odyssey: Balance Protocol</h3>
+                    <p class="text-xs text-zinc-400 leading-relaxed">Balance Wealth, Health, Relationships, and Passion to unlock complete life harmony without succumbing to burnout.</p>
+                    <div class="flex gap-1.5 flex-wrap text-[10px] font-bold text-zinc-300">
+                        <span class="bg-zinc-800 px-2 py-0.5 rounded border border-zinc-700">🧘 4 Life Pillars</span>
+                        <span class="bg-zinc-800 px-2 py-0.5 rounded border border-zinc-700">✨ Ikigai Index</span>
+                    </div>
+                </div>
+                <a href="../life-odyssey/index.html" class="comic-border bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-black py-2.5 rounded-xl text-xs text-center comic-btn block">
+                    <i class="fa-solid fa-play mr-1"></i> PLAY LIFE ODYSSEY
+                </a>
+            </div>
+
+            <!-- Game 4: Cyber-Quest -->
+            <div class="comic-border-lg bg-zinc-900 rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-purple-400 transition-all">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-3xl p-2 bg-purple-950 rounded-xl comic-border-sm">🧙‍♂️</span>
+                        <span class="text-[10px] font-bold bg-purple-900 text-purple-200 px-2 py-0.5 rounded border border-purple-700">DEV ROGUELIKE</span>
+                    </div>
+                    <h3 class="text-lg font-black text-white">Cyber-Quest: Dev Roguelike</h3>
+                    <p class="text-xs text-zinc-400 leading-relaxed">Tabletop coding battler: tame CSS slimes and memory leak goblins, drink espresso mana, and defeat the Legacy Monolith.</p>
+                    <div class="flex gap-1.5 flex-wrap text-[10px] font-bold text-zinc-300">
+                        <span class="bg-zinc-800 px-2 py-0.5 rounded border border-zinc-700">☕ Caffeine Mana</span>
+                        <span class="bg-zinc-800 px-2 py-0.5 rounded border border-zinc-700">👾 Bug Monsters</span>
+                    </div>
+                </div>
+                <a href="../cyber-quest/index.html" class="comic-border bg-purple-500 hover:bg-purple-400 text-white font-black py-2.5 rounded-xl text-xs text-center comic-btn block">
+                    <i class="fa-solid fa-play mr-1"></i> PLAY CYBER-QUEST
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- How Was It Made Modal -->
+    <div id="modal-how" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="comic-border-lg bg-zinc-900 rounded-2xl max-w-xl w-full p-6 space-y-4 text-white">
+            <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+                <h3 class="text-lg font-black text-amber-400 flex items-center gap-2"><i class="fa-solid fa-code"></i> <span id="how-title">How the Grand Arcade Was Built</span></h3>
+                <button onclick="closeModal('modal-how')" class="text-zinc-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-3 text-xs leading-relaxed text-zinc-300 max-h-96 overflow-y-auto pr-1" id="how-content">
+                <p><b>🤖 Complete Engineering by ZCode:</b> All 5 games in this arcade suite were architected, coded, localized, and tested end-to-end using ZCode (Autonomous AI Software Engineer).</p>
+                <p><b>🎲 Unified Monopoly Engine:</b> Built with a mathematical 6x6 perimeter track (20 spaces), dual-dice physics, customizable player avatars (1-4 players), autonomous AI bots, and title deed upgrades.</p>
+                <p><b>🔊 Zero-Dependency Web Audio Synth:</b> Procedural audio synthesis directly in code with real-time sound effects (dice rolls, cash bells, penalty buzzers, fanfares).</p>
+                <p><b>🌍 Full 6-Language Localization:</b> English, Russian, French, Spanish, Arabic, and Hebrew with complete native bidirectional RTL rendering.</p>
+            </div>
+            <div class="text-right pt-2">
+                <button onclick="closeModal('modal-how')" class="comic-border bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black px-4 py-2 rounded text-xs comic-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Attribution -->
+    <footer class="bg-zinc-950 border-t-2 border-zinc-800 py-4 px-4 text-center text-xs text-zinc-400">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div id="footer-attr">
+                Created by <span class="font-bold text-amber-400">Roman</span> | <a href="https://www.rommark.dev" target="_blank" class="text-amber-300 hover:underline font-bold">www.rommark.dev</a> using <span class="text-white font-bold">ZCode</span>
+            </div>
+            <button onclick="openHowModal()" class="comic-border-sm bg-gradient-to-r from-amber-600 to-orange-700 hover:from-amber-500 hover:to-orange-600 text-white font-bold px-3 py-1.5 rounded text-xs comic-btn">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> <span id="lbl-how-btn-footer">🛠️ How was it made?</span>
+            </button>
+        </div>
+    </footer>
+
+    <script>
+    function openHowModal() { document.getElementById('modal-how').classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    function setLanguage(lang) {
+        const isRtl = lang === 'ar' || lang === 'he';
+        document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+        document.documentElement.lang = lang;
+    }
+    </script>
+</body>
+</html>
