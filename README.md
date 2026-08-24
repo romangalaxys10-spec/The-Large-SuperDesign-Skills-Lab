@@ -399,7 +399,7 @@ A full production suite of **5 playable cartoon & strategic web games + unified 
 ### 🛠️ Game Design & Technical Highlights:
 - **🎨 Cartoon Motion & Visual Identity**: Ben-Day halftone comic dot patterns, squash-and-stretch token animations, and comic action badges designed with SuperDesign & Canva principles.
 - **🔊 Procedural Web Audio Engines**: Zero external audio assets — all dice rolls, cash chimes, crisis alarms, and victory fanfares are synthesized dynamically in code via the Web Audio API.
-- **🌍 6 Isolated Full Translations**: 100% localized in **English (`EN`)**, **Русский (`RU`)**, **Français (`FR`)**, **Español (`ES`)**, **العربية (`AR`)**, and **עברית (`HE`)**, **Русский ()**, **Français ()**, **Español ()**, **العربية ()**, and **עברית ()** with native bidirectional RTL support.
+- **🌍 6 Isolated Full Translations**: 100% localized in **English (`EN`)**, **Русский (`RU`)**, **Français (`FR`)**, **Español (`ES`)**, **العربية (`AR`)**, and **עברית (`HE`)** with native bidirectional RTL support.
 - **👥 Single-Player vs. AI & Local Pass-and-Play (2–4 Players)**: Full setup modals with custom cartoon avatars and customizable player rosters.
 - **📦 Clean Architecture**: Vanilla ES6+ single-file architectures per game, zero heavy runtime dependencies, instant global deployment on Vercel.
 
