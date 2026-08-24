@@ -1,6 +1,6 @@
 # 🧪 The Large SuperDesign Skills Lab
 
-**71 loadable design-system skills for AI coding agents.**
+**147 design-system skills for AI coding agents.**
 Each skill teaches an agent one complete visual identity — tokens, typography, layout grammar, components and guardrails — plus a live demo page and a token-anatomy diagram.
 
 | | |
@@ -8,6 +8,8 @@ Each skill teaches an agent one complete visual identity — tokens, typography,
 | 🟢 **Production Vercel systems** | 20 skills reverse-engineered from real, revenue-grade demos ([rommark.dev gallery](https://rommark.dev/)) |
 | 🔵 **SuperDesign studies** | All **45 published systems** from [superdesign.dev/design-systems](https://superdesign.dev/design-systems), re-tokenized and enhanced |
 | 🟡 **Presentation & slide systems** | 6 skills covering keynotes, consulting decks, pitch decks, editorial quotes, data-viz and workshop slides |
+| 🟠 **Awesome style directions (vendored)** | 67 style skills from [bergside/awesome-design-skills](https://github.com/bergside/awesome-design-skills) — brutalism, glassmorphism, neubrutalism, bento, editorial, retro, ... |
+| 🔣 **UI/UX Pro Max intelligence (vendored)** | The full searchable design-intelligence engine from [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) — 84 UI styles, 192 palettes, 74 font pairings, 119 UX guidelines, 25 chart types, CSV search tooling + 6 sub-skills |
 | 📦 **Per skill you get** | `SKILL.md` (agent instructions) · `demo.html` (working reference) · `diagram.svg` (visual token anatomy) |
 
 Built by [Rommark.dev](https://www.rommark.dev) · MIT licensed
@@ -154,9 +156,17 @@ verify vs demo.html → done
 
 ### Multi-page consistency
 
-For sites larger than a landing page: reuse the same token block on every page, and derive new sections only from the signature-component table in SKILL.md. Need a component the skill doesn't define (e.g., a pricing toggle)? Style it using only existing tokens — never invent new colors.
+### Vendored families (`awesome-*` and `pro-*`)
 
----
+These are third-party skill packs vendored under MIT license:
+
+- **`awesome-<style>`** — pure *style direction* (e.g. `awesome-brutalism`, `awesome-glassmorphism`). Each contains SKILL.md (foundations, accessibility, tone) + DESIGN.md (deeper specs). Combine freely with a layout system from another family: pick `pro-ui-ux-pro-max` for structure intelligence + one `awesome-*` for styling voice.
+- **`pro-ui-ux-pro-max`** — a *searchable* engine. Run:
+  ```bash
+  python3 skills/pro-ui-ux-pro-max/scripts/search.py "fintech dashboard dark" --design-system
+  ```
+  Domains: `style`, `product`, `typography`, `color`, `ux`, `chart`, `stack`. Use it when no fixed identity is chosen yet and you need data-driven recommendations.
+- **`pro-design-system`, `pro-design`, `pro-brand`, `pro-slides`, `pro-banner-design`, `pro-ui-styling`** — task sub-skills from the same engine.
 
 ## 🔧 Agent installation per tool
 
