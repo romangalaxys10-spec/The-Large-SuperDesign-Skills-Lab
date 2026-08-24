@@ -10,6 +10,7 @@ Each skill teaches an agent one complete visual identity — tokens, typography,
 | 🟡 **Presentation & slide systems** | 6 skills covering keynotes, consulting decks, pitch decks, editorial quotes, data-viz and workshop slides |
 | 🟠 **Awesome style directions (vendored)** | 67 style skills from [bergside/awesome-design-skills](https://github.com/bergside/awesome-design-skills) — brutalism, glassmorphism, neubrutalism, bento, editorial, retro, ... |
 | 🔣 **UI/UX Pro Max intelligence (vendored)** | The full searchable design-intelligence engine from [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) — 84 UI styles, 192 palettes, 74 font pairings, 119 UX guidelines, 25 chart types, CSV search tooling + 6 sub-skills |
+| 🦆 **Anti-slop & craft skills (vendored)** | Curated from [Nutlope/hallmark](https://github.com/Nutlope/hallmark) and Tony Lee's [12 free skills list](https://tonylee.im/en/blog/12-free-skills-escape-ai-slop-design/): Hallmark (58-gate slop test), Anthropic's official frontend-design plugin, taste-skill, better-icons, ui-design-brain, vercel-agent-skills, designer-skills-collection (107 SKILL.mds), design-plugin, make-interfaces-feel-better |
 | 📦 **Per skill you get** | `SKILL.md` (agent instructions) · `demo.html` (working reference) · `diagram.svg` (visual token anatomy) |
 
 Built by [Rommark.dev](https://www.rommark.dev) · MIT licensed
@@ -157,6 +158,20 @@ verify vs demo.html → done
 ### Multi-page consistency
 
 ### Vendored families (`awesome-*` and `pro-*`)
+### Anti-slop & craft families
+
+- **`hallmark/`** — the strongest quality gate in this lab. After building any UI with another skill, run its verbs mentally: `audit` (score against 58 slop gates), `redesign`, `study`. Always run the pre-emit self-critique stamp.
+- **`frontend-design-anthropic/`** — foundational rules; load alongside any identity skill as a floor.
+- **`taste-skill/`** — control deviation from defaults via numeric variance variables.
+- **`ui-design-brain/`** — per-component principles across 5 style systems (how a modal behaves per style).
+- **`vercel-agent-skills/`** — includes web-design-guidelines + composition-patterns review rulesets.
+- **`designer-skills-collection/`** — 107 granular skills (laws of Gestalt, spacing systems, dark mode, critique). Load individually as needed: `designer-skills-collection/ui-design/skills/law-of-closure/SKILL.md`.
+- **`make-interfaces-feel-better/`** — micro-interaction pass; run last, after structure is set.
+- **`better-icons/`, `design-plugin/`, `taste-skill/*`** — icon search sync, code-level enforcement, and image→code variants.
+
+Recommended layering (from Tony Lee's research): one foundational skill + one component-intelligence skill + one review gate + one aesthetic gap-filler. Never stack two skills that own the same concern.
+
+
 
 These are third-party skill packs vendored under MIT license:
 
